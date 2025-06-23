@@ -1,0 +1,151 @@
+[
+  {
+    "node_id": 0,
+    "node_name": "Mervin Kelly",
+    "node_description": "Executive Vice President",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 1,
+    "node_name": "Bell Labs Administration",
+    "node_description": "Executive",
+    "node_parent_id": 2,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 2,
+    "node_name": "Bell Labs",
+    "node_description": null,
+    "node_parent_id": null,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 3,
+    "node_name": "AT&T",
+    "node_description": "Management and Holding Company of the Bell System",
+    "node_parent_id": null,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 4,
+    "node_name": "William Shockley",
+    "node_description": "Lead theorist of solid-state research group",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 5,
+    "node_name": "Solid-State Research Group",
+    "node_description": null,
+    "node_parent_id": 2,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 6,
+    "node_name": "Walter Houser Brattain",
+    "node_description": "Experimental Physicist",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 7,
+    "node_name": "John Bardeen",
+    "node_description": "Theoretical Physicist",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 8,
+    "node_name": "Robert Gibney",
+    "node_description": "Electrochemist",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 9,
+    "node_name": "Gerald Pearson",
+    "node_description": "Experimental Physicist",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 10,
+    "node_name": "Frank Jewett",
+    "node_description": "Bell Labs Chairman",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 11,
+    "node_name": "Oliver Ellsworth Buckley",
+    "node_description": "Bell Labs President",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 12,
+    "node_name": "Ralph Bown",
+    "node_description": "Vice President of Research at Bell Labs, (later) Research Director at Bell Labs",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 13,
+    "node_name": "Bell Labs Lawyers",
+    "node_description": null,
+    "node_parent_id": 2,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 14,
+    "node_name": "Government",
+    "node_description": null,
+    "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 15,
+    "node_name": "External",
+    "node_description": "Agents and institutions external to Bell System",
+    "node_parent_id": null,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 16,
+    "node_name": "Military",
+    "node_description": null,
+    "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 17,
+    "node_name": "Competitors",
+    "node_description": "Competing telephony communications technologies companies and later, electronics companies",
+    "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 18,
+    "node_name": "Academia",
+    "node_description": "Foremost science and engineering academic-research organizations in the country.",
+    "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 19,
+    "node_name": "Public domain",
+    "node_description": null,
+    "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+
+
+  {
+    "node_id": 0,
+    "node_name": "Ralph Bown",
+    "node_description": "VP of Research",
+    "node_parent_id": 1945,
+    "node_grandparent_id": 1945
+  }
+]
