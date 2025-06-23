@@ -16,7 +16,7 @@
   {
     "node_id": 2,
     "node_name": "Bell Labs",
-    "node_description": null,
+    "node_description": "AT&T research arm",
     "node_parent_id": null,
     "node_grandparent_id": null
   },
@@ -128,15 +128,50 @@
   {
     "node_id": 18,
     "node_name": "Academia",
-    "node_description": "Foremost science and engineering academic-research organizations in the country.",
+    "node_description": "Foremost science and engineering academic-research organizations in the country",
     "node_parent_id": 15,
     "node_grandparent_id": null
   },
   {
     "node_id": 19,
-    "node_name": "Public domain",
+    "node_name": "Public Domain",
     "node_description": null,
     "node_parent_id": 15,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 20,
+    "node_name": "Jack Morton",
+    "node_description": "Lead of transistor development team, (later) Vice President of Device Development",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 21,
+    "node_name": "Transistor Development Team",
+    "node_description": null,
+    "node_parent_id": 2,
+    "node_grandparent_id": null
+  },
+  {
+    "node_id": 22,
+    "node_name": "Gordon Teal",
+    "node_description": "Metallurgist",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 23,
+    "node_name": "Morgan Sparks",
+    "node_description": "Chemist, (later) Director of Solid State Research at Bell Labs, Vice President of Electronics Technology, Director of Sandia National Laboratories",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2
+  },
+  {
+    "node_id": 24,
+    "node_name": "Western Electric",
+    "node_description": "AT&T manufacturing arm",
+    "node_parent_id": null,
     "node_grandparent_id": null
   },
 

@@ -53,6 +53,24 @@
     "date": "06.1948",
     "phase": "fundamental"
   },
+  {
+    "step_id": 9,
+    "step_description": "Transitioned to development team. For all its publicity, the new point-contact transistor was useless as a practical device. Proving laboratory feasibility was not difficult, but learning how to make them by the hundreds or thousands, and of sufficient uniformity to be interchangeable and reliable, was another problem.",
+    "date": "06.1948 -- 06.1949",
+    "phase": "development"
+  },
+  {
+    "step_id": 10,
+    "step_description": "Gordon Teal's significant advances in crystal pulling readied the transistor for manufacture with Western Electric.",
+    "date": "1949 -- 1951",
+    "phase": "development"
+  },
+  {
+    "step_id": 11,
+    "step_description": "Manufacturing and resulting diffusion of transistor technology.",
+    "date": "1951",
+    "phase": "development"
+  },
   
 
 

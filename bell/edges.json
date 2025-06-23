@@ -329,6 +329,106 @@
     "unused": 0,
     "violated": 0
   },
+  {
+    "interaction_id": 33,
+    "from_nodes": [0],
+    "to_nodes": [20],
+    "interaction_description": "Assigned development lead",
+    "step_id": 9,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 34,
+    "from_nodes": [21],
+    "to_nodes": [21],
+    "interaction_description": "Morton’s team, in conjunction with the Labs’ metallurgists, fabricated five thousand working germanium transistors.",
+    "step_id": 9,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 35,
+    "from_nodes": [21],
+    "to_nodes": [5,16,18],
+    "interaction_description": "Transistors given as complimentary samples. Nearly a thousand were used at Bell Labs to study the properties of germanium.",
+    "step_id": 9,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 36,
+    "from_nodes": [22],
+    "to_nodes": [6,7],
+    "interaction_description": "During the summer of 1951, Jack Morton’s team had readied Bardeen and Brattain’s point-contact transistor for large-scale production.",
+    "step_id": 10,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 37,
+    "from_nodes": [22,23],
+    "to_nodes": [4],
+    "interaction_description": "Advances in crystal pulling allowed Teal and his colleague Morgan Sparks to grow junction transistors for Shockley, the essential missing ingredient that made his idea possible (before, trapped in theory with no way of fabricating).",
+    "step_id": 10,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 38,
+    "from_nodes": [22,23,4],
+    "to_nodes": [18],
+    "interaction_description": "Shockley, Sparks and Teal published results of 'grown-junction transistor' in the Physical Review, '𝑝 −𝑛 Junction Transistors.'",
+    "step_id": 10,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 39,
+    "from_nodes": [4],
+    "to_nodes": [19],
+    "interaction_description": "The manufacture of the device roughly coincided with Shockley’s demonstration of the first junction transistors at a public unveiling. The newest invention was hailed as clearly superior to the point-contact transistor in terms of its efficiency and performance (it used only one-millionth of the power of a typical vacuum tube).",
+    "step_id": 10,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 40,
+    "from_nodes": [20],
+    "to_nodes": [24],
+    "interaction_description": "Readied point-contact transistor for large-scale production.",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 41,
+    "from_nodes": [2],
+    "to_nodes": [17],
+    "interaction_description": "Licensed transistor technology for $25,000. Free exception for companies that wanted to use the devices for hearing aids (as deference to AT&T founder Alexander Graham Bell).",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 42,
+    "from_nodes": [2],
+    "to_nodes": [17],
+    "interaction_description": "Licensed transistor technology for $25,000. Free exception for companies that wanted to use the devices for hearing aids (as deference to AT&T founder Alexander Graham Bell).",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
 
 
   {
