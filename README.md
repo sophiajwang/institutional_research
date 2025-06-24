@@ -3,6 +3,9 @@
 
 This project is a computer visualization of the development process behind the transistor, tracking the flow of work across different agents (nodes) and interactions (edges) within the Bell Labs ecosystem and beyond.
 
+## Live Demo
+**[View Interactive Visualization](https://sophiajwang.github.io/institutional_research/)**
+
 ## Storyboard
 
 ![Storyboard of Bell Labs transistor development process](bell/bell_labs_storyboarding.png)
