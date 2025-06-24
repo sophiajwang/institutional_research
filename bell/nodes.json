@@ -37,7 +37,7 @@
   {
     "node_id": 5,
     "node_name": "Solid-State Research Group",
-    "node_description": null,
+    "node_description": "Research team focusing on solid-state physics",
     "node_parent_id": 2,
     "node_grandparent_id": null
   },
@@ -93,14 +93,14 @@
   {
     "node_id": 13,
     "node_name": "Bell Labs Lawyers",
-    "node_description": null,
+    "node_description": "Legal team handling patents and intellectual property",
     "node_parent_id": 2,
     "node_grandparent_id": null
   },
   {
     "node_id": 14,
     "node_name": "Government",
-    "node_description": null,
+    "node_description": "Government regulatory bodies",
     "node_parent_id": 15,
     "node_grandparent_id": null
   },
@@ -114,7 +114,7 @@
   {
     "node_id": 16,
     "node_name": "Military",
-    "node_description": null,
+    "node_description": "Military organizations and defense contractors",
     "node_parent_id": 15,
     "node_grandparent_id": null
   },
@@ -135,7 +135,7 @@
   {
     "node_id": 19,
     "node_name": "Public Domain",
-    "node_description": null,
+    "node_description": "Public knowledge and open research",
     "node_parent_id": 15,
     "node_grandparent_id": null
   },
@@ -149,7 +149,7 @@
   {
     "node_id": 21,
     "node_name": "Transistor Development Team",
-    "node_description": null,
+    "node_description": "Engineering team focused on transistor development and manufacturing",
     "node_parent_id": 2,
     "node_grandparent_id": null
   },
@@ -173,14 +173,5 @@
     "node_description": "AT&T manufacturing arm",
     "node_parent_id": null,
     "node_grandparent_id": null
-  },
-
-
-  {
-    "node_id": 0,
-    "node_name": "Ralph Bown",
-    "node_description": "VP of Research",
-    "node_parent_id": 1945,
-    "node_grandparent_id": 1945
   }
 ]
