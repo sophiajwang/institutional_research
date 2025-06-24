@@ -85,6 +85,46 @@ body {
     font-family: 'Helvetica', sans-serif;
 }
 
+.edge-item {
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    color: #BBBBBB;
+    margin: 3px 0;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 2px;
+    position: relative;
+}
+
+.edge-item:hover {
+    background: #444;
+}
+
+.edge-item input[type="checkbox"] {
+    margin-right: 8px;
+    transform: scale(0.8);
+    accent-color: #5DC0D9;
+}
+
+.expand-btn {
+    font-size: 10px;
+    color: #5DC0D9;
+    cursor: pointer;
+    margin-top: 5px;
+    user-select: none;
+}
+
+.expand-btn:hover {
+    color: #78B4D4;
+}
+
+.edges-list {
+    margin-top: 8px;
+    padding-left: 10px;
+    border-left: 2px solid #444;
+}
+
 #tooltip {
     position: absolute;
     background: rgba(0, 0, 0, 0.9);
@@ -129,6 +169,18 @@ body {
     color: #5DC0D9;
     font-family: 'Helvetica', sans-serif;
     border: 1px solid #444444;
+}
+
+#legend {
+    position: absolute;
+    background: rgba(20, 20, 20, 0.9);
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #444444;
+    font-family: 'Helvetica', sans-serif;
+    color: #F2F2F2;
+    font-size: 11px;
+    width: 200px;
 }
 
 /* Hide scrollbar for webkit browsers */

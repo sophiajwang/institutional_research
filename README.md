@@ -8,7 +8,7 @@ This project is a computer visualization of the development process behind the t
 
 ## Storyboard
 
-![Storyboard of Bell Labs transistor development process](bell/bell_labs_storyboarding.png)
+![Storyboard of Bell Labs transistor development process](bell_labs_storyboarding.png)
 
 The storyboard outlines the chronological flow of the invention process, showing how institutional structures, people, and interactions evolve across key steps.
 

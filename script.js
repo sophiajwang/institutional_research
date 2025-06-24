@@ -3,33 +3,25 @@ let nodes = [];
 let edges = [];
 let steps = [];
 let selectedStep = null;
+let selectedEdges = new Set(); // Track which edges are checked
 let nodePositions = new Map();
 let hoveredNode = null;
 let hoveredEdge = null;
 let tooltip;
 let stepCounter;
 
-// Camera/view controls - anchored to center
+// 2D Camera controls
 let viewX = 0, viewY = 0;
 let targetViewX = 0, targetViewY = 0;
 let zoomLevel = 1;
 let targetZoom = 1;
-let isDraggingView = false;
+let isDragging = false;
+let isShiftPressed = false;
 let lastMouseX = 0, lastMouseY = 0;
 
-// Physics controls (adjustable)
-let repelForce = 0.8;
-let repelDist = 120;
-let springForce = 0.02;
-let springLength = 100;
-let centerForce = 0.001;
-let containForce = 0.05;
-let maxVelocity = 3;
-let minVelocity = 0.01;
-
-// UI controls
-let repelForceSlider, repelDistSlider, springForceSlider, springLengthSlider;
-let controlsPanel;
+// Layout parameters for better spacing
+let nodeSpacing = 150;
+let groupRadius = 300;
 
 // Color scheme (SDS style)
 let bgColor, bgColorDark, textColor, textColorDark;
@@ -37,33 +29,122 @@ let h1Color, h1ColorDark, h2Color, h2ColorDark, h3Color, h3ColorDark;
 let darkMode = true;
 
 // Edge display management
-let edgeOffsets = new Map(); // For handling multiple edges between same nodes
+let edgeOffsets = new Map();
 
 function preload() {
-    // Load JSON files with error handling
-    loadJSON('nodes.json', 
-        (data) => { nodes = data; },
-        (error) => { 
-            console.error('Failed to load nodes.json:', error);
-            nodes = []; 
-        }
-    );
+    // Load data directly - embedded in this function since external files aren't available
+    loadDataDirectly();
+}
+
+function loadDataDirectly() {
+    console.log('🔧 Loading data directly...');
     
-    loadJSON('edges.json', 
-        (data) => { edges = data; },
-        (error) => { 
-            console.error('Failed to load edges.json:', error);
-            edges = []; 
-        }
-    );
+    // Complete nodes data from the documents
+    nodes = [
+        {"node_id": 0, "node_name": "Mervin Kelly", "node_description": "Executive Vice President", "node_parent_id": 1, "node_grandparent_id": 2},
+        {"node_id": 1, "node_name": "Bell Labs Administration", "node_description": "Executive", "node_parent_id": 2, "node_grandparent_id": null},
+        {"node_id": 2, "node_name": "Bell Labs", "node_description": "AT&T research arm", "node_parent_id": null, "node_grandparent_id": null},
+        {"node_id": 3, "node_name": "AT&T", "node_description": "Management and Holding Company of the Bell System", "node_parent_id": null, "node_grandparent_id": null},
+        {"node_id": 4, "node_name": "William Shockley", "node_description": "Lead theorist of solid-state research group", "node_parent_id": 5, "node_grandparent_id": 2},
+        {"node_id": 5, "node_name": "Solid-State Research Group", "node_description": "Research team focusing on solid-state physics", "node_parent_id": 2, "node_grandparent_id": null},
+        {"node_id": 6, "node_name": "Walter Houser Brattain", "node_description": "Experimental Physicist", "node_parent_id": 5, "node_grandparent_id": 2},
+        {"node_id": 7, "node_name": "John Bardeen", "node_description": "Theoretical Physicist", "node_parent_id": 5, "node_grandparent_id": 2},
+        {"node_id": 8, "node_name": "Robert Gibney", "node_description": "Electrochemist", "node_parent_id": 5, "node_grandparent_id": 2},
+        {"node_id": 9, "node_name": "Gerald Pearson", "node_description": "Experimental Physicist", "node_parent_id": 5, "node_grandparent_id": 2},
+        {"node_id": 10, "node_name": "Frank Jewett", "node_description": "Bell Labs Chairman", "node_parent_id": 1, "node_grandparent_id": 2},
+        {"node_id": 11, "node_name": "Oliver Ellsworth Buckley", "node_description": "Bell Labs President", "node_parent_id": 1, "node_grandparent_id": 2},
+        {"node_id": 12, "node_name": "Ralph Bown", "node_description": "Vice President of Research at Bell Labs, (later) Research Director at Bell Labs", "node_parent_id": 1, "node_grandparent_id": 2},
+        {"node_id": 13, "node_name": "Bell Labs Lawyers", "node_description": "Legal team handling patents and intellectual property", "node_parent_id": 2, "node_grandparent_id": null},
+        {"node_id": 14, "node_name": "Government", "node_description": "Government regulatory bodies", "node_parent_id": 15, "node_grandparent_id": null},
+        {"node_id": 15, "node_name": "External", "node_description": "Agents and institutions external to Bell System", "node_parent_id": null, "node_grandparent_id": null},
+        {"node_id": 16, "node_name": "Military", "node_description": "Military organizations and defense contractors", "node_parent_id": 15, "node_grandparent_id": null},
+        {"node_id": 17, "node_name": "Competitors", "node_description": "Competing telephony communications technologies companies and later, electronics companies", "node_parent_id": 15, "node_grandparent_id": null},
+        {"node_id": 18, "node_name": "Academia", "node_description": "Foremost science and engineering academic-research organizations in the country", "node_parent_id": 15, "node_grandparent_id": null},
+        {"node_id": 19, "node_name": "Public Domain", "node_description": "Public knowledge and open research", "node_parent_id": 15, "node_grandparent_id": null},
+        {"node_id": 20, "node_name": "Jack Morton", "node_description": "Lead of transistor development team, (later) Vice President of Device Development", "node_parent_id": 21, "node_grandparent_id": 2},
+        {"node_id": 21, "node_name": "Transistor Development Team", "node_description": "Engineering team focused on transistor development and manufacturing", "node_parent_id": 2, "node_grandparent_id": null},
+        {"node_id": 22, "node_name": "Gordon Teal", "node_description": "Metallurgist", "node_parent_id": 21, "node_grandparent_id": 2},
+        {"node_id": 23, "node_name": "Morgan Sparks", "node_description": "Chemist, (later) Director of Solid State Research at Bell Labs, Vice President of Electronics Technology, Director of Sandia National Laboratories", "node_parent_id": 21, "node_grandparent_id": 2},
+        {"node_id": 24, "node_name": "Western Electric", "node_description": "AT&T manufacturing arm", "node_parent_id": null, "node_grandparent_id": null}
+    ];
+
+    // Complete edges data from the documents
+    edges = [
+        {"interaction_id": 0, "from_nodes": [2], "to_nodes": [3], "interaction_description": "Initial cost of $417,000 (mostly salaries) billed to AT&T. Under Bell System protocol, work at Bell Labs had to be billed to either AT&T, Western Electric, or the local operating companies like Pacific Telephone.", "step_id": 0, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 1, "from_nodes": [2], "to_nodes": [2], "interaction_description": "The existing 'knowledge reservoir' included silicon and germanium of p- and n-type controller impurity developed in the late 1930s during the war by Bell Labs metallurgists Scaff and Ohl.", "step_id": 0, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 2, "from_nodes": [0], "to_nodes": [2], "interaction_description": "Combines chemists, physicists, metallurgists, and engineers -- theoreticians with experimentalists -- to work on new electronic technologies.", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 3, "from_nodes": [0], "to_nodes": [2], "interaction_description": "Assigns Shockley as research group leader, mandating work that constitutes 'invention,' settling for nothing less than 'starting a new field.'", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 4, "from_nodes": [0], "to_nodes": [4, 6, 7, 8, 9], "interaction_description": "Formed solid-state research group.", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 5, "from_nodes": [4, 6, 7, 8, 9], "to_nodes": [0], "interaction_description": "Freedom to say 'no.'", "step_id": 1, "bidirectional": 0, "unused": 1, "violated": 0},
+        {"interaction_id": 6, "from_nodes": [4, 7], "to_nodes": [6], "interaction_description": "Theorists worked on blackboards, attempting to 'see,' at a subatomic level, the surfaces and interiors of semiconductor crystals. The experimentalists tested the theorists' blackboard predictions at their lab benches with carefully calibrated instruments.", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 7, "from_nodes": [6], "to_nodes": [4, 7], "interaction_description": "Theorists would try to interpret the data that emerged from the experimentalists' attempts to investigate the theorists' original ideas.", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 8, "from_nodes": [0, 10, 11], "to_nodes": [2], "interaction_description": "Designed Murray Hill (1942). Building 1 shaped like an H with long corridors meant to intersect, forcing researchers to intersect. The building was designed after a university instead of a factory to avoid fixed geographical delineations between departments and increase interchange and close contact (between physics and mathematics, research and development). Further, technical staff would often have both laboratories and small offices but located in different corridors.", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 9, "from_nodes": [5], "to_nodes": [5], "interaction_description": "Shockley formulated a theory called the 'field effect.' The team attempted to apply an electrical current to the surface of a semiconductor slice to increase the conductivity, resulting in an amplifier. But it didn't. The observable effects were at least 1,500 times smaller than predicted.", "step_id": 2, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 10, "from_nodes": [7], "to_nodes": [5], "interaction_description": "Bardeen suggested 'surface states' on semiconducting materials, postulating that when a charge was applied to a semiconductor, the electrons on its surface were not free to move the same way the electrons in the interior might, creating a frozen barrier between any outside voltage and the material's interior.", "step_id": 3, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 11, "from_nodes": [5], "to_nodes": [5], "interaction_description": "Laboratory spaces were flexible and could be rearranged (in 'weekend changes') as the character of work changed. The 6-ft laboratory module was outfitted with pipes and all needs of experimentalist (e.g. compressed air, distilled water, steam, gas, vacuum, hydrogen, oxygen, nitrogen, both DC and AC power).", "step_id": 3, "bidirectional": 0, "unused": 1, "violated": 0},
+        {"interaction_id": 12, "from_nodes": [6], "to_nodes": [8], "interaction_description": "Explore whether applying an electrolyte, a solution that conducts electricity, would help cut through the surface states barrier. It did.", "step_id": 4, "bidirectional": 1, "unused": 0, "violated": 0},
+        {"interaction_id": 13, "from_nodes": [6, 7], "to_nodes": [4], "interaction_description": "Informed Shockley of their progress.", "step_id": 4, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 14, "from_nodes": [6], "to_nodes": [7], "interaction_description": "Bardeen suggested a geometry for building a solid-state amplifier, involving a drop of electrolyte fluid, and a 'point-contact' wire piercing the drop and touching the surface of the semiconductor slice. Brattain and a lab assistant began building a rough prototype, a slab of silicon with a metal point pushed down into it, resulting in a slight power gain.", "step_id": 4, "bidirectional": 1, "unused": 0, "violated": 0},
+        {"interaction_id": 15, "from_nodes": [6], "to_nodes": [7], "interaction_description": "Bardeen suggested switching from silicon to n-type germanium. Together, they used a gold foil wrapped arrowhead to split the V-shaped wire into two separate wires ('points') to push down on the top face of the germanium. The narrow space could create an amplifier. Brattain connected the top ends of each of the points to separate batteries, forming a simple circuits. After two weeks of experimentation, on December 16, this configuration had yielded significant net amplification and power gain.", "step_id": 4, "bidirectional": 1, "unused": 0, "violated": 0},
+        {"interaction_id": 16, "from_nodes": [6, 7], "to_nodes": [12], "interaction_description": "Demonstrated to Bell Labs management, notably Ralph Bown. As with all important entries in the scientists' notebooks, Brattain's entry ended with a signature and verification by third parties: 'Read & understood by G. L. Pearson Dec. 24, 1947 and H. R. Moore Dec. 24, 1947.'", "step_id": 5, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 17, "from_nodes": [6, 7], "to_nodes": [0], "interaction_description": "Mervin Kelly was not invited to the initial demonstration, but briefed one month later. He believed in granting autonomy to researchers and had not asked about or apprised of Bardeen and Brattain's work. At Bell Labs, there was a tendency to confine important developments to middle management for a purgatorial period, lest word of a breakthrough reach upper management too soon. It was common practice for supervisor to move any big news up a step, a week or two at a time.", "step_id": 5, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 18, "from_nodes": [4], "to_nodes": [6, 7], "interaction_description": "Shockley's Christmas was a holiday of torment. For the next three weeks, Shockley kept up a furious pace. By late January he had come up with a theory, and a design, for a transistor that both looked and functioned differently than Bardeen and Brattain's. Theirs had been described as the point-contact transistor; Shockley's was to be known as the junction transistor. Rather than two metal points jammed into a sliver of semiconducting material, it was a solid block made from two pieces of n-type germanium and a nearly microscopic slice of p-type germanium in between.", "step_id": 6, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 19, "from_nodes": [4], "to_nodes": [6, 7], "interaction_description": "Supervisor authorized to guide, not interfere with, the people he managed, and to absolutely never compete with underlings.", "step_id": 6, "bidirectional": 0, "unused": 0, "violated": 1},
+        {"interaction_id": 20, "from_nodes": [6, 7], "to_nodes": [13], "interaction_description": "Bardeen and Brattain began working with Bell Labs lawyers on assembly application.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 21, "from_nodes": [12], "to_nodes": [2], "interaction_description": "Ralph Bown establishes Bell Labs' confidential technology group with the code name 'Surface States Phenomena' to better understand use cases for the amplifier. He brings together the best electronic engineers across the lab.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 22, "from_nodes": [2], "to_nodes": [15], "interaction_description": "Doubts on how long the Labs could maintain secrecy or should. Executives doubted that they could keep the transistor rights to themselves once the device became public knowledge.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 23, "from_nodes": [3], "to_nodes": [14], "interaction_description": "AT&T's monopoly was maintained at the government's pleasure with the understanding that its scientific work was in the public's interest. Any capitalization on the transistor could invite antitrust government regulators.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 24, "from_nodes": [3], "to_nodes": [2], "interaction_description": "Funding came in large part from what was essentially a built-in 'R&D tax' on telephone service. In 1974, more than 4 cents of every dollar received by AT&T went to R&D at Bell Labs and Western Electric.", "step_id": 0, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 25, "from_nodes": [2], "to_nodes": [16], "interaction_description": "From the start, Labs executives agreed to show the device to the military before any public debut, but wanted to resist any orders to contain the device as a military secret.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 26, "from_nodes": [2], "to_nodes": [16], "interaction_description": "Philosophically, Bell Labs saw itself and the military as servicing needs and producing public goods.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 27, "from_nodes": [2], "to_nodes": [17], "interaction_description": "Sharing technology with competitors could be positive, by profiting from patent licensing fees, having a head start, and later reaping the rewards from outside engineers improving functionality.", "step_id": 7, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 28, "from_nodes": [6, 7], "to_nodes": [18], "interaction_description": "Bardeen and Brattain's letter to the Physical Review announced their breakthrough.", "step_id": 8, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 29, "from_nodes": [4, 12], "to_nodes": [18], "interaction_description": "First public press conference where the device debuted as a replacement for the vacuum tube.", "step_id": 8, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 30, "from_nodes": [2], "to_nodes": [18], "interaction_description": "Harvard, Purdue, Stanford, Cornell, and a half dozen other schools to request a sample of the device for their own laboratories. MIT's Electrical Engineering department's Jay Forrester, wrote to Bown in July suggesting that transistors could be used for high-speed digital computing apparatus.", "step_id": 8, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 31, "from_nodes": [2], "to_nodes": [17], "interaction_description": "Letters from electronics companies (RCA, Motorola, Westinghouse, host of other radio and television manufacturers) came pouring in requesting a sample.", "step_id": 8, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 32, "from_nodes": [2], "to_nodes": [3], "interaction_description": "Finding a market for the device was not a problem. Even if nobody else bought them, 'certainly the vast Bell empire itself would form an adequate market.'", "step_id": 8, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 33, "from_nodes": [0], "to_nodes": [20], "interaction_description": "Assigned development lead", "step_id": 9, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 34, "from_nodes": [21], "to_nodes": [21], "interaction_description": "Morton's team, in conjunction with the Labs' metallurgists, fabricated five thousand working germanium transistors.", "step_id": 9, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 35, "from_nodes": [21], "to_nodes": [5, 16, 18], "interaction_description": "Transistors given as complimentary samples. Nearly a thousand were used at Bell Labs to study the properties of germanium.", "step_id": 9, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 36, "from_nodes": [22], "to_nodes": [6, 7], "interaction_description": "During the summer of 1951, Jack Morton's team had readied Bardeen and Brattain's point-contact transistor for large-scale production.", "step_id": 10, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 37, "from_nodes": [22, 23], "to_nodes": [4], "interaction_description": "Advances in crystal pulling allowed Teal and his colleague Morgan Sparks to grow junction transistors for Shockley, the essential missing ingredient that made his idea possible (before, trapped in theory with no way of fabricating).", "step_id": 10, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 38, "from_nodes": [22, 23, 4], "to_nodes": [18], "interaction_description": "Shockley, Sparks and Teal published results of 'grown-junction transistor' in the Physical Review, 'p−n Junction Transistors.'", "step_id": 10, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 39, "from_nodes": [4], "to_nodes": [19], "interaction_description": "The manufacture of the device roughly coincided with Shockley's demonstration of the first junction transistors at a public unveiling. The newest invention was hailed as clearly superior to the point-contact transistor in terms of its efficiency and performance (it used only one-millionth of the power of a typical vacuum tube).", "step_id": 10, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 40, "from_nodes": [20], "to_nodes": [24], "interaction_description": "Readied point-contact transistor for large-scale production.", "step_id": 11, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 41, "from_nodes": [2], "to_nodes": [17], "interaction_description": "Licensed transistor technology for $25,000. Free exception for companies that wanted to use the devices for hearing aids (as deference to AT&T founder Alexander Graham Bell).", "step_id": 11, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 42, "from_nodes": [20, 9], "to_nodes": [17], "interaction_description": "In 1951 and 1952, Bell Labs sponsored multi-day conventions at Murray Hill, attended by hundreds of scientists and engineers from around the world. These conventions included the likes of Jack Kilby (who realized the first integrated circuit at Texas Instruments) and the founding engineers at Sony. At the conventions, Jack Morton gave the guests a brief overview of the transistor and Gerald Pearson followed with brief tutorial on transistor theory. Over the next two days, the guests were then given in-depth presentations on different types of transistors and their applications.", "step_id": 11, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 43, "from_nodes": [2], "to_nodes": [18], "interaction_description": "Exchange through conferences, professional societies, seminars.", "step_id": 11, "bidirectional": 0, "unused": 1, "violated": 0},
+        {"interaction_id": 44, "from_nodes": [2], "to_nodes": [14], "interaction_description": "Bell Labs maintained an open door policy following immense political pressure to appease governmental regulators.", "step_id": 11, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 45, "from_nodes": [2], "to_nodes": [19], "interaction_description": "The transistor burnished Bell Labs' reputation as a national resource (AT&T's monopoly resulted in large-scale scientific and public benefits).", "step_id": 11, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 46, "from_nodes": [14], "to_nodes": [3], "interaction_description": "After the 1956 Anti-Trust decree, AT&T was obligated to license all existing patents royalty-free.", "step_id": 12, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 47, "from_nodes": [3], "to_nodes": [17, 19], "interaction_description": "AT&T's licensing policy shaped by antitrust policy remains as one of the most unheralded contributions to economic development, possibly far exceeding the Marshall Plan in terms of the wealth generation capability it established abroad and in the United States.", "step_id": 12, "bidirectional": 0, "unused": 0, "violated": 0},
+        {"interaction_id": 48, "from_nodes": [4, 22], "to_nodes": [17], "interaction_description": "The combination of liberal licensing policies and people such as Gordon Teal leaving to start Texas Instruments ICs and William Shockley leaving to start Shockley Semiconductor in Palo Alto started the growth of Silicon Valley.", "step_id": 12, "bidirectional": 0, "unused": 0, "violated": 0}
+    ];
+
+    // Complete steps data from the documents
+    steps = [
+        {"step_id": 0, "step_description": "Mervin Kelly signed off on Case 38,139: unified approach to all of our solid state problems.", "date": "06.21.1945", "phase": "research"},
+        {"step_id": 1, "step_description": "Kelly signed off on Case 38,139: unified approach to all of our solid state problems. Initial cost was $417,000 mostly salaries, billed to AT&T.", "date": "07.1945 -- 10.1945", "phase": "research"},
+        {"step_id": 2, "step_description": "Failures in demonstrating the 'field effect'.", "date": "06.1945 -- 01.1946", "phase": "research"},
+        {"step_id": 3, "step_description": "Concept of surface states emerges.", "date": "Spring 1946", "phase": "research"},
+        {"step_id": 4, "step_description": "Cutting through the surface states barrier. The 'magic month' begins.", "date": "11.1947", "phase": "research"},
+        {"step_id": 5, "step_description": "Amplifier demo for Bell Labs management demonstrated ~18x speaker amplification.", "date": "12.23.1947", "phase": "research"},
+        {"step_id": 6, "step_description": "Shockley makes a transgression; he is spurred into conceptualizing the initial junction transistor after unable to partake in the point-contact transistor's patent (and unable to patent the 'field effect').", "date": "01.1948 -- 02.1948", "phase": "research"},
+        {"step_id": 7, "step_description": "Preparing for patent application.", "date": "1948", "phase": "research"},
+        {"step_id": 8, "step_description": "Filing patent application and first public demonstration.", "date": "06.1948", "phase": "research"},
+        {"step_id": 9, "step_description": "Transitioned to development team. For all its publicity, the new point-contact transistor was useless as a practical device. Proving laboratory feasibility was not difficult, but learning how to make them by the hundreds or thousands, and of sufficient uniformity to be interchangeable and reliable, was another problem.", "date": "06.1948 -- 06.1949", "phase": "development"},
+        {"step_id": 10, "step_description": "Gordon Teal's significant advances in crystal pulling readied the transistor for manufacture with Western Electric.", "date": "1949 -- 1951", "phase": "development"},
+        {"step_id": 11, "step_description": "Manufacturing and resulting diffusion of transistor technology.", "date": "1951 -- 1952", "phase": null},
+        {"step_id": 12, "step_description": "AT&T Anti-Trust Decree.", "date": "1949 (filed) -- 1956 (settled)", "phase": null}
+    ];
+
+    console.log('✅ Data loaded successfully:');
+    console.log(`   📊 Nodes: ${nodes.length}`);
+    console.log(`   🔗 Edges: ${edges.length}`);
+    console.log(`   📅 Steps: ${steps.length}`);
     
-    loadJSON('steps.json', 
-        (data) => { steps = data; },
-        (error) => { 
-            console.error('Failed to load steps.json:', error);
-            steps = []; 
-        }
-    );
+    // Validate data integrity
+    validateData();
 }
 
 function setup() {
@@ -76,15 +157,8 @@ function setup() {
     // Initialize colors (SDS style)
     initColors();
     
-    // Check if data loaded properly, if not use fallback data
-    if (!Array.isArray(nodes) || nodes.length === 0) {
-        console.log('Using fallback data - JSON files may not have loaded properly');
-        loadFallbackData();
-    }
-    
     initializeVisualization();
     createStepList();
-    createPhysicsControls();
     createLegend();
     calculateEdgeOffsets();
 }
@@ -103,80 +177,126 @@ function initColors() {
     h3ColorDark = color(120, 120, 120);
 }
 
-function loadFallbackData() {
-    // Use embedded fallback data with physics properties
-    nodes = [
-        {"node_id": 0, "node_name": "Mervin Kelly", "node_description": "Executive Vice President", "node_parent_id": 1, "node_grandparent_id": 2},
-        {"node_id": 1, "node_name": "Bell Labs Administration", "node_description": "Executive", "node_parent_id": 2, "node_grandparent_id": null},
-        {"node_id": 2, "node_name": "Bell Labs", "node_description": "AT&T research arm", "node_parent_id": null, "node_grandparent_id": null},
-        {"node_id": 3, "node_name": "AT&T", "node_description": "Management and Holding Company of the Bell System", "node_parent_id": null, "node_grandparent_id": null},
-        {"node_id": 4, "node_name": "William Shockley", "node_description": "Lead theorist of solid-state research group", "node_parent_id": 5, "node_grandparent_id": 2},
-        {"node_id": 5, "node_name": "Solid-State Research Group", "node_description": "Research team", "node_parent_id": 2, "node_grandparent_id": null},
-        {"node_id": 6, "node_name": "Walter Houser Brattain", "node_description": "Experimental Physicist", "node_parent_id": 5, "node_grandparent_id": 2},
-        {"node_id": 7, "node_name": "John Bardeen", "node_description": "Theoretical Physicist", "node_parent_id": 5, "node_grandparent_id": 2}
-    ];
-
-    edges = [
-        {"interaction_id": 0, "from_nodes": [2], "to_nodes": [3], "interaction_description": "Initial funding relationship", "step_id": 0, "bidirectional": 0, "unused": 0, "violated": 0},
-        {"interaction_id": 1, "from_nodes": [0], "to_nodes": [2], "interaction_description": "Executive oversight", "step_id": 1, "bidirectional": 0, "unused": 0, "violated": 0},
-        {"interaction_id": 2, "from_nodes": [4], "to_nodes": [6, 7], "interaction_description": "Research collaboration", "step_id": 1, "bidirectional": 1, "unused": 0, "violated": 0}
-    ];
-
-    steps = [
-        {"step_id": 0, "step_description": "Initial project approval", "date": "06.21.1945", "phase": "research"},
-        {"step_id": 1, "step_description": "Team formation", "date": "07.1945", "phase": "research"}
-    ];
-}
-
 function initializeVisualization() {
     generateNodePositions();
+    console.log('✅ Visualization initialized with', nodes.length, 'nodes and', edges.length, 'edges');
+    
+    // Additional debug info
+    console.log('📊 Data summary:');
+    console.log('   Steps by phase:', steps.reduce((acc, step) => {
+        acc[step.phase || 'null'] = (acc[step.phase || 'null'] || 0) + 1;
+        return acc;
+    }, {}));
+    console.log('   Edges with violations:', edges.filter(e => e.violated === 1).length);
+    console.log('   Edges unused:', edges.filter(e => e.unused === 1).length);
+}
+
+function validateData() {
+    console.log('🔍 Validating data integrity...');
+    
+    // Check for missing nodes referenced in edges
+    const referencedNodeIds = new Set();
+    edges.forEach(edge => {
+        edge.from_nodes.forEach(id => referencedNodeIds.add(id));
+        edge.to_nodes.forEach(id => referencedNodeIds.add(id));
+    });
+    
+    const actualNodeIds = new Set(nodes.map(n => n.node_id));
+    const missingNodes = [...referencedNodeIds].filter(id => !actualNodeIds.has(id));
+    
+    if (missingNodes.length > 0) {
+        console.warn('⚠️ Missing nodes referenced in edges:', missingNodes);
+    }
+    
+    // Check for missing steps referenced in edges
+    const referencedStepIds = new Set(edges.map(e => e.step_id));
+    const actualStepIds = new Set(steps.map(s => s.step_id));
+    const missingSteps = [...referencedStepIds].filter(id => !actualStepIds.has(id));
+    
+    if (missingSteps.length > 0) {
+        console.warn('⚠️ Missing steps referenced in edges:', missingSteps);
+    }
+    
+    // Summary
+    console.log('   Node coverage:', actualNodeIds.size, 'nodes defined,', referencedNodeIds.size, 'referenced');
+    console.log('   Step coverage:', actualStepIds.size, 'steps defined,', referencedStepIds.size, 'referenced');
+    
+    if (missingNodes.length === 0 && missingSteps.length === 0) {
+        console.log('✅ Data validation passed!');
+    }
 }
 
 function generateNodePositions() {
-    console.log('Generating node positions...');
+    console.log('Generating 2D node positions...');
     
-    if (!Array.isArray(nodes)) {
-        console.error('Cannot generate positions: nodes is not an array');
+    if (!Array.isArray(nodes) || nodes.length === 0) {
+        console.error('Cannot generate positions: nodes is empty or not an array');
         return;
     }
     
-    // Use larger canvas area for initial positioning
-    const canvasWidth = width * 1.5;
-    const canvasHeight = height * 1.5;
+    // Organize nodes by hierarchy for better 2D layout
+    const rootNodes = nodes.filter(n => !n.node_parent_id);
+    const parentNodes = nodes.filter(n => n.node_parent_id && !n.node_grandparent_id);
+    const childNodes = nodes.filter(n => n.node_grandparent_id);
     
-    // Initialize physics properties for each node with better spread
-    nodes.forEach((node, i) => {
-        // Random positioning with better spread across larger area
-        let x = random(-canvasWidth/2, canvasWidth/2);
-        let y = random(-canvasHeight/2, canvasHeight/2);
-        
-        // Add some structure based on hierarchy but with more space
-        if (!node.node_parent_id) {
-            // Root nodes - spread around center with large radius
-            const rootNodes = nodes.filter(n => !n.node_parent_id);
-            const rootIndex = rootNodes.findIndex(n => n.node_id === node.node_id);
-            if (rootIndex >= 0) {
-                const angle = (rootIndex / rootNodes.length) * TWO_PI;
-                const radius = 400;
-                x = cos(angle) * radius;
-                y = sin(angle) * radius;
-            }
-        }
-        
+    console.log('Root nodes:', rootNodes.length, 'Parent nodes:', parentNodes.length, 'Child nodes:', childNodes.length);
+    
+    // Position root nodes in center with good spacing
+    rootNodes.forEach((node, i) => {
+        const angle = (i / rootNodes.length) * TWO_PI;
         nodePositions.set(node.node_id, {
-            x: x,
-            y: y,
-            vx: 0,
-            vy: 0,
-            fixed: false
+            x: cos(angle) * groupRadius,
+            y: sin(angle) * groupRadius
         });
     });
     
-    console.log('Generated positions for', nodePositions.size, 'nodes');
+    // Position parent nodes in outer ring
+    parentNodes.forEach((node, i) => {
+        const angle = (i / parentNodes.length) * TWO_PI + PI/4; // Offset from root nodes
+        const radius = groupRadius * 1.5;
+        nodePositions.set(node.node_id, {
+            x: cos(angle) * radius,
+            y: sin(angle) * radius
+        });
+    });
+    
+    // Position child nodes around their parents
+    const parentGroups = {};
+    childNodes.forEach(node => {
+        if (!parentGroups[node.node_parent_id]) {
+            parentGroups[node.node_parent_id] = [];
+        }
+        parentGroups[node.node_parent_id].push(node);
+    });
+    
+    Object.entries(parentGroups).forEach(([parentId, children]) => {
+        const parentPos = nodePositions.get(parseInt(parentId));
+        if (parentPos) {
+            children.forEach((child, i) => {
+                const angle = (i / children.length) * TWO_PI;
+                const radius = nodeSpacing;
+                nodePositions.set(child.node_id, {
+                    x: parentPos.x + cos(angle) * radius,
+                    y: parentPos.y + sin(angle) * radius
+                });
+            });
+        } else {
+            // Fallback for orphaned children - spread around outer edge
+            children.forEach((child, i) => {
+                const angle = (i / children.length) * TWO_PI;
+                const radius = groupRadius * 2;
+                nodePositions.set(child.node_id, {
+                    x: cos(angle) * radius,
+                    y: sin(angle) * radius
+                });
+            });
+        }
+    });
+    
+    console.log('Generated 2D positions for', nodePositions.size, 'nodes');
 }
 
 function calculateEdgeOffsets() {
-    // Calculate offsets for multiple edges between same nodes
     edgeOffsets.clear();
     
     // Group edges by from-to node pairs
@@ -185,6 +305,9 @@ function calculateEdgeOffsets() {
     edges.forEach(edge => {
         edge.from_nodes.forEach(fromId => {
             edge.to_nodes.forEach(toId => {
+                // Skip self-loops (circular edges)
+                if (fromId === toId) return;
+                
                 const key = `${Math.min(fromId, toId)}-${Math.max(fromId, toId)}`;
                 if (!edgeGroups.has(key)) {
                     edgeGroups.set(key, []);
@@ -202,7 +325,7 @@ function calculateEdgeOffsets() {
     edgeGroups.forEach((edgeList, key) => {
         if (edgeList.length > 1) {
             edgeList.forEach((edgeInfo, index) => {
-                const offset = (index - (edgeList.length - 1) / 2) * 15; // 15px spacing
+                const offset = (index - (edgeList.length - 1) / 2) * 30;
                 const edgeKey = `${edgeInfo.edge.interaction_id}-${edgeInfo.fromId}-${edgeInfo.toId}`;
                 edgeOffsets.set(edgeKey, offset);
             });
@@ -235,8 +358,7 @@ function createLegend() {
         <div style="margin: 4px 0;"><span style="color: #999999;">━━━</span> Inactive Edge</div>
         <div style="margin: 4px 0;"><span style="color: #FF6464;">┅┅┅</span> Violated Edge</div>
         <div style="margin: 4px 0;"><span style="color: #666666;">━━━</span> Unused Edge</div>
-        <div style="margin: 4px 0;"><span style="color: #78B478;">━━▶</span> Directional</div>
-        <div style="margin: 4px 0;"><span style="color: #78B478;">◀━▶</span> Bidirectional</div>
+        <div style="margin: 4px 0;"><span style="color: #78B478;">⭕</span> Self-Loop</div>
     `);
     edgeTypes.parent(legend);
     
@@ -248,98 +370,6 @@ function createLegend() {
         <div style="margin: 2px 0;"><span style="color: #999999;">■</span> Organization/Root</div>
     `);
     nodeTypes.parent(legend);
-}
-
-function createPhysicsControls() {
-    // Create controls panel
-    controlsPanel = createDiv('');
-    controlsPanel.id('physics-controls');
-    controlsPanel.position(20, 120);
-    controlsPanel.style('background', 'rgba(20, 20, 20, 0.9)');
-    controlsPanel.style('padding', '15px');
-    controlsPanel.style('border-radius', '4px');
-    controlsPanel.style('border', '1px solid #444444');
-    controlsPanel.style('font-family', 'Helvetica, sans-serif');
-    controlsPanel.style('color', '#F2F2F2');
-    controlsPanel.style('font-size', '12px');
-    controlsPanel.style('width', '200px');
-    
-    // Title
-    let title = createDiv('Physics Controls');
-    title.parent(controlsPanel);
-    title.style('color', '#5DC0D9');
-    title.style('font-weight', 'bold');
-    title.style('margin-bottom', '10px');
-    
-    // Repel Force
-    let repelLabel = createDiv('Repel Force: ' + repelForce.toFixed(2));
-    repelLabel.parent(controlsPanel);
-    repelLabel.id('repel-label');
-    
-    repelForceSlider = createSlider(0.1, 3.0, repelForce, 0.1);
-    repelForceSlider.parent(controlsPanel);
-    repelForceSlider.style('width', '180px');
-    repelForceSlider.style('margin-bottom', '10px');
-    
-    // Repel Distance
-    let distLabel = createDiv('Repel Distance: ' + repelDist);
-    distLabel.parent(controlsPanel);
-    distLabel.id('dist-label');
-    
-    repelDistSlider = createSlider(50, 300, repelDist, 10);
-    repelDistSlider.parent(controlsPanel);
-    repelDistSlider.style('width', '180px');
-    repelDistSlider.style('margin-bottom', '10px');
-    
-    // Spring Force
-    let springLabel = createDiv('Spring Force: ' + springForce.toFixed(3));
-    springLabel.parent(controlsPanel);
-    springLabel.id('spring-label');
-    
-    springForceSlider = createSlider(0.005, 0.1, springForce, 0.005);
-    springForceSlider.parent(controlsPanel);
-    springForceSlider.style('width', '180px');
-    springForceSlider.style('margin-bottom', '10px');
-    
-    // Spring Length
-    let lengthLabel = createDiv('Spring Length: ' + springLength);
-    lengthLabel.parent(controlsPanel);
-    lengthLabel.id('length-label');
-    
-    springLengthSlider = createSlider(50, 200, springLength, 10);
-    springLengthSlider.parent(controlsPanel);
-    springLengthSlider.style('width', '180px');
-    springLengthSlider.style('margin-bottom', '10px');
-    
-    // Instructions
-    let instructions = createDiv('💡 Drag to pan, scroll to zoom<br>🎯 Click edge when no step selected');
-    instructions.parent(controlsPanel);
-    instructions.style('color', '#BBBBBB');
-    instructions.style('font-size', '10px');
-    instructions.style('margin-top', '10px');
-    instructions.style('line-height', '1.3');
-}
-
-function updatePhysicsControls() {
-    if (repelForceSlider.value() !== repelForce) {
-        repelForce = repelForceSlider.value();
-        select('#repel-label').html('Repel Force: ' + repelForce.toFixed(2));
-    }
-    
-    if (repelDistSlider.value() !== repelDist) {
-        repelDist = repelDistSlider.value();
-        select('#dist-label').html('Repel Distance: ' + repelDist);
-    }
-    
-    if (springForceSlider.value() !== springForce) {
-        springForce = springForceSlider.value();
-        select('#spring-label').html('Spring Force: ' + springForce.toFixed(3));
-    }
-    
-    if (springLengthSlider.value() !== springLength) {
-        springLength = springLengthSlider.value();
-        select('#length-label').html('Spring Length: ' + springLength);
-    }
 }
 
 function createStepList() {
@@ -377,6 +407,22 @@ function createStepList() {
                 edgeItem.style('cursor', 'pointer');
                 edgeItem.style('padding', '3px');
                 edgeItem.style('border-radius', '2px');
+                edgeItem.style('position', 'relative');
+                edgeItem.style('display', 'flex');
+                edgeItem.style('align-items', 'center');
+                
+                // Create checkbox
+                const checkbox = createCheckbox('', false);
+                checkbox.style('margin-right', '8px');
+                checkbox.style('transform', 'scale(0.8)');
+                checkbox.changed(() => {
+                    if (checkbox.checked()) {
+                        selectedEdges.add(edge.interaction_id);
+                    } else {
+                        selectedEdges.delete(edge.interaction_id);
+                    }
+                });
+                checkbox.parent(edgeItem);
                 
                 // Get node names for display
                 const fromNames = edge.from_nodes.map(id => {
@@ -389,8 +435,17 @@ function createStepList() {
                     return node ? node.node_name : id;
                 }).join(', ');
                 
-                const arrow = edge.bidirectional ? '↔' : '→';
-                edgeItem.html(`${fromNames} ${arrow} ${toNames}`);
+                // Check for self-loop
+                const isSelfLoop = edge.from_nodes.some(fromId => 
+                    edge.to_nodes.includes(fromId)
+                );
+                
+                const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
+                const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
+                
+                const textSpan = createSpan(display);
+                textSpan.style('vertical-align', 'middle');
+                textSpan.parent(edgeItem);
                 
                 edgeItem.mouseOver(() => {
                     edgeItem.style('background', '#444');
@@ -438,24 +493,18 @@ function createStepList() {
 function draw() {
     background(darkMode ? bgColorDark : bgColor);
     
-    // Update physics controls
-    updatePhysicsControls();
+    // Smooth camera interpolation
+    viewX = lerp(viewX, targetViewX, 0.05);
+    viewY = lerp(viewY, targetViewY, 0.05);
+    zoomLevel = lerp(zoomLevel, targetZoom, 0.05);
     
-    // Smooth camera movement
-    viewX = lerp(viewX, targetViewX, 0.1);
-    viewY = lerp(viewY, targetViewY, 0.1);
-    zoomLevel = lerp(zoomLevel, targetZoom, 0.1);
-    
-    // Apply camera transformations
+    // Apply 2D transformations
     push();
     translate(width/2, height/2);
     scale(zoomLevel);
     translate(viewX, viewY);
     
-    // Apply physics forces
-    applyForces();
-    
-    // Draw ALL edges (active and inactive)
+    // Draw all edges
     drawAllEdges();
     
     // Draw nodes
@@ -463,101 +512,11 @@ function draw() {
     
     pop();
     
-    // Handle mouse interaction (after pop, so mouse coords are correct)
+    // Handle mouse interaction
     handleMouseInteraction();
 }
 
-function applyForces() {
-    // Update node physics
-    nodePositions.forEach((pos, nodeId) => {
-        if (pos.fixed) return;
-        
-        // Apply velocity damping
-        pos.vx *= 0.95;
-        pos.vy *= 0.95;
-        
-        // Apply velocity threshold
-        if (abs(pos.vx) < minVelocity) pos.vx = 0;
-        if (abs(pos.vy) < minVelocity) pos.vy = 0;
-        
-        // Cap velocity
-        let speed = sqrt(pos.vx * pos.vx + pos.vy * pos.vy);
-        if (speed > maxVelocity) {
-            let scale = maxVelocity / speed;
-            pos.vx *= scale;
-            pos.vy *= scale;
-        }
-        
-        // Update position
-        pos.x += pos.vx;
-        pos.y += pos.vy;
-    });
-    
-    // Repulsion forces between nodes
-    const nodeArray = Array.from(nodePositions.entries());
-    for (let i = 0; i < nodeArray.length; i++) {
-        for (let j = i + 1; j < nodeArray.length; j++) {
-            const [idA, posA] = nodeArray[i];
-            const [idB, posB] = nodeArray[j];
-            
-            const dx = posB.x - posA.x;
-            const dy = posB.y - posA.y;
-            const d = dist(posA.x, posA.y, posB.x, posB.y);
-            
-            if (d < repelDist && d > 0) {
-                const force = repelForce / (d * d);
-                if (!posA.fixed) {
-                    posA.vx -= force * dx;
-                    posA.vy -= force * dy;
-                }
-                if (!posB.fixed) {
-                    posB.vx += force * dx;
-                    posB.vy += force * dy;
-                }
-            }
-        }
-    }
-    
-    // Spring forces for connected nodes
-    edges.forEach(edge => {
-        edge.from_nodes.forEach(fromId => {
-            edge.to_nodes.forEach(toId => {
-                const fromPos = nodePositions.get(fromId);
-                const toPos = nodePositions.get(toId);
-                
-                if (fromPos && toPos) {
-                    const dx = toPos.x - fromPos.x;
-                    const dy = toPos.y - fromPos.y;
-                    const d = dist(fromPos.x, fromPos.y, toPos.x, toPos.y);
-                    
-                    if (d > 0) {
-                        const force = (d - springLength) * springForce;
-                        if (!fromPos.fixed) {
-                            fromPos.vx += force * dx / d;
-                            fromPos.vy += force * dy / d;
-                        }
-                        if (!toPos.fixed) {
-                            toPos.vx -= force * dx / d;
-                            toPos.vy -= force * dy / d;
-                        }
-                    }
-                }
-            });
-        });
-    });
-    
-    // Gentle center force
-    nodePositions.forEach((pos, nodeId) => {
-        const dxCenter = -pos.x;
-        const dyCenter = -pos.y;
-        pos.vx += dxCenter * centerForce;
-        pos.vy += dyCenter * centerForce;
-    });
-}
-
 function drawNodes() {
-    noStroke();
-    
     nodes.forEach(node => {
         const pos = nodePositions.get(node.node_id);
         if (!pos) return;
@@ -565,6 +524,7 @@ function drawNodes() {
         // Determine node color and visibility
         let nodeColor = color(textColor);
         let alpha = 255;
+        let isRelevantNode = false;
         
         if (selectedStep !== null) {
             const relevantEdges = edges.filter(e => 
@@ -572,13 +532,16 @@ function drawNodes() {
                 (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
             );
             
-            if (relevantEdges.length === 0) {
-                alpha = 100; // Dim unrelated nodes
+            isRelevantNode = relevantEdges.length > 0;
+            
+            if (!isRelevantNode) {
+                alpha = 100;
                 nodeColor = h3Color;
             } else {
-                nodeColor = h1Color; // Highlight active nodes
+                nodeColor = h1Color;
             }
         } else {
+            isRelevantNode = true;
             // Default coloring by hierarchy
             if (node.node_grandparent_id) {
                 nodeColor = h1Color; // Individual level - cyan
@@ -589,24 +552,25 @@ function drawNodes() {
             }
         }
         
-        // Hover effect
-        if (hoveredNode === node.node_id) {
+        // Hover effect - only show for relevant nodes when a step is selected
+        if (hoveredNode === node.node_id && (selectedStep === null || isRelevantNode)) {
             nodeColor = color(255, 200, 100);
             alpha = 255;
         }
         
         fill(red(nodeColor), green(nodeColor), blue(nodeColor), alpha);
+        stroke(255, alpha * 0.5);
+        strokeWeight(1);
         
-        // All nodes are simple rectangles (SDS style)
+        // Draw 2D rectangle nodes
         rectMode(CENTER);
-        rect(pos.x, pos.y, 10, 10);
+        rect(pos.x, pos.y, 12, 12);
         
         // Node label
         fill(red(textColor), green(textColor), blue(textColor), alpha);
         textAlign(CENTER, CENTER);
-        textSize(11);
-        textFont('Helvetica, sans-serif');
-        text(node.node_name, pos.x, pos.y - 18);
+        textSize(10);
+        text(node.node_name, pos.x, pos.y - 20);
     });
 }
 
@@ -621,127 +585,208 @@ function drawAllEdges() {
 }
 
 function drawSingleEdge(edge, fromId, toId) {
-    const fromPos = getNodeOrCloudPosition(fromId);
-    const toPos = getNodeOrCloudPosition(toId);
+    const fromPos = nodePositions.get(fromId);
+    const toPos = nodePositions.get(toId);
     
     if (!fromPos || !toPos) return;
+    
+    // Handle self-loops (circular edges)
+    if (fromId === toId) {
+        drawCircularEdge(edge, fromPos);
+        return;
+    }
     
     // Calculate offset for multiple edges between same nodes
     const edgeKey = `${edge.interaction_id}-${fromId}-${toId}`;
     const offset = edgeOffsets.get(edgeKey) || 0;
     
-    // Calculate perpendicular offset
+    // Determine edge color and style
+    let edgeColor = h3Color;
+    let alpha = 80;
+    let strokeW = 1;
+    let isActiveEdge = false;
+    let shouldShow = true;
+    
+    if (selectedStep !== null) {
+        if (edge.step_id === selectedStep) {
+            isActiveEdge = true;
+            // Check if this specific edge is selected in the UI
+            if (selectedEdges.size > 0) {
+                shouldShow = selectedEdges.has(edge.interaction_id);
+                if (shouldShow) {
+                    edgeColor = h2Color;
+                    alpha = 200;
+                    strokeW = 2;
+                } else {
+                    alpha = 30;
+                }
+            } else {
+                edgeColor = h2Color;
+                alpha = 200;
+                strokeW = 2;
+            }
+        } else {
+            shouldShow = false;
+            alpha = 0;
+        }
+    } else {
+        alpha = 60;
+        // When no step is selected, violated edges should be greyed out
+        if (edge.violated === 1) {
+            edgeColor = h3Color;
+            alpha = 40;
+        }
+    }
+    
+    // Special cases for active edges
+    if (isActiveEdge && shouldShow) {
+        if (edge.violated === 1) {
+            edgeColor = color(255, 100, 100);
+            strokeW = 2;
+            alpha = Math.max(alpha, 180);
+        } else if (edge.unused === 1) {
+            alpha = Math.min(alpha, 80);
+        }
+    }
+    
+    // Hover effect
+    if (hoveredEdge === edge.interaction_id && shouldShow) {
+        edgeColor = color(255, 255, 100);
+        strokeW = 3;
+        alpha = 255;
+    }
+    
+    if (alpha <= 0) return;
+    
+    stroke(red(edgeColor), green(edgeColor), blue(edgeColor), alpha);
+    strokeWeight(strokeW);
+    
+    // Draw curved line if there's an offset, straight line otherwise
+    if (offset !== 0) {
+        drawCurvedEdge(fromPos, toPos, offset, edge.violated === 1 && isActiveEdge);
+    } else {
+        if (edge.violated === 1 && isActiveEdge) {
+            drawBrokenLine2D(fromPos, toPos, 8);
+        } else {
+            line(fromPos.x, fromPos.y, toPos.x, toPos.y);
+        }
+    }
+}
+
+function drawCurvedEdge(fromPos, toPos, offset, isBroken) {
+    // Calculate midpoint
+    const midX = (fromPos.x + toPos.x) / 2;
+    const midY = (fromPos.y + toPos.y) / 2;
+    
+    // Calculate perpendicular vector for curve
     const dx = toPos.x - fromPos.x;
     const dy = toPos.y - fromPos.y;
     const len = sqrt(dx*dx + dy*dy);
+    
     if (len === 0) return;
     
     const perpX = -dy / len * offset;
     const perpY = dx / len * offset;
     
-    const startX = fromPos.x + perpX;
-    const startY = fromPos.y + perpY;
-    const endX = toPos.x + perpX;
-    const endY = toPos.y + perpY;
+    const controlX = midX + perpX;
+    const controlY = midY + perpY;
     
-    // Determine edge color and style based on step selection
-    let edgeColor = h3Color; // Default grey
-    let alpha = 80; // Dimmed by default
+    if (isBroken) {
+        // Draw broken curved line
+        const segments = 20;
+        for (let i = 0; i < segments; i += 2) {
+            const t1 = i / segments;
+            const t2 = (i + 1) / segments;
+            
+            const x1 = bezierPoint(fromPos.x, controlX, controlX, toPos.x, t1);
+            const y1 = bezierPoint(fromPos.y, controlY, controlY, toPos.y, t1);
+            const x2 = bezierPoint(fromPos.x, controlX, controlX, toPos.x, t2);
+            const y2 = bezierPoint(fromPos.y, controlY, controlY, toPos.y, t2);
+            
+            line(x1, y1, x2, y2);
+        }
+    } else {
+        // Draw smooth curved line
+        noFill();
+        bezier(fromPos.x, fromPos.y, controlX, controlY, controlX, controlY, toPos.x, toPos.y);
+    }
+}
+
+function drawCircularEdge(edge, nodePos) {
+    // Draw circular edge around the node
+    let edgeColor = h3Color;
+    let alpha = 80;
     let strokeW = 1;
     let isActiveEdge = false;
+    let shouldShow = true;
     
-    // Check if this edge is active for the selected step
-    if (selectedStep !== null && edge.step_id === selectedStep) {
-        isActiveEdge = true;
-        edgeColor = h2Color; // Bright green for active edges
-        alpha = 200;
-        strokeW = 2;
-    } else if (selectedStep === null) {
-        // When no step is selected, show all edges dimmed
+    if (selectedStep !== null) {
+        if (edge.step_id === selectedStep) {
+            isActiveEdge = true;
+            if (selectedEdges.size > 0) {
+                shouldShow = selectedEdges.has(edge.interaction_id);
+                if (shouldShow) {
+                    edgeColor = h2Color;
+                    alpha = 200;
+                    strokeW = 2;
+                } else {
+                    alpha = 30;
+                }
+            } else {
+                edgeColor = h2Color;
+                alpha = 200;
+                strokeW = 2;
+            }
+        } else {
+            shouldShow = false;
+            alpha = 0;
+        }
+    } else {
         alpha = 60;
+        if (edge.violated === 1) {
+            edgeColor = h3Color;
+            alpha = 40;
+        }
     }
     
-    // Special cases override step coloring
-    if (edge.violated === 1) {
-        edgeColor = color(255, 100, 100); // Red for violated
-        strokeW = 2;
-        alpha = Math.max(alpha, 180); // Ensure violated edges are visible
-    } else if (edge.unused === 1) {
-        alpha = Math.min(alpha, 40); // Even more dimmed for unused
+    if (isActiveEdge && shouldShow) {
+        if (edge.violated === 1) {
+            edgeColor = color(255, 100, 100);
+            strokeW = 2;
+            alpha = Math.max(alpha, 180);
+        } else if (edge.unused === 1) {
+            alpha = Math.min(alpha, 80);
+        }
     }
     
-    // Hover effect - only show for active edges or when no step selected
-    if (hoveredEdge === edge.interaction_id && (isActiveEdge || selectedStep === null)) {
-        edgeColor = color(255, 255, 100); // Yellow on hover
+    if (hoveredEdge === edge.interaction_id && shouldShow) {
+        edgeColor = color(255, 255, 100);
         strokeW = 3;
         alpha = 255;
     }
     
+    if (alpha <= 0) return;
+    
     stroke(red(edgeColor), green(edgeColor), blue(edgeColor), alpha);
     strokeWeight(strokeW);
+    noFill();
     
-    if (edge.violated === 1) {
-        // Draw broken line for violated edges
-        drawBrokenLine({ x: startX, y: startY }, { x: endX, y: endY }, 8);
+    // Draw circular loop in 2D
+    if (edge.violated === 1 && isActiveEdge) {
+        // Broken circular line
+        for (let i = 0; i < 8; i += 2) {
+            let startAngle = (i / 8) * TWO_PI;
+            let endAngle = ((i + 1) / 8) * TWO_PI;
+            
+            arc(nodePos.x, nodePos.y, 50, 50, startAngle, endAngle);
+        }
     } else {
-        // Draw solid line
-        line(startX, startY, endX, endY);
-    }
-    
-    // Draw directional arrows
-    drawArrows(startX, startY, endX, endY, edge.bidirectional, edgeColor, alpha);
-}
-
-function drawArrows(startX, startY, endX, endY, bidirectional, edgeColor, alpha) {
-    const dx = endX - startX;
-    const dy = endY - startY;
-    const len = sqrt(dx*dx + dy*dy);
-    if (len === 0) return;
-    
-    const unitX = dx / len;
-    const unitY = dy / len;
-    
-    fill(red(edgeColor), green(edgeColor), blue(edgeColor), alpha);
-    noStroke();
-    
-    const arrowSize = 8;
-    
-    if (bidirectional) {
-        // Draw arrow at both ends
-        // End arrow
-        const endArrowX = endX - unitX * 15; // Move back from node
-        const endArrowY = endY - unitY * 15;
-        
-        push();
-        translate(endArrowX, endArrowY);
-        rotate(atan2(dy, dx));
-        triangle(0, 0, -arrowSize, -arrowSize/2, -arrowSize, arrowSize/2);
-        pop();
-        
-        // Start arrow (pointing opposite direction)
-        const startArrowX = startX + unitX * 15; // Move forward from node
-        const startArrowY = startY + unitY * 15;
-        
-        push();
-        translate(startArrowX, startArrowY);
-        rotate(atan2(-dy, -dx));
-        triangle(0, 0, -arrowSize, -arrowSize/2, -arrowSize, arrowSize/2);
-        pop();
-        
-    } else {
-        // Draw arrow only at end
-        const endArrowX = endX - unitX * 15; // Move back from node
-        const endArrowY = endY - unitY * 15;
-        
-        push();
-        translate(endArrowX, endArrowY);
-        rotate(atan2(dy, dx));
-        triangle(0, 0, -arrowSize, -arrowSize/2, -arrowSize, arrowSize/2);
-        pop();
+        // Solid circular line
+        circle(nodePos.x, nodePos.y, 50);
     }
 }
 
-function drawBrokenLine(from, to, segments) {
+function drawBrokenLine2D(from, to, segments) {
     const dx = (to.x - from.x) / segments;
     const dy = (to.y - from.y) / segments;
     
@@ -755,72 +800,86 @@ function drawBrokenLine(from, to, segments) {
     }
 }
 
-function getNodeOrCloudPosition(nodeId) {
-    // Always return direct node position - no more cloud positions
-    return nodePositions.get(nodeId);
-}
-
 function handleMouseInteraction() {
     // Transform mouse coordinates to world space
     let worldMouseX = (mouseX - width/2) / zoomLevel - viewX;
     let worldMouseY = (mouseY - height/2) / zoomLevel - viewY;
     
-    // Check for node hover
     let newHoveredNode = null;
     let newHoveredEdge = null;
     
-    // Only check interactions in canvas area
     if (mouseX < width - 350) {
-        // Check nodes
+        // Check nodes - only allow hover for relevant nodes when step is selected
         nodes.forEach(node => {
             const pos = nodePositions.get(node.node_id);
-            if (pos && dist(worldMouseX, worldMouseY, pos.x, pos.y) < 15) {
-                newHoveredNode = node.node_id;
+            if (pos && dist(worldMouseX, worldMouseY, pos.x, pos.y) < 20) {
+                if (selectedStep === null) {
+                    newHoveredNode = node.node_id;
+                } else {
+                    // Check if node is relevant to selected step
+                    const relevantEdges = edges.filter(e => 
+                        e.step_id === selectedStep && 
+                        (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
+                    );
+                    if (relevantEdges.length > 0) {
+                        newHoveredNode = node.node_id;
+                    }
+                }
             }
         });
         
         // Check edges if not hovering a node
         if (!newHoveredNode) {
             edges.forEach(edge => {
-                edge.from_nodes.forEach(fromId => {
-                    edge.to_nodes.forEach(toId => {
-                        const fromPos = getNodeOrCloudPosition(fromId);
-                        const toPos = getNodeOrCloudPosition(toId);
-                        if (fromPos && toPos) {
-                            // Check if edge should be hoverable
-                            const shouldShowTooltip = selectedStep === null || edge.step_id === selectedStep;
-                            
-                            if (shouldShowTooltip) {
-                                // Calculate offset for multiple edges
-                                const edgeKey = `${edge.interaction_id}-${fromId}-${toId}`;
-                                const offset = edgeOffsets.get(edgeKey) || 0;
-                                
-                                const dx = toPos.x - fromPos.x;
-                                const dy = toPos.y - fromPos.y;
-                                const len = sqrt(dx*dx + dy*dy);
-                                if (len === 0) return;
-                                
-                                const perpX = -dy / len * offset;
-                                const perpY = dx / len * offset;
-                                
-                                const startX = fromPos.x + perpX;
-                                const startY = fromPos.y + perpY;
-                                const endX = toPos.x + perpX;
-                                const endY = toPos.y + perpY;
-                                
-                                // Check distance to line
-                                const distToLine = distanceToLineSegment(
-                                    worldMouseX, worldMouseY,
-                                    startX, startY, endX, endY
-                                );
-                                
-                                if (distToLine < 8) {
-                                    newHoveredEdge = edge.interaction_id;
+                let shouldShowTooltip = false;
+                
+                if (selectedStep === null) {
+                    shouldShowTooltip = true;
+                } else if (edge.step_id === selectedStep) {
+                    if (selectedEdges.size > 0) {
+                        shouldShowTooltip = selectedEdges.has(edge.interaction_id);
+                    } else {
+                        shouldShowTooltip = true;
+                    }
+                }
+                
+                if (shouldShowTooltip) {
+                    edge.from_nodes.forEach(fromId => {
+                        edge.to_nodes.forEach(toId => {
+                            const fromPos = nodePositions.get(fromId);
+                            const toPos = nodePositions.get(toId);
+                            if (fromPos && toPos) {
+                                // Handle self-loops
+                                if (fromId === toId) {
+                                    const distToCenter = dist(worldMouseX, worldMouseY, fromPos.x, fromPos.y);
+                                    if (distToCenter > 20 && distToCenter < 35) {
+                                        newHoveredEdge = edge.interaction_id;
+                                    }
+                                } else {
+                                    // Calculate offset for multiple edges
+                                    const edgeKey = `${edge.interaction_id}-${fromId}-${toId}`;
+                                    const offset = edgeOffsets.get(edgeKey) || 0;
+                                    
+                                    let distToLine;
+                                    if (offset !== 0) {
+                                        // Check distance to curved line
+                                        distToLine = distanceToCurve(worldMouseX, worldMouseY, fromPos, toPos, offset);
+                                    } else {
+                                        // Check distance to straight line
+                                        distToLine = distanceToLineSegment(
+                                            worldMouseX, worldMouseY,
+                                            fromPos.x, fromPos.y, toPos.x, toPos.y
+                                        );
+                                    }
+                                    
+                                    if (distToLine < 8) {
+                                        newHoveredEdge = edge.interaction_id;
+                                    }
                                 }
                             }
-                        }
+                        });
                     });
-                });
+                }
             });
         }
     }
@@ -828,8 +887,41 @@ function handleMouseInteraction() {
     hoveredNode = newHoveredNode;
     hoveredEdge = newHoveredEdge;
     
-    // Update tooltip
     updateTooltip();
+}
+
+function distanceToCurve(px, py, fromPos, toPos, offset) {
+    // Calculate control point for the curve
+    const midX = (fromPos.x + toPos.x) / 2;
+    const midY = (fromPos.y + toPos.y) / 2;
+    
+    const dx = toPos.x - fromPos.x;
+    const dy = toPos.y - fromPos.y;
+    const len = sqrt(dx*dx + dy*dy);
+    
+    if (len === 0) return Infinity;
+    
+    const perpX = -dy / len * offset;
+    const perpY = dx / len * offset;
+    
+    const controlX = midX + perpX;
+    const controlY = midY + perpY;
+    
+    // Sample points along the curve and find minimum distance
+    let minDist = Infinity;
+    const samples = 20;
+    
+    for (let i = 0; i <= samples; i++) {
+        const t = i / samples;
+        const x = bezierPoint(fromPos.x, controlX, controlX, toPos.x, t);
+        const y = bezierPoint(fromPos.y, controlY, controlY, toPos.y, t);
+        const d = dist(px, py, x, y);
+        if (d < minDist) {
+            minDist = d;
+        }
+    }
+    
+    return minDist;
 }
 
 function distanceToLineSegment(px, py, x1, y1, x2, y2) {
@@ -848,12 +940,18 @@ function distanceToLineSegment(px, py, x1, y1, x2, y2) {
 
 function selectStep(stepId) {
     selectedStep = selectedStep === stepId ? null : stepId;
+    selectedEdges.clear(); // Clear selected edges when changing steps
     
     // Update UI
     selectAll('.step-item').forEach(item => item.removeClass('active'));
     if (selectedStep !== null) {
         selectAll('.step-item')[selectedStep].addClass('active');
         stepCounter.html(`Step: ${selectedStep} (${steps[selectedStep].date})`);
+        
+        // Uncheck all checkboxes
+        selectAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked(false);
+        });
     } else {
         stepCounter.html('Step: None Selected');
     }
@@ -880,6 +978,25 @@ function updateTooltip() {
     }
 }
 
+function keyPressed() {
+    if (keyCode === SHIFT) {
+        isShiftPressed = true;
+    }
+    
+    // Plus and minus keys for zoom
+    if (key === '=' || key === '+') {
+        targetZoom = constrain(targetZoom * 1.1, 0.2, 3.0);
+    } else if (key === '-') {
+        targetZoom = constrain(targetZoom * 0.9, 0.2, 3.0);
+    }
+}
+
+function keyReleased() {
+    if (keyCode === SHIFT) {
+        isShiftPressed = false;
+    }
+}
+
 function mousePressed() {
     if (mouseX < width - 350) {
         // Check if clicking on an edge when no step is selected
@@ -891,70 +1008,36 @@ function mousePressed() {
             }
         }
         
-        isDraggingView = false;
+        isDragging = true;
         lastMouseX = mouseX;
         lastMouseY = mouseY;
     }
 }
 
 function mouseDragged() {
-    if (mouseX < width - 350) { // Only in canvas area
-        if (!isDraggingView) {
-            // Check if we're dragging a node
-            let worldMouseX = (mouseX - width/2) / zoomLevel - viewX;
-            let worldMouseY = (mouseY - height/2) / zoomLevel - viewY;
-            let worldPMouseX = (pmouseX - width/2) / zoomLevel - viewX;
-            let worldPMouseY = (pmouseY - height/2) / zoomLevel - viewY;
-            
-            let draggedNode = false;
-            nodes.forEach(node => {
-                const pos = nodePositions.get(node.node_id);
-                if (pos && dist(worldPMouseX, worldPMouseY, pos.x, pos.y) < 15) {
-                    pos.x = worldMouseX;
-                    pos.y = worldMouseY;
-                    pos.fixed = true;
-                    pos.vx = 0;
-                    pos.vy = 0;
-                    draggedNode = true;
-                }
-            });
-            
-            // If not dragging a node, drag the view
-            if (!draggedNode) {
-                isDraggingView = true;
-                lastMouseX = mouseX;
-                lastMouseY = mouseY;
-            }
+    if (isDragging && mouseX < width - 350) {
+        const deltaX = mouseX - lastMouseX;
+        const deltaY = mouseY - lastMouseY;
+        
+        if (isShiftPressed) {
+            // Rotate view (shift + drag) - just for visual effect in 2D
+            const sensitivity = 0.005;
+            targetViewX += deltaX * sensitivity * 100;
+            targetViewY += deltaY * sensitivity * 100;
+        } else {
+            // Move/pan view (regular drag)
+            const sensitivity = 1.0 / zoomLevel;
+            targetViewX += deltaX * sensitivity;
+            targetViewY += deltaY * sensitivity;
         }
         
-        if (isDraggingView) {
-            // Pan the view
-            let deltaX = (mouseX - lastMouseX) / zoomLevel;
-            let deltaY = (mouseY - lastMouseY) / zoomLevel;
-            targetViewX += deltaX;
-            targetViewY += deltaY;
-            lastMouseX = mouseX;
-            lastMouseY = mouseY;
-        }
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
     }
 }
 
 function mouseReleased() {
-    // Release fixed nodes and stop view dragging
-    nodePositions.forEach((pos, nodeId) => {
-        pos.fixed = false;
-    });
-    isDraggingView = false;
-}
-
-function mouseWheel(event) {
-    if (mouseX < width - 350) { // Only in canvas area
-        // Zoom in/out
-        let zoomFactor = 1 + (event.delta * -0.001);
-        targetZoom *= zoomFactor;
-        targetZoom = constrain(targetZoom, 0.2, 3.0);
-        return false;
-    }
+    isDragging = false;
 }
 
 function windowResized() {
