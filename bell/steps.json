@@ -68,11 +68,13 @@
   {
     "step_id": 11,
     "step_description": "Manufacturing and resulting diffusion of transistor technology.",
-    "date": "1951",
-    "phase": "development"
+    "date": "1951 -- 1952",
+    "phase": null
   },
-  
-
-
-
+  {
+    "step_id": 12,
+    "step_description": "AT&T Anti-Trust Decree.",
+    "date": "1949 (filed) -- 1956 (settled)",
+    "phase": null
+  }
 ]

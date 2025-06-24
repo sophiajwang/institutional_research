@@ -421,21 +421,72 @@
   },
   {
     "interaction_id": 42,
-    "from_nodes": [2],
+    "from_nodes": [20,9],
     "to_nodes": [17],
-    "interaction_description": "Licensed transistor technology for $25,000. Free exception for companies that wanted to use the devices for hearing aids (as deference to AT&T founder Alexander Graham Bell).",
+    "interaction_description": "In 1951 and 1952, Bell Labs sponsored multi-day conventions at Murray Hill, attended by hundreds of scientists and engineers from around the world. These conventions included the likes of Jack Kilby (who realized the first integrated circuit at Texas Instruments) and the founding engineers at Sony. At the conventions, Jack Morton gave the guests a brief overview of the transistor and Gerald Pearson followed with brief tutorial on transistor theory. Over the next two days, the guests were then given in-depth presentations on different types of transistors and their applications.",
     "step_id": 11,
     "bidirectional": 0,
     "unused": 0,
     "violated": 0
   },
-
-
   {
-    "interaction_id": 0,
-    "from_nodes": "Kelly signed off on Case 38,139: unified approach to all of our solid state problems. Initial cost was $417,000 mostly salaries, billed to AT&T.",
-    "to_nodes": 6,
-    "interaction_description": 21,
-    "step_id": 1945
+    "interaction_id": 43,
+    "from_nodes": [2],
+    "to_nodes": [18],
+    "interaction_description": "Exchange through conferences, professional societies, seminars.",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 1,
+    "violated": 0
+  },
+  {
+    "interaction_id": 44,
+    "from_nodes": [2],
+    "to_nodes": [14],
+    "interaction_description": "Bell Labs maintained an open door policy following immense political pressure to appease governmental regulators.",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 45,
+    "from_nodes": [2],
+    "to_nodes": [19],
+    "interaction_description": "The transistor burnished Bell Labs' reputation as a national resource (AT&T's monopoly resulted in large-scale scientific and public benefits).",
+    "step_id": 11,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 46,
+    "from_nodes": [14],
+    "to_nodes": [3],
+    "interaction_description": "After the 1956 Anti-Trust decree, AT&T was obligated to license all existing patents royalty-free.",
+    "step_id": 12,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 47,
+    "from_nodes": [3],
+    "to_nodes": [17,19],
+    "interaction_description": "AT&T’s licensing policy shaped by antitrust policy remains as one of the most unheralded contributions to economic development, possibly far exceeding the Marshall Plan in terms of the wealth generation capability it established abroad and in the United States.",
+    "step_id": 12,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
+  },
+  {
+    "interaction_id": 48,
+    "from_nodes": [4,22],
+    "to_nodes": [17],
+    "interaction_description": "The combination of liberal licensing policies and people such as Gordon Teal leaving to start Texas Instruments ICs and William Shockley leaving to start Shockley Semiconductor in Palo Alto started the growth of Silicon Valley.",
+    "step_id": 12,
+    "bidirectional": 0,
+    "unused": 0,
+    "violated": 0
   }
 ]
