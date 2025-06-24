@@ -336,7 +336,7 @@ function calculateEdgeOffsets() {
 function createLegend() {
     let legend = createDiv('');
     legend.id('legend');
-    legend.position(width - 250, height - 150);
+    legend.position(width - 250, height - 180);
     legend.style('background', 'rgba(20, 20, 20, 0.9)');
     legend.style('padding', '15px');
     legend.style('border-radius', '4px');
@@ -368,125 +368,166 @@ function createLegend() {
         <div style="margin: 2px 0;"><span style="color: #5DC0D9;">■</span> Individual/Child</div>
         <div style="margin: 2px 0;"><span style="color: #78B478;">■</span> Group/Parent</div>
         <div style="margin: 2px 0;"><span style="color: #999999;">■</span> Organization/Root</div>
+        <div style="margin: 2px 0;"><span style="color: #FFA500;">■</span> Related Children</div>
     `);
     nodeTypes.parent(legend);
 }
 
+// Make selectStep globally accessible for navigation buttons
+window.selectStep = selectStep;
+
 function createStepList() {
     const stepList = select('#step-list');
     
-    steps.forEach(step => {
-        const stepDiv = createDiv();
-        stepDiv.class('step-item');
-        stepDiv.addClass(step.phase || 'null');
+    // Group steps by phase
+    const phaseGroups = {
+        research: steps.filter(s => s.phase === 'research'),
+        development: steps.filter(s => s.phase === 'development'),
+        impact: steps.filter(s => !s.phase || s.phase === null)
+    };
+    
+    // Create phase sections
+    Object.entries(phaseGroups).forEach(([phase, phaseSteps]) => {
+        if (phaseSteps.length === 0) return;
         
-        const dateDiv = createDiv(step.date);
-        dateDiv.class('step-date');
-        dateDiv.parent(stepDiv);
+        // Create phase header
+        const phaseHeader = createDiv(phase.charAt(0).toUpperCase() + phase.slice(1));
+        phaseHeader.class('phase-header');
+        phaseHeader.style('color', '#5DC0D9');
+        phaseHeader.style('font-weight', 'bold');
+        phaseHeader.style('font-size', '14px');
+        phaseHeader.style('margin', '20px 0 10px 0');
+        phaseHeader.style('text-transform', 'uppercase');
+        phaseHeader.style('letter-spacing', '1px');
+        if (phase === 'research') {
+            phaseHeader.style('margin-top', '0');
+        }
+        phaseHeader.parent(stepList);
         
-        const descDiv = createDiv(step.step_description);
-        descDiv.class('step-description');
-        descDiv.parent(stepDiv);
-        
-        // Add edges list for this step
-        const relatedEdges = edges.filter(e => e.step_id === step.step_id);
-        if (relatedEdges.length > 0) {
-            const edgesList = createDiv();
-            edgesList.class('edges-list');
-            edgesList.style('display', 'none');
-            edgesList.style('margin-top', '8px');
-            edgesList.style('padding-left', '10px');
-            edgesList.style('border-left', '2px solid #444');
+        phaseSteps.forEach(step => {
+            const stepDiv = createDiv();
+            stepDiv.class('step-item');
+            stepDiv.addClass(step.phase || 'null');
             
-            relatedEdges.forEach(edge => {
-                const edgeItem = createDiv();
-                edgeItem.class('edge-item');
-                edgeItem.style('font-size', '11px');
-                edgeItem.style('color', '#BBBBBB');
-                edgeItem.style('margin', '3px 0');
-                edgeItem.style('cursor', 'pointer');
-                edgeItem.style('padding', '3px');
-                edgeItem.style('border-radius', '2px');
-                edgeItem.style('position', 'relative');
-                edgeItem.style('display', 'flex');
-                edgeItem.style('align-items', 'center');
+            const dateDiv = createDiv(step.date);
+            dateDiv.class('step-date');
+            dateDiv.parent(stepDiv);
+            
+            const descDiv = createDiv(step.step_description);
+            descDiv.class('step-description');
+            descDiv.parent(stepDiv);
+            
+            // Add edges list for this step
+            const relatedEdges = edges.filter(e => e.step_id === step.step_id);
+            if (relatedEdges.length > 0) {
+                const edgesList = createDiv();
+                edgesList.class('edges-list');
+                edgesList.style('display', 'none');
+                edgesList.style('margin-top', '8px');
+                edgesList.style('padding-left', '10px');
+                edgesList.style('border-left', '2px solid #444');
                 
-                // Create checkbox
-                const checkbox = createCheckbox('', false);
-                checkbox.style('margin-right', '8px');
-                checkbox.style('transform', 'scale(0.8)');
-                checkbox.changed(() => {
-                    if (checkbox.checked()) {
-                        selectedEdges.add(edge.interaction_id);
+                relatedEdges.forEach(edge => {
+                    const edgeItem = createDiv();
+                    edgeItem.class('edge-item');
+                    edgeItem.style('font-size', '11px');
+                    edgeItem.style('color', '#BBBBBB');
+                    edgeItem.style('margin', '3px 0');
+                    edgeItem.style('cursor', 'pointer');
+                    edgeItem.style('padding', '3px');
+                    edgeItem.style('border-radius', '2px');
+                    edgeItem.style('position', 'relative');
+                    edgeItem.style('display', 'flex');
+                    edgeItem.style('align-items', 'center');
+                    
+                    // Create checkbox with event prevention
+                    const checkbox = createCheckbox('', false);
+                    checkbox.style('margin-right', '8px');
+                    checkbox.style('transform', 'scale(0.8)');
+                    checkbox.changed(() => {
+                        if (checkbox.checked()) {
+                            selectedEdges.add(edge.interaction_id);
+                        } else {
+                            selectedEdges.delete(edge.interaction_id);
+                        }
+                    });
+                    
+                    // Prevent checkbox events from bubbling to step selection
+                    checkbox.elt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                    checkbox.parent(edgeItem);
+                    
+                    // Get node names for display
+                    const fromNames = edge.from_nodes.map(id => {
+                        const node = nodes.find(n => n.node_id === id);
+                        return node ? node.node_name : id;
+                    }).join(', ');
+                    
+                    const toNames = edge.to_nodes.map(id => {
+                        const node = nodes.find(n => n.node_id === id);
+                        return node ? node.node_name : id;
+                    }).join(', ');
+                    
+                    // Check for self-loop
+                    const isSelfLoop = edge.from_nodes.some(fromId => 
+                        edge.to_nodes.includes(fromId)
+                    );
+                    
+                    const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
+                    const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
+                    
+                    const textSpan = createSpan(display);
+                    textSpan.style('vertical-align', 'middle');
+                    textSpan.parent(edgeItem);
+                    
+                    edgeItem.mouseOver(() => {
+                        edgeItem.style('background', '#444');
+                        hoveredEdge = edge.interaction_id;
+                    });
+                    
+                    edgeItem.mouseOut(() => {
+                        edgeItem.style('background', 'transparent');
+                        if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
+                    });
+                    
+                    // Prevent edge item clicks from bubbling to step selection
+                    edgeItem.elt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                    
+                    edgeItem.parent(edgesList);
+                });
+                
+                edgesList.parent(stepDiv);
+                
+                // Add expand/collapse button
+                const expandBtn = createDiv('▶ ' + relatedEdges.length + ' edges');
+                expandBtn.class('expand-btn');
+                expandBtn.style('font-size', '10px');
+                expandBtn.style('color', '#5DC0D9');
+                expandBtn.style('cursor', 'pointer');
+                expandBtn.style('margin-top', '5px');
+                
+                let isExpanded = false;
+                expandBtn.mousePressed((e) => {
+                    e.stopPropagation(); // Prevent step selection
+                    isExpanded = !isExpanded;
+                    if (isExpanded) {
+                        edgesList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedEdges.length + ' edges');
                     } else {
-                        selectedEdges.delete(edge.interaction_id);
+                        edgesList.style('display', 'none');
+                        expandBtn.html('▶ ' + relatedEdges.length + ' edges');
                     }
                 });
-                checkbox.parent(edgeItem);
                 
-                // Get node names for display
-                const fromNames = edge.from_nodes.map(id => {
-                    const node = nodes.find(n => n.node_id === id);
-                    return node ? node.node_name : id;
-                }).join(', ');
-                
-                const toNames = edge.to_nodes.map(id => {
-                    const node = nodes.find(n => n.node_id === id);
-                    return node ? node.node_name : id;
-                }).join(', ');
-                
-                // Check for self-loop
-                const isSelfLoop = edge.from_nodes.some(fromId => 
-                    edge.to_nodes.includes(fromId)
-                );
-                
-                const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
-                const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
-                
-                const textSpan = createSpan(display);
-                textSpan.style('vertical-align', 'middle');
-                textSpan.parent(edgeItem);
-                
-                edgeItem.mouseOver(() => {
-                    edgeItem.style('background', '#444');
-                    hoveredEdge = edge.interaction_id;
-                });
-                
-                edgeItem.mouseOut(() => {
-                    edgeItem.style('background', 'transparent');
-                    if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
-                });
-                
-                edgeItem.parent(edgesList);
-            });
+                expandBtn.parent(stepDiv);
+            }
             
-            edgesList.parent(stepDiv);
-            
-            // Add expand/collapse button
-            const expandBtn = createDiv('▶ ' + relatedEdges.length + ' edges');
-            expandBtn.class('expand-btn');
-            expandBtn.style('font-size', '10px');
-            expandBtn.style('color', '#5DC0D9');
-            expandBtn.style('cursor', 'pointer');
-            expandBtn.style('margin-top', '5px');
-            
-            let isExpanded = false;
-            expandBtn.mousePressed(() => {
-                isExpanded = !isExpanded;
-                if (isExpanded) {
-                    edgesList.style('display', 'block');
-                    expandBtn.html('▼ ' + relatedEdges.length + ' edges');
-                } else {
-                    edgesList.style('display', 'none');
-                    expandBtn.html('▶ ' + relatedEdges.length + ' edges');
-                }
-            });
-            
-            expandBtn.parent(stepDiv);
-        }
-        
-        stepDiv.mousePressed(() => selectStep(step.step_id));
-        stepDiv.parent(stepList);
+            stepDiv.mousePressed(() => selectStep(step.step_id));
+            stepDiv.parent(stepList);
+        });
     });
 }
 
@@ -525,6 +566,7 @@ function drawNodes() {
         let nodeColor = color(textColor);
         let alpha = 255;
         let isRelevantNode = false;
+        let isHighlightedChild = false;
         
         if (selectedStep !== null) {
             const relevantEdges = edges.filter(e => 
@@ -534,11 +576,38 @@ function drawNodes() {
             
             isRelevantNode = relevantEdges.length > 0;
             
-            if (!isRelevantNode) {
-                alpha = 100;
-                nodeColor = h3Color;
-            } else {
+            // Check if this node should be highlighted as part of parent/grandparent organization
+            const stepEdges = edges.filter(e => e.step_id === selectedStep);
+            stepEdges.forEach(edge => {
+                edge.from_nodes.concat(edge.to_nodes).forEach(nodeId => {
+                    const targetNode = nodes.find(n => n.node_id === nodeId);
+                    if (targetNode) {
+                        // If edge references parent/grandparent, highlight their children
+                        if (targetNode.node_parent_id && !targetNode.node_grandparent_id) {
+                            // This is a parent node, highlight its children
+                            if (node.node_parent_id === targetNode.node_id) {
+                                isHighlightedChild = true;
+                            }
+                        } else if (!targetNode.node_parent_id) {
+                            // This is a grandparent node, highlight its children and grandchildren
+                            if (node.node_parent_id === targetNode.node_id || node.node_grandparent_id === targetNode.node_id) {
+                                isHighlightedChild = true;
+                            }
+                        }
+                    }
+                });
+            });
+            
+            if (isRelevantNode) {
                 nodeColor = h1Color;
+                alpha = 255;
+            } else if (isHighlightedChild) {
+                nodeColor = color(255, 165, 0); // Orange for highlighted children
+                alpha = 200;
+            } else {
+                // Show other nodes greyed out but visible
+                alpha = 80;
+                nodeColor = h3Color;
             }
         } else {
             isRelevantNode = true;
@@ -552,10 +621,12 @@ function drawNodes() {
             }
         }
         
-        // Hover effect - only show for relevant nodes when a step is selected
-        if (hoveredNode === node.node_id && (selectedStep === null || isRelevantNode)) {
-            nodeColor = color(255, 200, 100);
-            alpha = 255;
+        // Hover effect - show for all nodes when no step selected, only relevant when step selected
+        if (hoveredNode === node.node_id) {
+            if (selectedStep === null || isRelevantNode) {
+                nodeColor = color(255, 200, 100);
+                alpha = 255;
+            }
         }
         
         fill(red(nodeColor), green(nodeColor), blue(nodeColor), alpha);
@@ -626,8 +697,10 @@ function drawSingleEdge(edge, fromId, toId) {
                 strokeW = 2;
             }
         } else {
-            shouldShow = false;
-            alpha = 0;
+            // Show other edges greyed out when step is selected
+            edgeColor = h3Color;
+            alpha = 30;
+            shouldShow = true;
         }
     } else {
         alpha = 60;
@@ -650,7 +723,7 @@ function drawSingleEdge(edge, fromId, toId) {
     }
     
     // Hover effect
-    if (hoveredEdge === edge.interaction_id && shouldShow) {
+    if (hoveredEdge === edge.interaction_id && (selectedStep === null || shouldShow)) {
         edgeColor = color(255, 255, 100);
         strokeW = 3;
         alpha = 255;
@@ -713,7 +786,7 @@ function drawCurvedEdge(fromPos, toPos, offset, isBroken) {
 }
 
 function drawCircularEdge(edge, nodePos) {
-    // Draw circular edge around the node
+    // Draw circular edge around the node with improved curve like the diagram
     let edgeColor = h3Color;
     let alpha = 80;
     let strokeW = 1;
@@ -738,8 +811,10 @@ function drawCircularEdge(edge, nodePos) {
                 strokeW = 2;
             }
         } else {
-            shouldShow = false;
-            alpha = 0;
+            // Show other edges greyed out when step is selected
+            edgeColor = h3Color;
+            alpha = 30;
+            shouldShow = true;
         }
     } else {
         alpha = 60;
@@ -759,7 +834,7 @@ function drawCircularEdge(edge, nodePos) {
         }
     }
     
-    if (hoveredEdge === edge.interaction_id && shouldShow) {
+    if (hoveredEdge === edge.interaction_id && (selectedStep === null || shouldShow)) {
         edgeColor = color(255, 255, 100);
         strokeW = 3;
         alpha = 255;
@@ -771,18 +846,59 @@ function drawCircularEdge(edge, nodePos) {
     strokeWeight(strokeW);
     noFill();
     
-    // Draw circular loop in 2D
+    // Draw improved circular loop like the diagram - starting from node perimeter
+    const radius = 25; // Radius of the loop
+    const nodeRadius = 6; // Half the node size (12/2)
+    
+    // Calculate starting point on the node perimeter (top-right)
+    const startAngle = -PI/4; // Start at top-right of node
+    const startX = nodePos.x + cos(startAngle) * nodeRadius;
+    const startY = nodePos.y + sin(startAngle) * nodeRadius;
+    
+    // Create control points for a smooth curve that loops around
+    const loopCenterX = nodePos.x + radius;
+    const loopCenterY = nodePos.y - radius;
+    
     if (edge.violated === 1 && isActiveEdge) {
-        // Broken circular line
-        for (let i = 0; i < 8; i += 2) {
-            let startAngle = (i / 8) * TWO_PI;
-            let endAngle = ((i + 1) / 8) * TWO_PI;
+        // Draw broken circular line with bezier curves
+        const segments = 8;
+        for (let i = 0; i < segments; i += 2) {
+            const t1 = i / segments;
+            const t2 = (i + 1) / segments;
             
-            arc(nodePos.x, nodePos.y, 50, 50, startAngle, endAngle);
+            // Calculate points on the circular path
+            const angle1 = startAngle + t1 * TWO_PI;
+            const angle2 = startAngle + t2 * TWO_PI;
+            
+            const x1 = nodePos.x + cos(angle1) * (nodeRadius + radius * 0.7);
+            const y1 = nodePos.y + sin(angle1) * (nodeRadius + radius * 0.7);
+            const x2 = nodePos.x + cos(angle2) * (nodeRadius + radius * 0.7);
+            const y2 = nodePos.y + sin(angle2) * (nodeRadius + radius * 0.7);
+            
+            line(x1, y1, x2, y2);
         }
     } else {
-        // Solid circular line
-        circle(nodePos.x, nodePos.y, 50);
+        // Draw smooth circular loop starting and ending at node perimeter
+        beginShape();
+        noFill();
+        
+        // Create a smooth loop using bezier curve
+        const controlRadius = radius * 1.2;
+        bezier(
+            startX, startY, // Start point on node perimeter
+            nodePos.x + controlRadius, nodePos.y - controlRadius, // Control point 1
+            nodePos.x + controlRadius, nodePos.y + controlRadius, // Control point 2  
+            startX, startY  // End point (same as start)
+        );
+        
+        // Add arrow head for direction
+        const arrowSize = 3;
+        const endAngle = startAngle + PI/6;
+        const arrowX = startX + cos(endAngle) * arrowSize;
+        const arrowY = startY + sin(endAngle) * arrowSize;
+        
+        line(startX, startY, arrowX, arrowY);
+        line(startX, startY, startX + cos(endAngle - PI/2) * arrowSize, startY + sin(endAngle - PI/2) * arrowSize);
     }
 }
 
@@ -809,7 +925,7 @@ function handleMouseInteraction() {
     let newHoveredEdge = null;
     
     if (mouseX < width - 350) {
-        // Check nodes - only allow hover for relevant nodes when step is selected
+        // Check nodes - allow hover for all nodes when no step selected, relevant nodes when step selected
         nodes.forEach(node => {
             const pos = nodePositions.get(node.node_id);
             if (pos && dist(worldMouseX, worldMouseY, pos.x, pos.y) < 20) {
@@ -841,6 +957,9 @@ function handleMouseInteraction() {
                     } else {
                         shouldShowTooltip = true;
                     }
+                } else {
+                    // Allow hovering on greyed out edges too
+                    shouldShowTooltip = true;
                 }
                 
                 if (shouldShowTooltip) {
@@ -852,7 +971,7 @@ function handleMouseInteraction() {
                                 // Handle self-loops
                                 if (fromId === toId) {
                                     const distToCenter = dist(worldMouseX, worldMouseY, fromPos.x, fromPos.y);
-                                    if (distToCenter > 20 && distToCenter < 35) {
+                                    if (distToCenter > 15 && distToCenter < 35) {
                                         newHoveredEdge = edge.interaction_id;
                                     }
                                 } else {
@@ -945,8 +1064,16 @@ function selectStep(stepId) {
     // Update UI
     selectAll('.step-item').forEach(item => item.removeClass('active'));
     if (selectedStep !== null) {
-        selectAll('.step-item')[selectedStep].addClass('active');
-        stepCounter.html(`Step: ${selectedStep} (${steps[selectedStep].date})`);
+        selectAll('.step-item').forEach((item, index) => {
+            if (steps[index] && steps[index].step_id === selectedStep) {
+                item.addClass('active');
+            }
+        });
+        
+        updateStepCounter();
+        
+        // Pan to relevant nodes/edges
+        panToStepElements(selectedStep);
         
         // Uncheck all checkboxes
         selectAll('input[type="checkbox"]').forEach(checkbox => {
@@ -954,6 +1081,69 @@ function selectStep(stepId) {
         });
     } else {
         stepCounter.html('Step: None Selected');
+    }
+}
+
+function updateStepCounter() {
+    if (selectedStep !== null) {
+        const step = steps.find(s => s.step_id === selectedStep);
+        if (step) {
+            // Create navigation controls
+            const prevButton = selectedStep > 0 ? `<button onclick="selectStep(${selectedStep - 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-right: 5px; border-radius: 2px; cursor: pointer;">←</button>` : '';
+            const nextButton = selectedStep < steps.length - 1 ? `<button onclick="selectStep(${selectedStep + 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-left: 5px; border-radius: 2px; cursor: pointer;">→</button>` : '';
+            
+            stepCounter.html(`
+                <div style="text-align: center;">
+                    ${prevButton}
+                    <span style="color: #5DC0D9; font-weight: bold;">Step ${selectedStep}</span>
+                    ${nextButton}
+                </div>
+                <div style="font-size: 12px; margin-top: 5px; color: #F2F2F2; line-height: 1.3;">
+                    ${step.step_description}
+                </div>
+                <div style="font-size: 10px; margin-top: 3px; color: #BBBBBB;">
+                    ${step.date}
+                </div>
+            `);
+        }
+    }
+}
+
+function panToStepElements(stepId) {
+    // Find all nodes involved in this step
+    const stepEdges = edges.filter(e => e.step_id === stepId);
+    const involvedNodeIds = new Set();
+    
+    stepEdges.forEach(edge => {
+        edge.from_nodes.forEach(id => involvedNodeIds.add(id));
+        edge.to_nodes.forEach(id => involvedNodeIds.add(id));
+    });
+    
+    if (involvedNodeIds.size === 0) return;
+    
+    // Calculate center point of all involved nodes
+    let centerX = 0, centerY = 0;
+    let count = 0;
+    
+    involvedNodeIds.forEach(nodeId => {
+        const pos = nodePositions.get(nodeId);
+        if (pos) {
+            centerX += pos.x;
+            centerY += pos.y;
+            count++;
+        }
+    });
+    
+    if (count > 0) {
+        centerX /= count;
+        centerY /= count;
+        
+        // Smoothly pan to the center of relevant nodes
+        targetViewX = -centerX;
+        targetViewY = -centerY;
+        
+        // Optionally adjust zoom to fit all relevant nodes
+        targetZoom = constrain(targetZoom * 1.1, 0.8, 2.0);
     }
 }
 
@@ -969,7 +1159,8 @@ function updateTooltip() {
     } else if (hoveredEdge !== null) {
         const edge = edges.find(e => e.interaction_id === hoveredEdge);
         if (edge) {
-            tooltip.html(`<strong>Interaction</strong><br>${edge.interaction_description}`);
+            // Remove "Interaction" header, just show the description
+            tooltip.html(edge.interaction_description);
             tooltip.style('display', 'block');
             tooltip.position(mouseX + 10, mouseY - 10);
         }
