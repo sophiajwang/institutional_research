@@ -3,30 +3,63 @@
     "step_id": 0,
     "step_description": "The backbone of Bauhaus' curriculum. Practical and theoretical studies to release the creative powers of the student, to help him grasp the physical nature of materials and the basic laws of design.",
     "date": null,
-    "document_ids": [],
+    "document_ids": [0,1,2,3,4],
     "phase": "preliminary_course"
   },
-
-
   {
     "step_id": 1,
-    "step_description": "The bubble emerges. General perception of a bull market, with monetary policy that helps inflate the bubble rather than constrain it.",
-    "date": "2002 -- 2007",
-    "document_ids": [0,1,2],
-    "phase": "bubble"
+    "step_description": null,
+    "date": null,
+    "document_ids": [5,6,7],
+    "phase": "weaving_workshop"
   },
   {
     "step_id": 2,
-    "step_description": "The bubble approaches its top.",
-    "date": "2007",
-    "document_ids": [3,4,5],
-    "phase": "top"
+    "step_description": null,
+    "date": null,
+    "document_ids": [8,9,10,11],
+    "phase": "wall_painting_workshop"
   },
   {
     "step_id": 3,
-    "step_description": "Depression, significant contraction in economic activity (beyond recession).",
-    "date": "2008",
-    "document_ids": [6,7,8,9,10,11,12],
-    "phase": "depression"
+    "step_description": "Used during industrial production",
+    "date": null,
+    "document_ids": [12,13],
+    "phase": "store_room"
+  },
+  {
+    "step_id": 4,
+    "step_description": "Used for interfacing with the public and other external bodies.",
+    "date": null,
+    "document_ids": [14],
+    "phase": "exhibition_room"
+  },
+  {
+    "step_id": 5,
+    "step_description": "Studio Wing and students' quarters",
+    "date": null,
+    "document_ids": [15,16,17],
+    "phase": "studio_quarters"
+  },
+  {
+    "step_id": 6,
+    "step_description": "Administration offices",
+    "date": null,
+    "document_ids": [18],
+    "phase": "bridge"
+  },
+  {
+    "step_id": 7,
+    "step_description": "Stage and theater for dynamic, performing arts",
+    "date": null,
+    "document_ids": [19,20],
+    "phase": "auditorium"
+  },
+  {
+    "step_id": 8,
+    "step_description": "formal science-oriented, vocational training",
+    "date": null,
+    "document_ids": [21],
+    "phase": "technical_school"
   }
 ]

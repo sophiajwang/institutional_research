@@ -1,130 +1,457 @@
 [
   {
     "node_id": 0,
-    "node_name": "Debt",
-    "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": null,
-    "node_grandparent_id": null,
+    "node_name": "Walter Gropius",
+    "node_description": "Founder and director of Bauhaus from 1919 -- 1928",
+    "node_type": "agent",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2,
     "is_parent": 0,
     "is_grandparent": 0
   },
-
-
-  
   {
     "node_id": 1,
-    "node_name": "Private businesses",
+    "node_name": "Bauhaus Administration",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 2,
+    "node_name": "Bauhaus",
     "node_description": null,
     "node_type": "agent",
     "node_parent_id": null,
     "node_grandparent_id": null,
     "is_parent": 0,
-    "is_grandparent": 0
-  },
-  {
-    "node_id": 2,
-    "node_name": "Income",
-    "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": 5,
-    "node_grandparent_id": 0,
-    "is_parent": 0,
-    "is_grandparent": 0
+    "is_grandparent": 1
   },
   {
     "node_id": 3,
-    "node_name": "Productivity",
-    "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": 5,
-    "node_grandparent_id": 0,
+    "node_name": "Johannes Itten",
+    "node_description": "Swiss painter, designer, and Bauhaus theorist",
+    "node_type": "agent",
+    "node_parent_id": 4,
+    "node_grandparent_id": 2,
     "is_parent": 0,
     "is_grandparent": 0
   },
   {
     "node_id": 4,
-    "node_name": "Asset value",
+    "node_name": "Masters of form",
     "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": 5,
-    "node_grandparent_id": 0,
-    "is_parent": 0,
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 1,
     "is_grandparent": 0
   },
   {
     "node_id": 5,
-    "node_name": "Economic Growth",
+    "node_name": "Technical instructors of workshops",
     "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": null,
+    "node_type": "agent",
+    "node_parent_id": 2,
     "node_grandparent_id": null,
     "is_parent": 1,
     "is_grandparent": 0
   },
   {
     "node_id": 6,
-    "node_name": "Central Bank",
-    "node_description": "Federal Reserve",
-    "node_type": "agent",
-    "node_parent_id": null,
+    "node_name": "Preliminary Curriculum",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 7,
     "node_grandparent_id": null,
     "is_parent": 0,
     "is_grandparent": 0
   },
   {
     "node_id": 7,
-    "node_name": "Central Government",
+    "node_name": "Curriculum",
     "node_description": null,
-    "node_type": "agent",
+    "node_type": "unit",
     "node_parent_id": null,
     "node_grandparent_id": null,
     "is_parent": 0,
-    "is_grandparent": 0
+    "is_grandparent": 1
   },
   {
     "node_id": 8,
-    "node_name": "Lenders",
+    "node_name": "Workshops",
     "node_description": null,
-    "node_type": "agent",
-    "node_parent_id": null,
+    "node_type": "unit",
+    "node_parent_id": 7,
     "node_grandparent_id": null,
-    "is_parent": 0,
+    "is_parent": 1,
     "is_grandparent": 0
   },
   {
     "node_id": 9,
-    "node_name": "Liquidity",
+    "node_name": "Science-theoretical courses",
     "node_description": null,
-    "node_type": "variable",
-    "node_parent_id": 10,
-    "node_grandparent_id": 0,
+    "node_type": "unit",
+    "node_parent_id": 7,
+    "node_grandparent_id": null,
     "is_parent": 0,
     "is_grandparent": 0
   },
   {
     "node_id": 10,
-    "node_name": "Borrowing capacity",
+    "node_name": "Metal",
     "node_description": null,
-    "node_type": "variable",
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 11,
+    "node_name": "Carpentry",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 12,
+    "node_name": "Sculpture",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 13,
+    "node_name": "Pottery",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 14,
+    "node_name": "Stained glass",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 15,
+    "node_name": "Wall-painting",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 16,
+    "node_name": "Weaving",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 17,
+    "node_name": "Stage",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 18,
+    "node_name": "Nature",
+    "node_description": "Spirituality and inner harmony",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 19,
+    "node_name": "Materials",
+    "node_description": null,
+    "node_type": "attribute",
     "node_parent_id": null,
     "node_grandparent_id": null,
     "is_parent": 1,
     "is_grandparent": 0
   },
   {
-    "node_id": 11,
-    "node_name": "Borrowers",
-    "node_description": "The individual consumer",
-    "node_type": "agent",
-    "node_parent_id": null,
+    "node_id": 20,
+    "node_name": "Stone",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
     "node_grandparent_id": null,
     "is_parent": 0,
     "is_grandparent": 0
   },
   {
-    "node_id": 12,
-    "node_name": "Assets",
+    "node_id": 21,
+    "node_name": "Wood",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 22,
+    "node_name": "Metal",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 23,
+    "node_name": "Clay",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 24,
+    "node_name": "Glass",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 25,
+    "node_name": "Paint",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 26,
+    "node_name": "Textiles",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 19,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 27,
+    "node_name": "Composition",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 28,
+    "node_name": "Form",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 27,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 29,
+    "node_name": "Color",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 27,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 30,
+    "node_name": "Light",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 27,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 31,
+    "node_name": "Mechanics",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": 27,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 32,
+    "node_name": "Students",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 33,
+    "node_name": "Old masters",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 34,
+    "node_name": "External agents",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 35,
+    "node_name": "Josef Albers",
+    "node_description": "Abstract painter and influential artist-educator who immigrated to the United States during the 1930s.",
+    "node_type": "agent",
+    "node_parent_id": 4,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 36,
+    "node_name": "László Moholy-Nagy",
+    "node_description": "Hungarian painter, photographer, and professor",
+    "node_type": "agent",
+    "node_parent_id": 4,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 37,
+    "node_name": "László Moholy-Nagy",
+    "node_description": "Hungarian painter, photographer, and professor",
+    "node_type": "agent",
+    "node_parent_id": 4,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 38,
+    "node_name": "Anni Albers",
+    "node_description": "Leading textile artist of the 20th century",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 39,
+    "node_name": "Machines",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 40,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 40,
+    "node_name": "Production",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 41,
+    "node_name": "Tools",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 40,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 42,
+    "node_name": "Economization",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 40,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 43,
+    "node_name": "Techniques",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 40,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 44,
+    "node_name": "Industry",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 45,
+    "node_name": "Posters",
     "node_description": null,
     "node_type": "unit",
     "node_parent_id": null,
@@ -133,43 +460,173 @@
     "is_grandparent": 0
   },
   {
-    "node_id": 13,
-    "node_name": "Interest rates",
-    "node_description": null,
-    "node_type": "lever",
-    "node_parent_id": null,
-    "node_grandparent_id": null,
+    "node_id": 46,
+    "node_name": "Architecture",
+    "node_description": "Considered the 'unifying' art across all workshops.",
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
     "is_parent": 0,
     "is_grandparent": 0
   },
   {
-    "node_id": 14,
-    "node_name": "Debt service",
-    "node_description": "Money required to cover payments on a debt",
-    "node_type": "variable",
-    "node_parent_id": null,
-    "node_grandparent_id": null,
-    "is_parent": 0,
-    "is_grandparent": 0
-  },
-  {
-    "node_id": 15,
-    "node_name": "Credit Spread",
-    "node_description": "The difference between the quoted rates of return on two different investments, usually of different credit qualities but similar maturities",
-    "node_type": "variable",
-    "node_parent_id": null,
-    "node_grandparent_id": null,
-    "is_parent": 0,
-    "is_grandparent": 0
-  },
-  {
-    "node_id": 16,
-    "node_name": "Financial Institutions",
-    "node_description": "Banks",
+    "node_id": 47,
+    "node_name": "Hannes Meyer",
+    "node_description": "Swiss architect and second director of the Bauhaus Dessau from 1928 to 1930.",
     "node_type": "agent",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 48,
+    "node_name": "Ludwig Mies van der Rohe",
+    "node_description": "German-American architect, academic, and interior designer",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 49,
+    "node_name": "Business Manager",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 50,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 50,
+    "node_name": "Bauhaus Corporation",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 0,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 51,
+    "node_name": "Government",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 52,
+    "node_name": "Public",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 53,
+    "node_name": "Press",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 54,
+    "node_name": "Lighting fixtures",
+    "node_description": null,
+    "node_type": "unit",
     "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 55,
+    "node_name": "Furniture",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 56,
+    "node_name": "Interior Decoration",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 57,
+    "node_name": "Marcel Breuer",
+    "node_description": "Hungarian-American modernist architect and furniture designer",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 58,
+    "node_name": "Lettering",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 59,
+    "node_name": "Printing",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": 8,
+    "node_grandparent_id": 7,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 60,
+    "node_name": "herbert bayer",
+    "node_description": "austrian and american graphic designer, painter, photographer, sculptor, art director, environmental and interior designer, and architect; famously disliked upper-case",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 61,
+    "node_name": "Oskar Schlemmer",
+    "node_description": "German painter, sculptor, designer and choreographer",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 62,
+    "node_name": "School cooperation partners",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": 34,
     "node_grandparent_id": null,
     "is_parent": 0,
     "is_grandparent": 0
   }
-]
+  ]

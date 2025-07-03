@@ -5,279 +5,277 @@
       0
     ],
     "to_nodes": [
-      1
+      3
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Debt growth is being used to finance economic activities.",
+    "interaction_description": "Gropius had met Itten in 1918 in Vienna, where he was directing a private school, and— impressed by his theory of education— Gropius called him to the Bauhaus as the first collaborator.",
     "step_id": 0,
     "edge_type": null
   },
-
-
   {
     "interaction_id": 1,
     "from_nodes": [
-      1
+      3
     ],
     "to_nodes": [
-      2
+      6
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "These activities produce fast income growth.",
+    "to_color": null,
+    "interaction_description": "Itten created the foundations of the preliminary course. Students underwent as a trial period for 6 months. This course was intended to liberate the student's creative power, to give him an understanding of nature's materials, and to acquaint him with the basic principles which underly all creative activity in the visual arts.",
     "step_id": 0,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 2,
     "from_nodes": [
-      1
+      19
     ],
     "to_nodes": [
-      2,3,4
+      18
     ],
     "from_color": null,
-    "to_color": ["green","green","green"],
-    "interaction_description": "Borrowed money may go toward expanding a business and making it more productive, supporting growth in revenue.",
+    "to_color": null,
+    "interaction_description": "Pillar 1: detailed study of nature through representation of materials.",
     "step_id": 0,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 3,
     "from_nodes": [
-      5
+      19
     ],
     "to_nodes": [
-      6,7,8
+      18
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Debt growth, economic growth, and inflation are neither too hot nor too cold, so there is plenty of room to lever up.",
+    "interaction_description": "Pillar 1: detailed study of nature through experimentation with actual materials.",
     "step_id": 0,
     "edge_type": null
   },
   {
     "interaction_id": 4,
     "from_nodes": [
-      6
+      19
     ],
     "to_nodes": [
-      0
+      27
     ],
     "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "Moderate lending policy (moderate interests rates)",
+    "to_color": null,
+    "interaction_description": "Pillar 2: plastic studies of composition, with various materials",
     "step_id": 0,
     "edge_type": null
   },
   {
     "interaction_id": 5,
     "from_nodes": [
-      0
+      32
     ],
     "to_nodes": [
-      2,3,4
+      33
     ],
-    "from_color": ["green"],
-    "to_color": ["red", "red", "green"],
-    "interaction_description": "Debts rise faster than incomes, producing accelerating strong asset returns and growth.",
-    "step_id": 1,
-    "edge_type": "increase"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Pillar 3: Analyses of old masters",
+    "step_id": 0,
+    "edge_type": null
   },
   {
     "interaction_id": 6,
     "from_nodes": [
-      9,4,2
+      35,36
     ],
     "to_nodes": [
-      10
+      6
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "This process is generally self-reinforcing because rising incomes, net-worths, and asset values raise borrowers’ capacities to borrow. This happens because lenders determine how much they can lend on the basis of the borrowers’ 1) projected income/cash flows to service the debt, 2) net worth/collateral (which rises as asset prices rise), and 3) their own capacities to lend. All of these rise together.",
-    "step_id": 1,
-    "edge_type": "increase"
+    "interaction_description": "Taught preliminary curriculum after move to Dessau.",
+    "step_id": 0,
+    "edge_type": null
   },
   {
     "interaction_id": 7,
     "from_nodes": [
-      10
+      32
     ],
     "to_nodes": [
-      0
+      16
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "This set of conditions is not sustainable because the debt growth rates are increasing faster than the incomes that will be required to service them.",
+    "to_color": null,
+    "interaction_description": "At the Bauhaus, those starting to work in weaving or in any other craft were fortunate to have had no traditional training, lending them a freedom of approach and courage to their work.",
     "step_id": 1,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 8,
     "from_nodes": [
-      0
+      38
     ],
     "to_nodes": [
-      11
+      32
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Borrowers feel rich, so they spend more than they earn and buy assets at high prices with leverage.",
+    "interaction_description": "More systematic training in the mechanics of weaving was introduced, as well as a course in the dyeing of yarns",
     "step_id": 1,
     "edge_type": null
   },
   {
     "interaction_id": 9,
     "from_nodes": [
-      11
+      32
     ],
     "to_nodes": [
-      4
+      26
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "Increased spending drives up asset prices.",
+    "to_color": null,
+    "interaction_description": "The physical qualities of materials became a subject of interest. Light-reflecting and sound-absorbing materials were developed.",
     "step_id": 1,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 10,
     "from_nodes": [
-      6
+      26
     ],
     "to_nodes": [
-      13
+      39
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Long-term debt cycle are sustained for so long because central banks progressively lower interest rates.",
+    "interaction_description": "The desire to reach a larger group of consumers brought about a transition from handwork to machine-work: work by hand was for the laboratory only; work by machine was for mass production.",
     "step_id": 1,
-    "edge_type": "decrease"
+    "edge_type": null
   },
   {
     "interaction_id": 11,
     "from_nodes": [
-      13
+      39
     ],
     "to_nodes": [
-      4
+      44
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "Low interest rates raise asset prices because of the present value effect. In turn, this increases people's wealth.",
+    "to_color": null,
+    "interaction_description": "Aroused the interest of industry.",
     "step_id": 1,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 12,
     "from_nodes": [
-      4
+      32
     ],
     "to_nodes": [
-      14
+      25
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Rising wealth keeps debt service burdens from rising, and it lowers the monthly payment cost of items bought on credit.",
-    "step_id": 1,
+    "interaction_description": "Technical composition of the painting ground: lime plaster, plaster of paris, gypsum plaster, marble and alabaster dust plasters for tempera painting; spatter painting (airbrush) on plaster, wood and metal; preparation of the ground for panel pictures.",
+    "step_id": 2,
     "edge_type": null
   },
   {
     "interaction_id": 13,
     "from_nodes": [
-      4
+      32
     ],
     "to_nodes": [
-      11
+      33
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "The boom (by rising assets) also encourages new buyers who don’t want to miss out on the action to enter the market, fueling the emergence of a bubble.",
-    "step_id": 1,
-    "edge_type": "increase"
+    "interaction_description": "Study of all known painting techniques of the past; e.g. fresco, casein and mineral paints tempera, watercolor, calsomine, encaustic oil paint, lacquer, metallic paint",
+    "step_id": 2,
+    "edge_type": null
   },
   {
     "interaction_id": 14,
     "from_nodes": [
-      11
+      32
     ],
     "to_nodes": [
-      8
+      29
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Lending increased and became riskier, increasingly occurring outside the regulated and protected banking system. Financial institutions built new channels ('shadow banking') to get around the more established and better-regulated ones because it is initially advantageous to everyone involved. Fewer regulations make it cheaper to lend, borrowers get lower rates and easier terms, and investors get a small boost to returns. Shadow banks make these new debt assets seem safe via guarantees or through asset packaging. Often, these “innovations” lead to the crisis.",
-    "step_id": 1,
+    "interaction_description": "Fundamental principles of color harmony; chemical nature of oils, varnishes, lacquers, dryers and pigments",
+    "step_id": 2,
     "edge_type": null
   },
   {
     "interaction_id": 15,
     "from_nodes": [
-      6
+      32
     ],
     "to_nodes": [
-      13
+      15
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "But this can’t go on forever. When promises to deliver money (i.e. debt) can’t rise any more relative to the money and credit coming in, the process works in reverse and deleveraging begins. Recall that borrowing is simply a way of pulling spending forward.",
-    "step_id": 1,
-    "edge_type": "invalid"
+    "interaction_description": "Practical application of the new techniques discovered in the experimental workshop",
+    "step_id": 2,
+    "edge_type": null
   },
   {
     "interaction_id": 16,
     "from_nodes": [
-      6
+      32
     ],
     "to_nodes": [
-      13
+      45,46
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "While tops are triggered by different events, most often they occur when the central bank starts to tighten and interest rates rise.",
+    "interaction_description": "Applicational projects for color schemes in given architectural models, plans and elevations, as well as posters",
     "step_id": 2,
-    "edge_type": "increase"
+    "edge_type": null
   },
   {
     "interaction_id": 17,
     "from_nodes": [
-      13
+      32
     ],
     "to_nodes": [
-      4
+      41,42
     ],
     "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "Whatever the cause of the debt-service squeeze, it hurts asset prices (e.g., stock prices).",
+    "to_color": null,
+    "interaction_description": "Knowledge of tools, erection of scaffolding, the making of stencils and cartoons, working drawings, perspectives, models; taking dimensions, preparing estimates, book keeping",
     "step_id": 2,
-    "edge_type": "decrease"
+    "edge_type": null
   },
   {
     "interaction_id": 18,
     "from_nodes": [
-      4
+      0,47,48
     ],
     "to_nodes": [
-      2
+      40
     ],
-    "from_color": ["red"],
-    "to_color": ["red"],
-    "interaction_description": "Initially, we see the wealth effect where incomes are staying relatively steady, and if they are falling, they are not falling as fast as asset price. Initially, the wealth effect of asset price movements has a bigger impact on economic growth rates than monetary policy does. People mistakenly judge the decline to be a buying opportunity and find stocks cheap in relation to both past earnings and expected earnings. The reversal is self-reinforcing however. Recall that wealth falls first and incomes fall later.",
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Wall paper production was planned under Gropius. actual execution took place under Hannes Meyer and, later, Mies van der Rohe. The emphasis was not on pattern but on texture: solid colors were used, and a number of new techniques were introduced.",
     "step_id": 2,
-    "edge_type": "decrease"
+    "edge_type": null
   },
   {
     "interaction_id": 19,
     "from_nodes": [
-      4
+      40
     ],
     "to_nodes": [
-      8
+      44
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Lenders begin to worry that they might not be able to get their cash back from those they lent it to.",
+    "interaction_description": "The influence on German manufacturers was very great; Bauhaus wall paper was widely imitated.",
     "step_id": 2,
     "edge_type": null
   },
@@ -287,348 +285,404 @@
       8
     ],
     "to_nodes": [
-      10
+      44
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Borrowers are squeezed. Would-be borrowers find it difficult to obtain capital because lenders fear making loans.",
-    "step_id": 2,
+    "interaction_description": "Designs for furniture, lamps, textile fabrics, metal- and glassware were accepted by manufacturers.",
+    "step_id": 3,
     "edge_type": null
   },
   {
     "interaction_id": 21,
     "from_nodes": [
-      10
+      2
     ],
     "to_nodes": [
-      14
+      44
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "Borrowers are squeezed as an increasing share of their new borrowing goes to pay debt service and/or isn’t rolled over and their spending slows down. This is classically the result of people buying investment assets at high prices with leverage, based on overly optimistic assumptions about future cash flow. Typically, these types of credit/debt problems start to emerge about half a year ahead of the peak in the economy.",
-    "step_id": 2,
-    "edge_type": "increase"
+    "to_color": null,
+    "interaction_description": "The factories were then often visited by Bauhaus designers who studied the processes used and cooperated with technicians to simplify and improve the designs.",
+    "step_id": 3,
+    "edge_type": null
   },
   {
     "interaction_id": 22,
     "from_nodes": [
-      14
+      44
     ],
     "to_nodes": [
-      8
+      2
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "The riskiest debtors start to miss payments and lenders begin to worry.",
-    "step_id": 2,
+    "interaction_description": "Conversely, the factories often sent their technicians to the Bauhaus workshops to keep them informed about the development of designs. This was a great improvement over the ineffective dependence on paper projects against which the Bauhaus had rebelled as an inadequate means of communication between designers and industry.",
+    "step_id": 3,
     "edge_type": null
   },
   {
     "interaction_id": 23,
     "from_nodes": [
-      8
+      8,40
     ],
     "to_nodes": [
-      15
+      49
     ],
     "from_color": null,
-    "to_color": ["green"],
-    "interaction_description": "Credit spreads start to tick up.",
-    "step_id": 2,
-    "edge_type": "increase"
+    "to_color": null,
+    "interaction_description": "When a workshop considered a design ready for sale it was turned over the Business Manager of the Corporation together with all the necessary drawings and descriptions of the processes involved so that contracts could be drawn up.",
+    "step_id": 3,
+    "edge_type": null
   },
   {
     "interaction_id": 24,
     "from_nodes": [
-      15
+      44
     ],
     "to_nodes": [
-      8
+      50,2
     ],
-    "from_color": ["green"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Risky lending slows.",
-    "step_id": 2,
+    "interaction_description": "The income was divided between the Bauhaus Corporation and the school itself, which paid the designer. Half the royalty paid the school was credited to the Bauhaus fund, while the other half went to a welfare fund used to pay for designs which were considered valuable but which could not be disposed of for the time being. All Bauhaus workshops were involved in filling orders for industry. Sometimes, more than fifty firms were buying Bauhaus products to such an extent that the scarcity of machinery and capital made it impossible to fill all orders. Orders were received from abroad, from Austria, England, Holland, America.",
+    "step_id": 3,
     "edge_type": null
   },
   {
     "interaction_id": 25,
     "from_nodes": [
-      10
+      0
     ],
     "to_nodes": [
-      12
+      2
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Runs from risky assets to less risky assets pick up, contributing to a broadening of the contraction. This hurts spending and lowers investment rates while also making it less appealing to borrow to buy financial assets.",
-    "step_id": 2,
+    "interaction_description": "Lead designer of Bauhaus Dessau building and new campus (Masters' Houses).",
+    "step_id": 4,
     "edge_type": null
   },
   {
     "interaction_id": 26,
     "from_nodes": [
-      12
+      51
     ],
     "to_nodes": [
-      4
+      2
     ],
     "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "This in turn worsens the fundamentals of the asset (e.g., the weaker economic activity leads corporate earnings to chronically disappoint).",
-    "step_id": 2,
-    "edge_type": "decrease"
+    "to_color": null,
+    "interaction_description": "On December 4, 1926, the Bauhaus was formally inaugurated. The inaugural celebrations included an exhibition, lectures, motion pictures, as well as a dance in the new building. The inaugural address was delivered by National Art Director (Reichskunstwart) Erwin Redslob who had been born in Weimar and who had, from the very beginning, shown great interest in the Bauhaus.",
+    "step_id": 4,
+    "edge_type": null
   },
   {
     "interaction_id": 27,
     "from_nodes": [
-      4
+      52
     ],
     "to_nodes": [
-      4
+      2
     ],
-    "from_color": ["red"],
-    "to_color": ["red"],
-    "interaction_description": "Leading people to sell and further driving down prices.",
-    "step_id": 2,
-    "edge_type": "decrease"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The reopening of the Bauhaus under more prosperous conditions was regarded as a great cultural event and brought more than 1500 visitors to Dessau.",
+    "step_id": 4,
+    "edge_type": null
   },
   {
     "interaction_id": 28,
     "from_nodes": [
-      4
+      53
     ],
     "to_nodes": [
       2
     ],
-    "from_color": ["red"],
-    "to_color": ["red"],
-    "interaction_description": "Eventually incomes fall significantly from the fall of asset values.",
-    "step_id": 2,
-    "edge_type": "decrease"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Sixty press representatives were present at the Bauhaus opening in 1925. Reports in the press indicated that only a few critics un derstood that the interior had been designed mainly by the workshops themselves. Most of them believed it had been designed by the architects and only executed by the workshops.",
+    "step_id": 4,
+    "edge_type": null
   },
   {
     "interaction_id": 29,
     "from_nodes": [
-      2
+      32
     ],
     "to_nodes": [
-      10
+      2
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "Falling incomes make borrowers less creditworthiness, which constricts lending activity; the cycle continues.",
-    "step_id": 2,
-    "edge_type": "decrease"
+    "interaction_description": "In the five upper stories, there are twenty eight studio apartments for students, and in addition each floor has a kitchenette. In the basement of the studio building there are baths, a gymnasium and locker-room, and an electric laundry.",
+    "step_id": 5,
+    "edge_type": null
   },
   {
     "interaction_id": 30,
     "from_nodes": [
-      6
+      15
     ],
     "to_nodes": [
-      13
+      56
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "In normal recessions (when monetary policy is still effective), the imbalance between the amount of money and the need for it to service debt can be rectified by cutting interest rates enough to 1) produce a positive wealth effect, 2) stimulate economic activity, and 3) ease debt-service burdens. This can’t happen in depressions, because interest rates can’t be cut materially because they have either already reached close to 0 percent or, in cases where currency outflows and currency weaknesses are great, the floor on interest rates is higher because of credit or currency risk considerations.",
-    "step_id": 3,
-    "edge_type": "invalid"
+    "interaction_description": "The interior decoration of the entire building was executed by the wall-painting workshop.",
+    "step_id": 5,
+    "edge_type": null
   },
   {
     "interaction_id": 31,
     "from_nodes": [
-      0
+      10
     ],
     "to_nodes": [
-      8
+      54
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "As the depression begins, debt defaults and restructurings hit the various players, especially leveraged lenders (e.g., banks), like an avalanche.",
-    "step_id": 3,
+    "interaction_description": "The design and execution of all lighting fixtures by the metal workshop.",
+    "step_id": 5,
     "edge_type": null
   },
   {
     "interaction_id": 32,
     "from_nodes": [
-      8,10
+      11,57
     ],
     "to_nodes": [
-      16
+      55
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Both lenders’ and depositors’ justified fears feed on themselves, leading to runs on financial institutions that typically don’t have the cash to meet them unless they are under the umbrella of government protections.",
-    "step_id": 3,
+    "interaction_description": "The tubular steel furniture of the assembly hall, dining room and studios was executed from designs by Marcel Breuer.",
+    "step_id": 5,
     "edge_type": null
   },
   {
     "interaction_id": 33,
     "from_nodes": [
-      16
+      59,60
     ],
     "to_nodes": [
-      9
+      58
     ],
     "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "This in turn reduces liquidity.",
-    "step_id": 3,
-    "edge_type": "decrease"
+    "to_color": null,
+    "interaction_description": "The tubular steel furniture of the assembly hall, dining room and studios was executed from designs by Marcel Breuer.",
+    "step_id": 5,
+    "edge_type": null
   },
   {
     "interaction_id": 34,
     "from_nodes": [
-      16
+      32
     ],
     "to_nodes": [
-      8
+      2
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Those who experience runs, especially banks (though this is true of most entities that rely on short term funding), have problems raising money and credit to meet their needs, so debt defaults cascade.",
-    "step_id": 3,
+    "interaction_description": "In 1920, the student body was composed of 200 Germans, 14 Austrians, 3 Germans from the Baltic countries, 2 Sudeten Germans and 2 Hungarians. 526 students were trained in the Bauhaus between October 1919, and April 1924. A large number of others took only the preliminary course.",
+    "step_id": 5,
     "edge_type": null
   },
   {
     "interaction_id": 35,
     "from_nodes": [
-      8
-    ],
-    "to_nodes": [
-      10
-    ],
-    "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "Investors are unwilling to continue lending because of debt defaults and restructuring.",
-    "step_id": 3,
-    "edge_type": "decrease"
-  },
-  {
-    "interaction_id": 36,
-    "from_nodes": [
-      11
-    ],
-    "to_nodes": [
-      9
-    ],
-    "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "As borrowers scrambling to find cash to cover their debt payments, liquidity, the ability to sell investments for money, becomes a major concern (as the ratio of financial assets to money is high). However since the ratio of financial assets to money is high, when a large number of people rush to convert their financial assets into money and buy goods and services in bad times, the central bank either has to provide the liquidity that’s needed by printing more money or allow a lot of defaults.",
-    "step_id": 3,
-    "edge_type": "decrease"
-  },
-  {
-    "interaction_id": 37,
-    "from_nodes": [
-      4
+      51
     ],
     "to_nodes": [
       1
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "The depression can come from, or cause, either solvency problems or cash-flow problems. Usually a lot of both types of problems exist during this phase. A solvency problem means that, according to accounting and regulatory rules, the entity does not have enough equity capital to operate—i.e., it is “broke” and must be shut down. So, the accounting laws have a big impact on the severity of the debt problem at this moment. If a solvency problem exists (i.e., the debtor doesn’t have enough equity capital), it has an accounting/regulatory problem that can be dealt with by either a) providing enough equity capital or b) changing the accounting/regulatory rules, which hides the problem.",
-    "step_id": 3,
+    "interaction_description": "At Weimar, the whole institute, including the director, was under the Jurisdiction of the Ministry of Public Education; at Dessau, this authority was vested in the municipal council.",
+    "step_id": 6,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 36,
+    "from_nodes": [
+      51
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The annual budget varied between 130,000 and 200,000 marks, At Weimar, it was prepared by the Minister of Public Education and submitted to the Thuringian Landtag; at Dessau the budget was prepared by the municipal council and submitted to the Sfadtparlament.",
+    "step_id": 6,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 37,
+    "from_nodes": [
+      4,5
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "In the early years, the faculty had a nominal right to vote on vital decisions, in the belief that problems affecting creative work can never be solved by a majority, the right to vote was discarded in subsequent statutes; in fact, decisions by majority vote were dropped altogether.",
+    "step_id": 6,
     "edge_type": null
   },
   {
     "interaction_id": 38,
     "from_nodes": [
-      9
+      0
     ],
     "to_nodes": [
       1
     ],
-    "from_color": ["red"],
+    "from_color": null,
     "to_color": null,
-    "interaction_description": "A cash-flow problem means that an entity doesn’t have enough cash to meet its needs, typically because its own lenders are taking money away from it—i.e., there is a “run.” A cash-flow problem can occur even when the entity has adequate capital because the equity is in illiquid assets. Lack of cash flow is an immediate and severe problem—and as a result, the trigger and main issue of most debt crises. if a cash-flow problem exists, fiscal and/or monetary policy can provide either cash or guarantees that resolve it.",
-    "step_id": 3,
+    "interaction_description": "Full responsibility was granted to the director by a unanimous vote.",
+    "step_id": 6,
     "edge_type": null
   },
   {
     "interaction_id": 39,
     "from_nodes": [
-      2
+      4,5,32
     ],
     "to_nodes": [
-      14
+      1
     ],
-    "from_color": ["red"],
-    "to_color": ["green"],
-    "interaction_description": "Initially, the money coming in to debtors via incomes and borrowing is not enough to meet the debtors’ obligations.",
-    "step_id": 3,
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The statutes provided, however, that all decisions had to be preceded by discussion, all instructors and the student representatives had the right to participate in these discussions.",
+    "step_id": 6,
     "edge_type": null
   },
   {
     "interaction_id": 40,
     "from_nodes": [
-      11
+      4,5
     ],
     "to_nodes": [
-      12
+      1
     ],
     "from_color": null,
     "to_color": null,
-    "interaction_description": "Assets need to be sold and spending needs to be cut in order to raise cash.",
-    "step_id": 3,
+    "interaction_description": "For problems of internal organization and teaching: the Bauhaus council, made up of masters teaching problems of form and technical instructors in the workshops, would convene.",
+    "step_id": 6,
     "edge_type": null
   },
   {
     "interaction_id": 41,
     "from_nodes": [
-      12
+      49
     ],
     "to_nodes": [
-      4
+      1,2
     ],
     "from_color": null,
-    "to_color": ["red"],
-    "interaction_description": "This leads asset values to fall.",
-    "step_id": 3,
-    "edge_type": "decrease"
+    "to_color": null,
+    "interaction_description": "For the sale of models to industrial firms: the business manager (syndikus) who was in charge of the commercial activities of the Bauhaus and later of the Bauhaus corporation.",
+    "step_id": 6,
+    "edge_type": null
   },
   {
     "interaction_id": 42,
     "from_nodes": [
-      4
+      0
     ],
     "to_nodes": [
-      2,4
+      32
     ],
-    "from_color": ["red"],
-    "to_color": ["red", "red"],
-    "interaction_description": "Reduces the value of collateral, and in turn reduces incomes.",
-    "step_id": 3,
-    "edge_type": "decrease"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "In the course of time it became possible to give the student body more and more direct influence in the affairs of the whole organization. Originally there was a student council which was consulted from time to time by the director.",
+    "step_id": 6,
+    "edge_type": null
   },
   {
     "interaction_id": 43,
     "from_nodes": [
-      4,2,14
+      32
     ],
     "to_nodes": [
-      10
+      4,5
     ],
-    "from_color": ["red", "red", "green"],
-    "to_color": ["red"],
-    "interaction_description": "Since both their net worth and their income fall faster than their debts, borrowers become less creditworthy and lenders more reluctant to lend.",
-    "step_id": 3,
-    "edge_type": "decrease"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Later on, the students were granted the right to send one delegate from each workshop to the faculty council when vital decisions were to be made. Still later, in Dessau, one or two student representatives attended all meetings of the faculty council.",
+    "step_id": 6,
+    "edge_type": null
   },
   {
     "interaction_id": 44,
     "from_nodes": [
-      4
+      61
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Oskar Schlemmer delivered a lecture on stage craft and theater in March 1927. Previously, in Weimar, there was no theater space, and students used local stages.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 45,
+    "from_nodes": [
+      27
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Interested in interior space treated as part of the whole composition of the building, with a special emphasis on non-static interaction (with human actors).",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 46,
+    "from_nodes": [
+      47
+    ],
+    "to_nodes": [
+      0
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Meyer went beyond Gropius’s 'fundamental research', which he thought was too fixated on the object. Using scientific methods, he analysed the lifestyle patterns of the future residents of a settlement or house and integrated biological and climatic on-site studies in the design process.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 47,
+    "from_nodes": [
+      9
+    ],
+    "to_nodes": [
+      32
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "In addition to teaching in the arts and crafts, the programme of 1919 already included scientific-theoretical classes in subjects such as material science, physical and chemical colour theory, the history of technology, anatomy and business administration (especially book-keeping and contract management). In Dessau, where it effectively operated as a technical university, building trades school and academy, the Bauhaus had to meet the mandates of a vocational school. Among other things, these included a basic education in the natural sciences and general business skills. This aspect was already integrated in the educational framework, which taught illustrative geometry, mathematics, physics and chemistry alongside the principles of creative design.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 48,
+    "from_nodes": [
+      62
     ],
     "to_nodes": [
       2
     ],
-    "from_color": ["red"],
-    "to_color": ["red"],
-    "interaction_description": "Because one person’s debts are another’s assets and contribute to another person's income, the effect of aggressively cutting the value of those assets can be to greatly reduce the demand for goods, services, and investment assets. Thus, even as debts are written down, debt burdens rise as spending and incomes fall.",
-    "step_id": 3,
-    "edge_type": "decrease"
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "As a result, the Bauhaus was dependent on school cooperation partners for a long time. In Weimar, the main cooperation partner was the building trades school and in Dessau, the technical institutions and the vocational business school.",
+    "step_id": 8,
+    "edge_type": null
   }
 ]
