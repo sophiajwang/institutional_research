@@ -1,0 +1,93 @@
+[
+  {
+    "step_id": 0,
+    "step_description": "Mervin Kelly signed off on Case 38,139: unified approach to all of our solid state problems.",
+    "date": "06.21.1945",
+    "document_ids": [0,1,2],
+    "phase": "research"
+  },
+  {
+    "step_id": 1,
+    "step_description": "Kelly signed off on Case 38,139: unified approach to all of our solid state problems. Initial cost was $417,000 mostly salaries, billed to AT&T.",
+    "date": "07.1945 -- 10.1945",
+    "document_ids": [1,4,6],
+    "phase": "research"
+  },
+  {
+    "step_id": 2,
+    "step_description": "Failures in demonstrating the 'field effect'.",
+    "date": "06.1945 -- 01.1946",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 3,
+    "step_description": "Concept of surface states emerges.",
+    "date": "Spring 1946",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 4,
+    "step_description": "Cutting through the surface states barrier. The 'magic month' begins.",
+    "date": "11.1947",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 5,
+    "step_description": "Amplifier demo for Bell Labs management demonstrated ~18x speaker amplification.",
+    "date": "12.23.1947",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 6,
+    "step_description": "Shockley makes a transgression; he is spurred into conceptualizing the initial junction transistor after unable to partake in the point-contact transistor's patent (and unable to patent the 'field effect').",
+    "date": "01.1948 -- 02.1948",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 7,
+    "step_description": "Preparing for patent application.",
+    "date": "1948",
+    "document_ids": [1,5,6],
+    "phase": "research"
+  },
+  {
+    "step_id": 8,
+    "step_description": "Filing patent application and first public demonstration.",
+    "date": "06.1948",
+    "document_ids": [1],
+    "phase": "research"
+  },
+  {
+    "step_id": 9,
+    "step_description": "Transitioned to development team. For all its publicity, the new point-contact transistor was useless as a practical device. Proving laboratory feasibility was not difficult, but learning how to make them by the hundreds or thousands, and of sufficient uniformity to be interchangeable and reliable, was another problem.",
+    "date": "06.1948 -- 06.1949",
+    "document_ids": [1,6,7],
+    "phase": "development"
+  },
+  {
+    "step_id": 10,
+    "step_description": "Gordon Teal's significant advances in crystal pulling readied the transistor for manufacture with Western Electric.",
+    "date": "1949 -- 1951",
+    "document_ids": [1],
+    "phase": "development"
+  },
+  {
+    "step_id": 11,
+    "step_description": "Manufacturing and resulting diffusion of transistor technology.",
+    "date": "1951 -- 1952",
+    "document_ids": [0,1],
+    "phase": null
+  },
+  {
+    "step_id": 12,
+    "step_description": "AT&T Anti-Trust Decree.",
+    "date": "1949 (filed) -- 1956 (settled)",
+    "document_ids": [1,3,5],
+    "phase": null
+  }
+]
