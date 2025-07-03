@@ -1,0 +1,632 @@
+[
+  {
+    "interaction_id": 0,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "Debt growth is being used to finance economic activities.",
+    "step_id": 0,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 1,
+    "from_nodes": [
+      1
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "These activities produce fast income growth.",
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 2,
+    "from_nodes": [
+      1
+    ],
+    "to_nodes": [
+      2,3,4
+    ],
+    "from_color": null,
+    "to_color": ["green","green","green"],
+    "interaction_description": "Borrowed money may go toward expanding a business and making it more productive, supporting growth in revenue.",
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 3,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      6,7,8
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "Debt growth, economic growth, and inflation are neither too hot nor too cold, so there is plenty of room to lever up.",
+    "step_id": 0,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 4,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      0
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "Moderate lending policy (moderate interests rates)",
+    "step_id": 0,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 5,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      2,3,4
+    ],
+    "from_color": ["green"],
+    "to_color": ["red", "red", "green"],
+    "interaction_description": "Debts rise faster than incomes, producing accelerating strong asset returns and growth.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 6,
+    "from_nodes": [
+      9,4,2
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "This process is generally self-reinforcing because rising incomes, net-worths, and asset values raise borrowers’ capacities to borrow. This happens because lenders determine how much they can lend on the basis of the borrowers’ 1) projected income/cash flows to service the debt, 2) net worth/collateral (which rises as asset prices rise), and 3) their own capacities to lend. All of these rise together.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 7,
+    "from_nodes": [
+      10
+    ],
+    "to_nodes": [
+      0
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "This set of conditions is not sustainable because the debt growth rates are increasing faster than the incomes that will be required to service them.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 8,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      11
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "Borrowers feel rich, so they spend more than they earn and buy assets at high prices with leverage.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 9,
+    "from_nodes": [
+      11
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "Increased spending drives up asset prices.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 10,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Long-term debt cycle are sustained for so long because central banks progressively lower interest rates.",
+    "step_id": 1,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 11,
+    "from_nodes": [
+      13
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "Low interest rates raise asset prices because of the present value effect. In turn, this increases people's wealth.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 12,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      14
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "Rising wealth keeps debt service burdens from rising, and it lowers the monthly payment cost of items bought on credit.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 13,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      11
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "The boom (by rising assets) also encourages new buyers who don’t want to miss out on the action to enter the market, fueling the emergence of a bubble.",
+    "step_id": 1,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 14,
+    "from_nodes": [
+      11
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Lending increased and became riskier, increasingly occurring outside the regulated and protected banking system. Financial institutions built new channels ('shadow banking') to get around the more established and better-regulated ones because it is initially advantageous to everyone involved. Fewer regulations make it cheaper to lend, borrowers get lower rates and easier terms, and investors get a small boost to returns. Shadow banks make these new debt assets seem safe via guarantees or through asset packaging. Often, these “innovations” lead to the crisis.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 15,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "But this can’t go on forever. When promises to deliver money (i.e. debt) can’t rise any more relative to the money and credit coming in, the process works in reverse and deleveraging begins. Recall that borrowing is simply a way of pulling spending forward.",
+    "step_id": 1,
+    "edge_type": "invalid"
+  },
+  {
+    "interaction_id": 16,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "While tops are triggered by different events, most often they occur when the central bank starts to tighten and interest rates rise.",
+    "step_id": 2,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 17,
+    "from_nodes": [
+      13
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "Whatever the cause of the debt-service squeeze, it hurts asset prices (e.g., stock prices).",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 18,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": ["red"],
+    "to_color": ["red"],
+    "interaction_description": "Initially, we see the wealth effect where incomes are staying relatively steady, and if they are falling, they are not falling as fast as asset price. Initially, the wealth effect of asset price movements has a bigger impact on economic growth rates than monetary policy does. People mistakenly judge the decline to be a buying opportunity and find stocks cheap in relation to both past earnings and expected earnings. The reversal is self-reinforcing however. Recall that wealth falls first and incomes fall later.",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 19,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "Lenders begin to worry that they might not be able to get their cash back from those they lent it to.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 20,
+    "from_nodes": [
+      8
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Borrowers are squeezed. Would-be borrowers find it difficult to obtain capital because lenders fear making loans.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 21,
+    "from_nodes": [
+      10
+    ],
+    "to_nodes": [
+      14
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "Borrowers are squeezed as an increasing share of their new borrowing goes to pay debt service and/or isn’t rolled over and their spending slows down. This is classically the result of people buying investment assets at high prices with leverage, based on overly optimistic assumptions about future cash flow. Typically, these types of credit/debt problems start to emerge about half a year ahead of the peak in the economy.",
+    "step_id": 2,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 22,
+    "from_nodes": [
+      14
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "The riskiest debtors start to miss payments and lenders begin to worry.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 23,
+    "from_nodes": [
+      8
+    ],
+    "to_nodes": [
+      15
+    ],
+    "from_color": null,
+    "to_color": ["green"],
+    "interaction_description": "Credit spreads start to tick up.",
+    "step_id": 2,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 24,
+    "from_nodes": [
+      15
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": ["green"],
+    "to_color": null,
+    "interaction_description": "Risky lending slows.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 25,
+    "from_nodes": [
+      10
+    ],
+    "to_nodes": [
+      12
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "Runs from risky assets to less risky assets pick up, contributing to a broadening of the contraction. This hurts spending and lowers investment rates while also making it less appealing to borrow to buy financial assets.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 26,
+    "from_nodes": [
+      12
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "This in turn worsens the fundamentals of the asset (e.g., the weaker economic activity leads corporate earnings to chronically disappoint).",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 27,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": ["red"],
+    "to_color": ["red"],
+    "interaction_description": "Leading people to sell and further driving down prices.",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 28,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": ["red"],
+    "to_color": ["red"],
+    "interaction_description": "Eventually incomes fall significantly from the fall of asset values.",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 29,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "Falling incomes make borrowers less creditworthiness, which constricts lending activity; the cycle continues.",
+    "step_id": 2,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 30,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "In normal recessions (when monetary policy is still effective), the imbalance between the amount of money and the need for it to service debt can be rectified by cutting interest rates enough to 1) produce a positive wealth effect, 2) stimulate economic activity, and 3) ease debt-service burdens. This can’t happen in depressions, because interest rates can’t be cut materially because they have either already reached close to 0 percent or, in cases where currency outflows and currency weaknesses are great, the floor on interest rates is higher because of credit or currency risk considerations.",
+    "step_id": 3,
+    "edge_type": "invalid"
+  },
+  {
+    "interaction_id": 31,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "As the depression begins, debt defaults and restructurings hit the various players, especially leveraged lenders (e.g., banks), like an avalanche.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 32,
+    "from_nodes": [
+      8,10
+    ],
+    "to_nodes": [
+      16
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Both lenders’ and depositors’ justified fears feed on themselves, leading to runs on financial institutions that typically don’t have the cash to meet them unless they are under the umbrella of government protections.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 33,
+    "from_nodes": [
+      16
+    ],
+    "to_nodes": [
+      9
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "This in turn reduces liquidity.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 34,
+    "from_nodes": [
+      16
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Those who experience runs, especially banks (though this is true of most entities that rely on short term funding), have problems raising money and credit to meet their needs, so debt defaults cascade.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 35,
+    "from_nodes": [
+      8
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "Investors are unwilling to continue lending because of debt defaults and restructuring.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 36,
+    "from_nodes": [
+      11
+    ],
+    "to_nodes": [
+      9
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "As borrowers scrambling to find cash to cover their debt payments, liquidity, the ability to sell investments for money, becomes a major concern (as the ratio of financial assets to money is high). However since the ratio of financial assets to money is high, when a large number of people rush to convert their financial assets into money and buy goods and services in bad times, the central bank either has to provide the liquidity that’s needed by printing more money or allow a lot of defaults.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 37,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "The depression can come from, or cause, either solvency problems or cash-flow problems. Usually a lot of both types of problems exist during this phase. A solvency problem means that, according to accounting and regulatory rules, the entity does not have enough equity capital to operate—i.e., it is “broke” and must be shut down. So, the accounting laws have a big impact on the severity of the debt problem at this moment. If a solvency problem exists (i.e., the debtor doesn’t have enough equity capital), it has an accounting/regulatory problem that can be dealt with by either a) providing enough equity capital or b) changing the accounting/regulatory rules, which hides the problem.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 38,
+    "from_nodes": [
+      9
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": ["red"],
+    "to_color": null,
+    "interaction_description": "A cash-flow problem means that an entity doesn’t have enough cash to meet its needs, typically because its own lenders are taking money away from it—i.e., there is a “run.” A cash-flow problem can occur even when the entity has adequate capital because the equity is in illiquid assets. Lack of cash flow is an immediate and severe problem—and as a result, the trigger and main issue of most debt crises. if a cash-flow problem exists, fiscal and/or monetary policy can provide either cash or guarantees that resolve it.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 39,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      14
+    ],
+    "from_color": ["red"],
+    "to_color": ["green"],
+    "interaction_description": "Initially, the money coming in to debtors via incomes and borrowing is not enough to meet the debtors’ obligations.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 40,
+    "from_nodes": [
+      11
+    ],
+    "to_nodes": [
+      12
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Assets need to be sold and spending needs to be cut in order to raise cash.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 41,
+    "from_nodes": [
+      12
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": ["red"],
+    "interaction_description": "This leads asset values to fall.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 42,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      2,4
+    ],
+    "from_color": ["red"],
+    "to_color": ["red", "red"],
+    "interaction_description": "Reduces the value of collateral, and in turn reduces incomes.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 43,
+    "from_nodes": [
+      4,2,14
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": ["red", "red", "green"],
+    "to_color": ["red"],
+    "interaction_description": "Since both their net worth and their income fall faster than their debts, borrowers become less creditworthy and lenders more reluctant to lend.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 44,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": ["red"],
+    "to_color": ["red"],
+    "interaction_description": "Because one person’s debts are another’s assets and contribute to another person's income, the effect of aggressively cutting the value of those assets can be to greatly reduce the demand for goods, services, and investment assets. Thus, even as debts are written down, debt burdens rise as spending and incomes fall.",
+    "step_id": 3,
+    "edge_type": "decrease"
+  }
+]

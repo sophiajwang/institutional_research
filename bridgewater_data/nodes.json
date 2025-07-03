@@ -1,0 +1,172 @@
+[
+  {
+    "node_id": 0,
+    "node_name": "Debt",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 1,
+    "node_name": "Private businesses",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 2,
+    "node_name": "Income",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": 5,
+    "node_grandparent_id": 0,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 3,
+    "node_name": "Productivity",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": 5,
+    "node_grandparent_id": 0,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 4,
+    "node_name": "Asset value",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": 5,
+    "node_grandparent_id": 0,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 5,
+    "node_name": "Economic Growth",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 6,
+    "node_name": "Central Bank",
+    "node_description": "Federal Reserve",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 7,
+    "node_name": "Central Government",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 8,
+    "node_name": "Lenders",
+    "node_description": null,
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 9,
+    "node_name": "Liquidity",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": 10,
+    "node_grandparent_id": 0,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 10,
+    "node_name": "Borrowing capacity",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 11,
+    "node_name": "Borrowers",
+    "node_description": "The individual consumer",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 12,
+    "node_name": "Assets",
+    "node_description": null,
+    "node_type": "unit",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 13,
+    "node_name": "Interest rates",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 14,
+    "node_name": "Debt service",
+    "node_description": "Money required to cover payments on a debt",
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 15,
+    "node_name": "Credit Spread",
+    "node_description": "The difference between the quoted rates of return on two different investments, usually of different credit qualities but similar maturities",
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 16,
+    "node_name": "Financial Institutions",
+    "node_description": "Banks",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  }
+]

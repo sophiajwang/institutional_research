@@ -1,0 +1,30 @@
+[
+  {
+    "step_id": 0,
+    "step_description": "Early part of the debt cycle. Debt growth, economic growth, and inflation are neither too hot nor too cold. This is what is called the 'Goldilocks' period.",
+    "date": "early 2000s",
+    "document_ids": [13],
+    "phase": "early_stage"
+  },
+  {
+    "step_id": 1,
+    "step_description": "The bubble emerges. General perception of a bull market, with monetary policy that helps inflate the bubble rather than constrain it.",
+    "date": "2002 -- 2007",
+    "document_ids": [0,1,2],
+    "phase": "bubble"
+  },
+  {
+    "step_id": 2,
+    "step_description": "The bubble approaches its top.",
+    "date": "2007",
+    "document_ids": [3,4,5],
+    "phase": "top"
+  },
+  {
+    "step_id": 3,
+    "step_description": "Depression, significant contraction in economic activity (beyond recession).",
+    "date": "2008",
+    "document_ids": [6,7,8,9,10,11,12],
+    "phase": "depression"
+  }
+]
