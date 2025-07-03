@@ -1,0 +1,32 @@
+[
+  {
+    "step_id": 0,
+    "step_description": "The backbone of Bauhaus' curriculum. Practical and theoretical studies to release the creative powers of the student, to help him grasp the physical nature of materials and the basic laws of design.",
+    "date": null,
+    "document_ids": [],
+    "phase": "preliminary_course"
+  },
+
+
+  {
+    "step_id": 1,
+    "step_description": "The bubble emerges. General perception of a bull market, with monetary policy that helps inflate the bubble rather than constrain it.",
+    "date": "2002 -- 2007",
+    "document_ids": [0,1,2],
+    "phase": "bubble"
+  },
+  {
+    "step_id": 2,
+    "step_description": "The bubble approaches its top.",
+    "date": "2007",
+    "document_ids": [3,4,5],
+    "phase": "top"
+  },
+  {
+    "step_id": 3,
+    "step_description": "Depression, significant contraction in economic activity (beyond recession).",
+    "date": "2008",
+    "document_ids": [6,7,8,9,10,11,12],
+    "phase": "depression"
+  }
+]
