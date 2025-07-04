@@ -16,6 +16,7 @@ let hoveredNode = null;
 let hoveredEdge = null;
 let tooltip;
 let stepCounter;
+let stepCounterClicked = false;
 let stepList;
 let legend;
 let canvas;
@@ -545,7 +546,7 @@ function createStepList() {
                 expandBtn.parent(stepDiv);
             }
             
-            stepDiv.mousePressed(() => selectStep(step.step_id));
+            stepDiv.mousePressed(() => selectStep(step.step_id, false));
             stepDiv.parent(stepList);
         });
     });
@@ -1095,7 +1096,9 @@ function distanceToLineSegment(px, py, x1, y1, x2, y2) {
     return dist(px, py, projX, projY);
 }
 
-function selectStep(stepId) {
+function selectStep(stepId, fromStepCounter) {
+    stepCounterClicked = fromStepCounter;
+    console.log("Step ID: " + stepId);
     selectedStep = selectedStep === stepId ? null : stepId;
     selectedEdges.clear(); // Clear selected edges when changing steps
     
@@ -1126,9 +1129,8 @@ function updateStepCounter() {
     if (selectedStep !== null) {
         const step = steps.find(s => s.step_id === selectedStep);
         if (step) {
-            // Create navigation controls
-            const prevButton = selectedStep > 0 ? `<button onclick="selectStep(${selectedStep - 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-right: 5px; border-radius: 2px; cursor: pointer;">←</button>` : '';
-            const nextButton = selectedStep < steps.length - 1 ? `<button onclick="selectStep(${selectedStep + 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-left: 5px; border-radius: 2px; cursor: pointer;">→</button>` : '';
+            const prevButton = selectedStep > 0 ? `<button onclick="selectStep(${selectedStep - 1}, true)" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-right: 5px; border-radius: 2px; cursor: pointer;">←</button>` : '';
+            const nextButton = selectedStep < steps.length - 1 ? `<button onclick="selectStep(${selectedStep + 1}, true)" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-left: 5px; border-radius: 2px; cursor: pointer;">→</button>` : '';
             
             stepCounter.html(`
                 <div style="text-align: center;">
@@ -1232,6 +1234,7 @@ function mousePressed() {
 }
 
 function mouseClicked() {
+    console.log("UI? " + isMouseOverUI());
     if (isMouseOverUI()) return;
     if (!isDragging) {
         // Ira: It seems to me like you'd what to be able to select another step even if one is currently selected
@@ -1239,11 +1242,11 @@ function mouseClicked() {
         if (hoveredEdge !== null) {
             const edge = edges.find(e => e.interaction_id === hoveredEdge);
             if (edge) {
-                selectStep(edge.step_id);
+                selectStep(edge.step_id, false);
                 return;
             }
         } else {
-            selectStep(null);
+            selectStep(null, false);
         }
     }
     isDragging = false;
