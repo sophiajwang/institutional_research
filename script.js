@@ -120,6 +120,201 @@ let edgeOffsets = new Map();
 const ESCAPE = 27;
 console.log('🎨 Bauhaus document view functionality loaded!');
 
+// Touch/zoom state variables
+let initialPinchDistance = 0;
+let lastPinchZoom = 1;
+let isPinching = false;
+let initialTouches = [];
+let lastTouchCenter = { x: 0, y: 0 };
+
+/**
+ * Enhanced setup function with trackpad and touch zoom support
+ */
+function setup() {
+    console.log('🎨 Setup function started');
+    
+    // Create canvas
+    canvas = createCanvas(windowWidth - PANEL_WIDTH, windowHeight);
+    canvas.parent('canvas-container');
+    
+    // Get references to HTML elements
+    tooltip = select('#tooltip');
+    stepCounter = select('#step-counter');
+    stepList = select('#step-list');
+    controls = select('#controls');
+    
+    // Initialize colors
+    initColors();
+    
+    // Create case study dropdown
+    createCaseStudyDropdown();
+    
+    // Add trackpad and touch zoom support
+    setupZoomControls();
+    
+    setupComplete = true;
+    
+    // Check if data is already loaded
+    if (dataLoaded) {
+        initializeVisualizationAfterDataLoad();
+    } else {
+        console.log('⏳ Waiting for data to load...');
+    }
+}
+
+/**
+ * Setup trackpad and touch zoom controls
+ */
+function setupZoomControls() {
+    console.log('🔧 Setting up trackpad and touch zoom controls...');
+    
+    // Add trackpad pinch support (wheel event with ctrlKey for pinch)
+    canvas.elt.addEventListener('wheel', handleTrackpadPinch, { passive: false });
+    
+    // Add touch event listeners for mobile/tablet pinch-to-zoom
+    canvas.elt.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.elt.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.elt.addEventListener('touchend', handleTouchEnd, { passive: false });
+    
+    console.log('✅ Trackpad and touch zoom controls setup complete');
+}
+
+/**
+ * Handle trackpad pinch-to-zoom
+ */
+function handleTrackpadPinch(event) {
+    // Only handle pinch gestures (ctrlKey indicates pinch on most trackpads)
+    if (!event.ctrlKey) {
+        return;
+    }
+    
+    // Prevent default zoom behavior
+    event.preventDefault();
+    
+    // Don't zoom if over UI elements
+    if (isMouseOverUI()) {
+        return;
+    }
+    
+    // Get mouse position relative to canvas for zoom focus point
+    const rect = canvas.elt.getBoundingClientRect();
+    const focusX = event.clientX - rect.left;
+    const focusY = event.clientY - rect.top;
+    
+    // Calculate zoom factor from wheel delta
+    const zoomFactor = event.deltaY > 0 ? 0.95 : 1.05;
+    
+    // Apply zoom with focus point
+    zoomAtPoint(focusX, focusY, zoomFactor);
+}
+
+/**
+ * Handle touch start for pinch-to-zoom
+ */
+function handleTouchStart(event) {
+    const touches = event.touches;
+    
+    if (touches.length === 2) {
+        // Two-finger pinch detected
+        event.preventDefault();
+        isPinching = true;
+        
+        // Store initial touch positions
+        initialTouches = [
+            { x: touches[0].clientX, y: touches[0].clientY },
+            { x: touches[1].clientX, y: touches[1].clientY }
+        ];
+        
+        // Calculate initial distance between fingers
+        initialPinchDistance = getTouchDistance(touches[0], touches[1]);
+        lastPinchZoom = targetZoom;
+        
+        // Calculate initial center point for zoom focus
+        const rect = canvas.elt.getBoundingClientRect();
+        lastTouchCenter = {
+            x: (touches[0].clientX + touches[1].clientX) / 2 - rect.left,
+            y: (touches[0].clientY + touches[1].clientY) / 2 - rect.top
+        };
+    } else {
+        // Single touch - reset pinch state
+        isPinching = false;
+    }
+}
+
+/**
+ * Handle touch move for pinch-to-zoom
+ */
+function handleTouchMove(event) {
+    const touches = event.touches;
+    
+    if (isPinching && touches.length === 2) {
+        event.preventDefault();
+        
+        // Calculate current distance between fingers
+        const currentDistance = getTouchDistance(touches[0], touches[1]);
+        
+        // Calculate zoom factor based on distance change
+        const distanceRatio = currentDistance / initialPinchDistance;
+        const newZoom = constrain(lastPinchZoom * distanceRatio, 0.2, 3.0);
+        
+        // Get current center point for zoom focus
+        const rect = canvas.elt.getBoundingClientRect();
+        const currentCenter = {
+            x: (touches[0].clientX + touches[1].clientX) / 2 - rect.left,
+            y: (touches[0].clientY + touches[1].clientY) / 2 - rect.top
+        };
+        
+        // Apply zoom at the center point between fingers
+        const zoomFactor = newZoom / targetZoom;
+        zoomAtPoint(currentCenter.x, currentCenter.y, zoomFactor);
+    }
+}
+
+/**
+ * Handle touch end
+ */
+function handleTouchEnd(event) {
+    if (event.touches.length < 2) {
+        isPinching = false;
+        initialPinchDistance = 0;
+    }
+}
+
+/**
+ * Calculate distance between two touch points
+ */
+function getTouchDistance(touch1, touch2) {
+    const dx = touch2.clientX - touch1.clientX;
+    const dy = touch2.clientY - touch1.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+/**
+ * Zoom at a specific point (zoom focus point)
+ */
+function zoomAtPoint(focusX, focusY, zoomFactor) {
+    // Don't zoom if over UI elements
+    if (isMouseOverUI()) {
+        return;
+    }
+    
+    // Calculate world coordinates before zoom
+    const worldX_before = (focusX - width/2) / targetZoom - targetViewX;
+    const worldY_before = (focusY - height/2) / targetZoom - targetViewY;
+    
+    // Apply zoom
+    const newZoom = constrain(targetZoom * zoomFactor, 0.2, 3.0);
+    targetZoom = newZoom;
+    
+    // Calculate world coordinates after zoom
+    const worldX_after = (focusX - width/2) / targetZoom - targetViewX;
+    const worldY_after = (focusY - height/2) / targetZoom - targetViewY;
+    
+    // Adjust view to keep the focus point in the same place
+    targetViewX += worldX_after - worldX_before;
+    targetViewY += worldY_after - worldY_before;
+}
+
 // =================================================================
 // CASE STUDY MANAGEMENT
 // =================================================================
@@ -1672,6 +1867,9 @@ function createStepList() {
 /**
  * Handle keyboard events for modal
  */
+/**
+ * Handle keyboard events (enhanced with better zoom)
+ */
 function keyPressed() {
     if (keyCode === SHIFT) {
         isShiftPressed = true;
@@ -1685,10 +1883,11 @@ function keyPressed() {
         }
     }
     
+    // Keyboard zoom (zoom at center of screen)
     if (key === '=' || key === '+') {
-        targetZoom = constrain(targetZoom * 1.1, 0.2, 3.0);
+        zoomAtPoint(width/2, height/2, 1.1);
     } else if (key === '-') {
-        targetZoom = constrain(targetZoom * 0.9, 0.2, 3.0);
+        zoomAtPoint(width/2, height/2, 0.9);
     }
 }
 
@@ -2556,11 +2755,36 @@ function isMouseOverElement(element) {
          mouseY >= rect.top && mouseY <= rect.bottom;
 }
 
+/**
+ * Enhanced isMouseOverUI to handle touch coordinates
+ */
+function isMouseOverUIAtPoint(x, y) {
+    // Create a list of UI elements to check
+    const uiElements = [];
+    
+    // Add elements that exist
+    if (legend && legend.elt) uiElements.push(legend.elt);
+    if (stepCounter && stepCounter.elt) uiElements.push(stepCounter.elt);
+    if (controls && controls.elt) uiElements.push(controls.elt);
+    if (stepList && stepList.elt) uiElements.push(stepList.elt);
+    
+    // Check case study dropdown
+    const dropdown = select('#case-study-dropdown-container');
+    if (dropdown && dropdown.elt) uiElements.push(dropdown.elt);
+    
+    // Check if coordinates are over any UI element
+    return uiElements.some(element => {
+        const rect = element.getBoundingClientRect();
+        return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+    });
+}
+
+
+/**
+ * Updated isMouseOverUI function
+ */
 function isMouseOverUI() {
-  return isMouseOverElement(legend.elt) || 
-         isMouseOverElement(stepCounter.elt) ||
-         isMouseOverElement(controls.elt) ||
-         isMouseOverElement(stepList.elt);
+    return isMouseOverUIAtPoint(mouseX, mouseY);
 }
 
 // =================================================================
