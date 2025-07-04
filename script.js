@@ -1129,22 +1129,69 @@ function updateStepCounter() {
     if (selectedStep !== null) {
         const step = steps.find(s => s.step_id === selectedStep);
         if (step) {
-            const prevButton = selectedStep > 0 ? `<button onclick="selectStep(${selectedStep - 1}, true)" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-right: 5px; border-radius: 2px; cursor: pointer;">←</button>` : '';
-            const nextButton = selectedStep < steps.length - 1 ? `<button onclick="selectStep(${selectedStep + 1}, true)" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-left: 5px; border-radius: 2px; cursor: pointer;">→</button>` : '';
-            
-            stepCounter.html(`
-                <div style="text-align: center;">
-                    ${prevButton}
-                    <span style="color: #5DC0D9; font-weight: bold;">Step ${selectedStep}</span>
-                    ${nextButton}
-                </div>
-                <div style="font-size: 12px; margin-top: 5px; color: #F2F2F2; line-height: 1.3;">
-                    ${step.step_description}
-                </div>
-                <div style="font-size: 10px; margin-top: 3px; color: #BBBBBB;">
-                    ${step.date}
-                </div>
-            `);
+            // Clear previous contents
+            stepCounter.html('');
+
+            // Create a container div for centering
+            let container = createDiv();
+            container.parent(stepCounter);
+            container.style('text-align', 'center');
+
+            // Previous button
+            let prevBtn = null;
+            prevBtn = createButton('←');
+            prevBtn.parent(container);
+            prevBtn.style('background', '#666666');
+            prevBtn.style('border', 'none');
+            prevBtn.style('color', 'white');
+            prevBtn.style('padding', '2px 6px');
+            prevBtn.style('margin-right', '5px');
+            prevBtn.style('border-radius', '2px');
+            prevBtn.style('cursor', 'pointer');
+            if (selectedStep > 0) {
+                prevBtn.style('background', '#5DC0D9');
+                prevBtn.mousePressed(() => selectStep(selectedStep - 1, true));
+            }
+
+            // Step label
+            let stepLabel = createSpan('Step ' + selectedStep);
+            stepLabel.parent(container);
+            stepLabel.style('color', '#5DC0D9');
+            stepLabel.style('font-weight', 'bold');
+
+            // Next button
+            let nextBtn = null;
+            nextBtn = createButton('→');
+            nextBtn.parent(container);
+            nextBtn.style('background', '#666666');
+            nextBtn.style('border', 'none');
+            nextBtn.style('color', 'white');
+            nextBtn.style('padding', '2px 6px');
+            nextBtn.style('margin-left', '5px');
+            nextBtn.style('border-radius', '2px');
+            nextBtn.style('cursor', 'pointer');
+            if (selectedStep < steps.length - 1) {
+                nextBtn.style('background', '#5DC0D9');
+                nextBtn.mousePressed(() => selectStep(selectedStep + 1, true));
+            }
+
+            // Step description
+            let descDiv = createDiv(step.step_description);
+            descDiv.parent(stepCounter);
+            descDiv.style('font-size', '12px');
+            descDiv.style('margin-top', '5px');
+            descDiv.style('color', '#F2F2F2');
+            descDiv.style('line-height', '1.3');
+
+            // Step date
+            let dateDiv = createDiv(step.date);
+            dateDiv.parent(stepCounter);
+            dateDiv.style('font-size', '10px');
+            dateDiv.style('margin-top', '3px');
+            dateDiv.style('color', '#BBBBBB');
+
+            // Ensure the stepCounter is centered at the top of the canvas
+            stepCounter.style('width', '300px');
         }
     }
 }
