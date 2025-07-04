@@ -1,5 +1,5 @@
 // Ira TO DO / Bugs to Fix
-// 1. Selecting Edges from Step List
+// 1. [Done] Selecting Edges from Step List
 // 2. Have Option to Render Documents in Steps
 // 3. [Done] Improve hovering and selection of nodes and edges
 // 4. Zooming Effects
@@ -460,65 +460,75 @@ function createStepList() {
                     edgeItem.style('position', 'relative');
                     edgeItem.style('display', 'flex');
                     edgeItem.style('align-items', 'center');
-                    
-                    // Create checkbox with event prevention
+
+                    // Prevent clicks from propagating to stepDiv
+                    edgeItem.elt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    // Prevent hover from propagating to stepDiv
+                    edgeItem.elt.addEventListener('mouseover', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    edgeItem.elt.addEventListener('mouseout', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    // Your existing checkbox code...
                     const checkbox = createCheckbox('', false);
                     checkbox.style('margin-right', '8px');
                     checkbox.style('transform', 'scale(0.8)');
                     checkbox.changed(() => {
                         if (checkbox.checked()) {
                             selectedEdges.add(edge.interaction_id);
+                            console.log(selectedEdges);
                         } else {
                             selectedEdges.delete(edge.interaction_id);
                         }
                     });
-                    
-                    // Prevent checkbox events from bubbling to step selection
+
                     checkbox.elt.addEventListener('click', (e) => {
                         e.stopPropagation();
                     });
                     checkbox.parent(edgeItem);
-                    
-                    // Get node names for display
+
+                    // Node names display...
                     const fromNames = edge.from_nodes.map(id => {
                         const node = nodes.find(n => n.node_id === id);
                         return node ? node.node_name : id;
                     }).join(', ');
-                    
+
                     const toNames = edge.to_nodes.map(id => {
                         const node = nodes.find(n => n.node_id === id);
                         return node ? node.node_name : id;
                     }).join(', ');
-                    
-                    // Check for self-loop
-                    const isSelfLoop = edge.from_nodes.some(fromId => 
-                        edge.to_nodes.includes(fromId)
-                    );
-                    
+
+                    const isSelfLoop = edge.from_nodes.some(fromId => edge.to_nodes.includes(fromId));
                     const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
                     const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
-                    
+
                     const textSpan = createSpan(display);
                     textSpan.style('vertical-align', 'middle');
                     textSpan.parent(edgeItem);
-                    
+
                     edgeItem.mouseOver(() => {
                         edgeItem.style('background', '#444');
                         hoveredEdge = edge.interaction_id;
                     });
-                    
+
                     edgeItem.mouseOut(() => {
                         edgeItem.style('background', 'transparent');
                         hoveredEdge = null;
                     });
-                    
-                    // Prevent edge item clicks from bubbling to step selection
-                    edgeItem.elt.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                    });
-                    
+
                     edgeItem.parent(edgesList);
                 });
+
+                // Finally, also stop propagation on edgesList itself to be extra cautious
+                edgesList.elt.addEventListener('click', (e) => e.stopPropagation());
+                edgesList.elt.addEventListener('mouseover', (e) => e.stopPropagation());
+                edgesList.elt.addEventListener('mouseout', (e) => e.stopPropagation());
                 
                 edgesList.parent(stepDiv);
                 
@@ -529,10 +539,15 @@ function createStepList() {
                 expandBtn.style('color', '#5DC0D9');
                 expandBtn.style('cursor', 'pointer');
                 expandBtn.style('margin-top', '5px');
-                
+
+                // Explicitly stop propagation on expandBtn for click and hover events
+                expandBtn.elt.addEventListener('click', (e) => e.stopPropagation());
+                expandBtn.elt.addEventListener('mouseover', (e) => e.stopPropagation());
+                expandBtn.elt.addEventListener('mouseout', (e) => e.stopPropagation());
+
                 let isExpanded = false;
-                expandBtn.mousePressed((e) => {
-                    e.stopPropagation(); // Prevent step selection
+                expandBtn.elt.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     isExpanded = !isExpanded;
                     if (isExpanded) {
                         edgesList.style('display', 'block');
@@ -542,11 +557,14 @@ function createStepList() {
                         expandBtn.html('▶ ' + relatedEdges.length + ' edges');
                     }
                 });
-                
+
                 expandBtn.parent(stepDiv);
             }
             
-            stepDiv.mousePressed(() => selectStep(step.step_id, false));
+            stepDiv.elt.addEventListener('click', (e) => {
+                if (e.target.closest('.edge-item, .edges-list, input[type="checkbox"]')) return;
+                selectStep(step.step_id, false);
+            });
             stepDiv.parent(stepList);
         });
     });
@@ -726,11 +744,21 @@ function drawSingleEdge(edge, fromId, toId) {
             shouldShow = true;
         }
     } else {
-        alpha = 60;
-        // When no step is selected, violated edges should be greyed out
-        if (edge.violated === 1) {
-            edgeColor = h3Color;
-            alpha = 40;
+        // Check if this specific edge is selected in the UI
+        if (selectedEdges.size > 0) {
+            shouldShow = selectedEdges.has(edge.interaction_id);
+            if (shouldShow) {
+                edgeColor = h2Color;
+                alpha = 200;
+                strokeW = 2;
+            }
+        } else {
+            alpha = 60;
+            // When no step is selected, violated edges should be greyed out
+            if (edge.violated === 1) {
+                edgeColor = h3Color;
+                alpha = 40;
+            }
         }
     }
     
