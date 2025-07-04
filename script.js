@@ -102,7 +102,7 @@ let groupRadius = 300;
 
 // Layout Dimensions
 const PANEL_WIDTH = 350;
-const LEGEND_WIDTH = 200;
+const LEGEND_WIDTH = 100;
 const LEGEND_PADDING = 15;
 const MARGIN = 25;
 
@@ -953,6 +953,18 @@ function calculateEdgeOffsets() {
  * Create the legend
  */
 function createLegend() {
+
+    // Remove existing legend if it exists
+    if (legend) {
+        legend.remove();
+    }
+    
+    // Or alternatively, remove by ID:
+    const existingLegend = select('#legend');
+    if (existingLegend) {
+        existingLegend.remove();
+    }
+    
     legend = createDiv('');
     legend.id('legend');
     legend.style('background', 'rgba(20, 20, 20, 0.9)');
