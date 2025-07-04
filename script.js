@@ -33,6 +33,9 @@ let groupRadius = 300;
 
 // Layout Dimensions
 const PANEL_WIDTH = 350;
+const LEGEND_WIDTH = 200;
+const LEGEND_PADDING = 15;
+const MARGIN = 25;
 
 // Color scheme (SDS style)
 let bgColor, bgColorDark, textColor, textColorDark;
@@ -348,13 +351,13 @@ function createLegend() {
     legend = createDiv('');
     legend.id('legend');
     legend.style('background', 'rgba(20, 20, 20, 0.9)');
-    legend.style('padding', '15px');
+    legend.style('padding', LEGEND_PADDING + 'px');
     legend.style('border-radius', '4px');
     legend.style('border', '1px solid #444444');
     legend.style('font-family', 'Helvetica, sans-serif');
     legend.style('color', '#F2F2F2');
     legend.style('font-size', '11px');
-    legend.style('width', '200px');
+    legend.style('width', LEGEND_WIDTH + 'px');
 
     
     let title = createDiv('Legend');
@@ -937,7 +940,7 @@ function handleMouseInteraction() {
     let newHoveredNode = null;
     let newHoveredEdge = null;
     
-    if (mouseX < width - 350) {
+    if (mouseX < width) {
         // Check nodes - allow hover for all nodes when no step selected, relevant nodes when step selected
         nodes.forEach(node => {
             const pos = nodePositions.get(node.node_id);
@@ -1202,7 +1205,7 @@ function keyReleased() {
 }
 
 function mousePressed() {
-    if (mouseX < width - 350) {
+    if (mouseX < width) {
         // Check if clicking on an edge when no step is selected
         if (selectedStep === null && hoveredEdge !== null) {
             const edge = edges.find(e => e.interaction_id === hoveredEdge);
@@ -1219,7 +1222,7 @@ function mousePressed() {
 }
 
 function mouseDragged() {
-    if (isDragging && mouseX < width - 350) {
+    if (isDragging && mouseX < width) {
         const deltaX = mouseX - lastMouseX;
         const deltaY = mouseY - lastMouseY;
         
@@ -1245,6 +1248,6 @@ function mouseReleased() {
 }
 
 function windowResized() {
-    resizeCanvas(windowWidth - 350, windowHeight);
-    legend.position(width - 250, height - legend.elt.offsetHeight - 20);
+    resizeCanvas(windowWidth - PANEL_WIDTH, windowHeight);
+    legend.position(width - legend.elt.offsetHeight - MARGIN, height - legend.elt.offsetHeight - MARGIN);
 }
