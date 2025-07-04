@@ -1,12 +1,3 @@
-// Ira Bugs Fixed
-// 1. [Done] Selecting Edges from Step List
-// 3. [Done] Improve hovering and selection of nodes and edges
-// 4. [Done] Zooming Effects
-// 5. [Done] Legend Location
-
-// Ira Won't Do
-// 2. Have Option to Render Documents in Steps (rand out of time / no data loaded, yet)
-
 // =================================================================
 // MULTI-CASE STUDY VISUALIZATION - COMPLETE INTEGRATION
 // =================================================================
@@ -926,7 +917,7 @@ function switchTab(tabName) {
 }
 
 /**
- * Create the step list with edges (original functionality)
+ * Create the step list with edges (FIXED VERSION)
  */
 function createStepEdgesList() {
     console.log('📋 Creating step edges list...');
@@ -974,6 +965,15 @@ function createStepEdgesList() {
             stepDiv.class('step-item');
             stepDiv.addClass(step.phase || 'null');
             
+            // FIX: Make entire step div clickable by adding explicit click handler
+            stepDiv.elt.addEventListener('click', (e) => {
+                // Only prevent selection if clicking directly on edge items, checkboxes, or expand buttons
+                if (e.target.closest('.edge-item, input[type="checkbox"], .expand-btn')) {
+                    return;
+                }
+                selectStep(step.step_id, false);
+            });
+            
             const dateDiv = createDiv(step.date);
             dateDiv.class('step-date');
             dateDiv.parent(stepDiv);
@@ -996,7 +996,7 @@ function createStepEdgesList() {
                     const edgeItem = createDiv();
                     edgeItem.class('edge-item');
                     edgeItem.style('font-size', '11px');
-                    edgeItem.style('color', '#BBBBBB');
+                    edgeItem.style('color', '#DDDDDD'); // FIX: Changed from #BBBBBB to #DDDDDD for better visibility
                     edgeItem.style('margin', '3px 0');
                     edgeItem.style('cursor', 'pointer');
                     edgeItem.style('padding', '3px');
@@ -1010,16 +1010,6 @@ function createStepEdgesList() {
                         e.stopPropagation();
                     });
 
-                    // Prevent hover from propagating to stepDiv
-                    edgeItem.elt.addEventListener('mouseover', (e) => {
-                        e.stopPropagation();
-                    });
-
-                    edgeItem.elt.addEventListener('mouseout', (e) => {
-                        e.stopPropagation();
-                    });
-
-                    // Your existing checkbox code...
                     const checkbox = createCheckbox('', false);
                     checkbox.style('margin-right', '8px');
                     checkbox.style('transform', 'scale(0.8)');
@@ -1053,25 +1043,26 @@ function createStepEdgesList() {
 
                     const textSpan = createSpan(display);
                     textSpan.style('vertical-align', 'middle');
+                    textSpan.style('color', '#DDDDDD'); // FIX: Better visibility for edge text
                     textSpan.parent(edgeItem);
 
                     edgeItem.mouseOver(() => {
                         edgeItem.style('background', '#444');
+                        edgeItem.style('color', '#F2F2F2'); // FIX: Even brighter on hover
                         hoveredEdge = edge.interaction_id;
                     });
 
                     edgeItem.mouseOut(() => {
                         edgeItem.style('background', 'transparent');
+                        edgeItem.style('color', '#DDDDDD'); // FIX: Return to improved visibility color
                         hoveredEdge = null;
                     });
 
                     edgeItem.parent(edgesList);
                 });
 
-                // Finally, also stop propagation on edgesList itself to be extra cautious
+                // Stop propagation on edgesList container
                 edgesList.elt.addEventListener('click', (e) => e.stopPropagation());
-                edgesList.elt.addEventListener('mouseover', (e) => e.stopPropagation());
-                edgesList.elt.addEventListener('mouseout', (e) => e.stopPropagation());
                 
                 edgesList.parent(stepDiv);
                 
@@ -1082,31 +1073,22 @@ function createStepEdgesList() {
                 expandBtn.style('cursor', 'pointer');
                 expandBtn.style('margin-top', '5px');
 
-                // Explicitly stop propagation on expandBtn for click and hover events
-                expandBtn.elt.addEventListener('click', (e) => e.stopPropagation());
-                expandBtn.elt.addEventListener('mouseover', (e) => e.stopPropagation());
-                expandBtn.elt.addEventListener('mouseout', (e) => e.stopPropagation());
-
-                let isExpanded = false;
+                // Stop propagation on expand button
                 expandBtn.elt.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    isExpanded = !isExpanded;
+                    const isExpanded = edgesList.elt.style.display === 'block';
                     if (isExpanded) {
-                        edgesList.style('display', 'block');
-                        expandBtn.html('▼ ' + relatedEdges.length + ' edges');
-                    } else {
                         edgesList.style('display', 'none');
                         expandBtn.html('▶ ' + relatedEdges.length + ' edges');
+                    } else {
+                        edgesList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedEdges.length + ' edges');
                     }
                 });
 
                 expandBtn.parent(stepDiv);
             }
             
-            stepDiv.elt.addEventListener('click', (e) => {
-                if (e.target.closest('.edge-item, .edges-list, input[type="checkbox"]')) return;
-                selectStep(step.step_id, false);
-            });
             stepDiv.parent(stepList);
         });
     });
@@ -1128,6 +1110,11 @@ function createStepEdgesList() {
             stepDiv.class('step-item');
             stepDiv.addClass('other');
             
+            // FIX: Same click handler fix for 'other' phase steps
+            stepDiv.elt.addEventListener('click', (e) => {
+                selectStep(step.step_id, false);
+            });
+            
             const dateDiv = createDiv(step.date);
             dateDiv.class('step-date');
             dateDiv.parent(stepDiv);
@@ -1136,7 +1123,6 @@ function createStepEdgesList() {
             descDiv.class('step-description');
             descDiv.parent(stepDiv);
             
-            stepDiv.mousePressed(() => selectStep(step.step_id));
             stepDiv.parent(stepList);
         });
     }
@@ -1145,7 +1131,7 @@ function createStepEdgesList() {
 }
 
 /**
- * Updated createStepDocumentsList function with Bauhaus support
+ * Updated createStepDocumentsList function with FIXED step selection
  */
 function createStepDocumentsList() {
     console.log('📋 Creating step documents list...');
@@ -1193,6 +1179,15 @@ function createStepDocumentsList() {
             stepDiv.class('step-item');
             stepDiv.addClass(step.phase || 'null');
             
+            // FIX: Make entire step div clickable in documents mode too
+            stepDiv.elt.addEventListener('click', (e) => {
+                // Only prevent selection if clicking on document items or expand buttons
+                if (e.target.closest('.document-item, .bauhaus-document-item, .expand-btn, .documents-list')) {
+                    return;
+                }
+                selectStep(step.step_id, false);
+            });
+            
             const dateDiv = createDiv(step.date);
             dateDiv.class('step-date');
             dateDiv.parent(stepDiv);
@@ -1211,6 +1206,9 @@ function createStepDocumentsList() {
                 documentsList.style('padding-left', '10px');
                 documentsList.style('border-left', '2px solid #444');
                 
+                // FIX: Stop propagation on documents list container
+                documentsList.elt.addEventListener('click', (e) => e.stopPropagation());
+                
                 relatedDocuments.forEach(doc => {
                     let docItem;
                     
@@ -1220,6 +1218,9 @@ function createStepDocumentsList() {
                     } else {
                         docItem = createRegularDocumentItem(doc);
                     }
+                    
+                    // FIX: Stop propagation on document items
+                    docItem.elt.addEventListener('click', (e) => e.stopPropagation());
                     
                     docItem.parent(documentsList);
                 });
@@ -1233,23 +1234,22 @@ function createStepDocumentsList() {
                 expandBtn.style('cursor', 'pointer');
                 expandBtn.style('margin-top', '5px');
                 
-                let isExpanded = false;
-                expandBtn.mousePressed((e) => {
+                // FIX: Stop propagation and proper expand functionality
+                expandBtn.elt.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    isExpanded = !isExpanded;
+                    const isExpanded = documentsList.elt.style.display === 'block';
                     if (isExpanded) {
-                        documentsList.style('display', 'block');
-                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
-                    } else {
                         documentsList.style('display', 'none');
                         expandBtn.html('▶ ' + relatedDocuments.length + ' documents');
+                    } else {
+                        documentsList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
                     }
                 });
                 
                 expandBtn.parent(stepDiv);
             }
             
-            stepDiv.mousePressed(() => selectStep(step.step_id));
             stepDiv.parent(stepList);
         });
     });
@@ -1271,6 +1271,14 @@ function createStepDocumentsList() {
             stepDiv.class('step-item');
             stepDiv.addClass('other');
             
+            // FIX: Same click handler fix for 'other' phase steps in documents mode
+            stepDiv.elt.addEventListener('click', (e) => {
+                if (e.target.closest('.document-item, .bauhaus-document-item, .expand-btn, .documents-list')) {
+                    return;
+                }
+                selectStep(step.step_id, false);
+            });
+            
             const dateDiv = createDiv(step.date);
             dateDiv.class('step-date');
             dateDiv.parent(stepDiv);
@@ -1289,6 +1297,9 @@ function createStepDocumentsList() {
                 documentsList.style('padding-left', '10px');
                 documentsList.style('border-left', '2px solid #444');
                 
+                // FIX: Stop propagation on documents list
+                documentsList.elt.addEventListener('click', (e) => e.stopPropagation());
+                
                 relatedDocuments.forEach(doc => {
                     let docItem;
                     
@@ -1298,6 +1309,9 @@ function createStepDocumentsList() {
                     } else {
                         docItem = createRegularDocumentItem(doc);
                     }
+                    
+                    // FIX: Stop propagation on document items
+                    docItem.elt.addEventListener('click', (e) => e.stopPropagation());
                     
                     docItem.parent(documentsList);
                 });
@@ -1311,23 +1325,22 @@ function createStepDocumentsList() {
                 expandBtn.style('cursor', 'pointer');
                 expandBtn.style('margin-top', '5px');
                 
-                let isExpanded = false;
-                expandBtn.mousePressed((e) => {
+                // FIX: Stop propagation and proper expand functionality
+                expandBtn.elt.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    isExpanded = !isExpanded;
+                    const isExpanded = documentsList.elt.style.display === 'block';
                     if (isExpanded) {
-                        documentsList.style('display', 'block');
-                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
-                    } else {
                         documentsList.style('display', 'none');
                         expandBtn.html('▶ ' + relatedDocuments.length + ' documents');
+                    } else {
+                        documentsList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
                     }
                 });
                 
                 expandBtn.parent(stepDiv);
             }
             
-            stepDiv.mousePressed(() => selectStep(step.step_id));
             stepDiv.parent(stepList);
         });
     }
@@ -2411,14 +2424,18 @@ function panToStepElements(stepId) {
 }
 
 /**
- * Update tooltip
+ * Update tooltip (FIXED VERSION - no "No description available")
  */
 function updateTooltip() {
     if (hoveredNode !== null) {
         const node = nodes.find(n => n.node_id === hoveredNode);
         if (node) {
-            const desc = node.node_description || "No description available";
-            tooltip.html(`<strong>${node.node_name}</strong><br>${desc}`);
+            // FIX: Only show description if it exists, otherwise just show the name
+            if (node.node_description && node.node_description.trim() !== '') {
+                tooltip.html(`<strong>${node.node_name}</strong><br>${node.node_description}`);
+            } else {
+                tooltip.html(`<strong>${node.node_name}</strong>`);
+            }
             tooltip.style('display', 'block');
             tooltip.position(mouseX + 10, mouseY - 10);
         }

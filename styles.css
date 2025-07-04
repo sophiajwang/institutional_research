@@ -74,7 +74,7 @@ body {
     border-right: none;
 }
 
-/* Step Item Styles */
+/* Step Item Styles - Improved Clickability */
 .step-item {
     background: #262626;
     margin: 8px 0;
@@ -84,6 +84,8 @@ body {
     transition: all 0.2s;
     border-left: 3px solid #666666;
     font-family: 'Helvetica', sans-serif;
+    position: relative;
+    user-select: none;
 }
 
 .step-item:hover {
@@ -113,20 +115,22 @@ body {
     color: #BBBBBB;
     margin-bottom: 5px;
     font-family: 'Helvetica', sans-serif;
+    pointer-events: none;
 }
 
 .step-description {
     font-size: 13px;
     line-height: 1.4;
     font-family: 'Helvetica', sans-serif;
+    pointer-events: none;
 }
 
-/* Edge Item Styles */
+/* Edge Item Styles - IMPROVED VISIBILITY */
 .edge-item {
     display: flex;
     align-items: center;
     font-size: 11px;
-    color: #BBBBBB;
+    color: #DDDDDD; /* Changed from #BBBBBB for better visibility */
     margin: 3px 0;
     cursor: pointer;
     padding: 3px;
@@ -136,12 +140,18 @@ body {
 
 .edge-item:hover {
     background: #444;
+    color: #F2F2F2; /* Brighter color on hover */
 }
 
 .edge-item input[type="checkbox"] {
     margin-right: 8px;
     transform: scale(0.8);
     accent-color: #5DC0D9;
+}
+
+/* Enhanced text span styling within edge items */
+.edge-item span {
+    color: inherit; /* Inherit the improved color from parent */
 }
 
 /* Regular Document Item Styles */
@@ -155,6 +165,8 @@ body {
     border: 1px solid #444;
     background: #1A1A1A;
     transition: all 0.2s;
+    position: relative;
+    z-index: 1;
 }
 
 .document-item:hover {
@@ -190,6 +202,8 @@ body {
     border: 2px solid #444;
     background: #1A1A1A;
     transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .bauhaus-document-item:hover {
@@ -303,14 +317,16 @@ body {
     margin-top: 10px;
 }
 
-/* Expand Button Styles */
+/* Expand Button Styles - Improved Clickability */
 .expand-btn {
     font-size: 10px;
     color: #5DC0D9;
     cursor: pointer;
     margin-top: 5px;
     user-select: none;
-    transition: color 0.2s;
+    position: relative;
+    z-index: 2;
+    padding: 2px 4px;
 }
 
 .expand-btn:hover {
