@@ -16,7 +16,10 @@ let hoveredNode = null;
 let hoveredEdge = null;
 let tooltip;
 let stepCounter;
+let stepList;
 let legend;
+let canvas;
+let controls;
 
 // 2D Camera controls
 let viewX = 0, viewY = 0;
@@ -162,11 +165,13 @@ function loadDataDirectly() {
 }
 
 function setup() {
-    let canvas = createCanvas(windowWidth - PANEL_WIDTH, windowHeight);
+    canvas = createCanvas(windowWidth - PANEL_WIDTH, windowHeight);
     canvas.parent('canvas-container');
     
     tooltip = select('#tooltip');
     stepCounter = select('#step-counter');
+    stepList = select('#step-list');
+    controls = select('#controls');
     
     // Initialize colors (SDS style)
     initColors();
@@ -393,7 +398,6 @@ function createLegend() {
 window.selectStep = selectStep;
 
 function createStepList() {
-    const stepList = select('#step-list');
     
     // Group steps by phase
     const phaseGroups = {
@@ -937,6 +941,15 @@ function drawBrokenLine2D(from, to, segments) {
 }
 
 function handleMouseInteraction() {
+
+    // Don't bother if divs are in the way
+    if (isMouseOverUI()) {
+        hoveredNode = null;
+        hoveredEdge = null;
+        updateTooltip();
+        return;
+    }
+
     // Transform mouse coordinates to world space
     let worldMouseX = (mouseX - width/2) / zoomLevel - viewX;
     let worldMouseY = (mouseY - height/2) / zoomLevel - viewY;
@@ -1214,9 +1227,13 @@ function keyReleased() {
 }
 
 function mousePressed() {
-    if (mouseX < width) {
-        // Check if clicking on an edge when no step is selected
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+}
 
+function mouseClicked() {
+    if (isMouseOverUI()) return;
+    if (!isDragging) {
         // Ira: It seems to me like you'd what to be able to select another step even if one is currently selected
         //if (selectedStep === null && hoveredEdge !== null) {
         if (hoveredEdge !== null) {
@@ -1228,40 +1245,45 @@ function mousePressed() {
         } else {
             selectStep(null);
         }
-        
-        isDragging = true;
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
     }
+    isDragging = false;
 }
 
 function mouseDragged() {
-    if (isDragging && mouseX < width) {
-        const deltaX = mouseX - lastMouseX;
-        const deltaY = mouseY - lastMouseY;
-        
-        if (isShiftPressed) {
-            // Rotate view (shift + drag) - just for visual effect in 2D
-            const sensitivity = 0.005;
-            targetViewX += deltaX * sensitivity * 100;
-            targetViewY += deltaY * sensitivity * 100;
-        } else {
-            // Move/pan view (regular drag)
-            const sensitivity = 1.0 / zoomLevel;
-            targetViewX += deltaX * sensitivity;
-            targetViewY += deltaY * sensitivity;
-        }
-        
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
+    isDragging = true;
+    const deltaX = mouseX - lastMouseX;
+    const deltaY = mouseY - lastMouseY;
+    
+    if (isShiftPressed) {
+        // Rotate view (shift + drag) - just for visual effect in 2D
+        const sensitivity = 2;
+        targetViewX += deltaX * sensitivity;
+        targetViewY += deltaY * sensitivity;
+    } else {
+        // Move/pan view (regular drag)
+        const sensitivity = 1.0 / zoomLevel;
+        targetViewX += deltaX * sensitivity;
+        targetViewY += deltaY * sensitivity;
     }
-}
-
-function mouseReleased() {
-    isDragging = false;
+    
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
 }
 
 function windowResized() {
     resizeCanvas(windowWidth - PANEL_WIDTH, windowHeight);
     legend.position(width - legend.elt.offsetHeight - MARGIN, height - legend.elt.offsetHeight - MARGIN);
+}
+
+function isMouseOverElement(element) {
+  const rect = element.getBoundingClientRect();
+  return mouseX >= rect.left && mouseX <= rect.right &&
+         mouseY >= rect.top && mouseY <= rect.bottom;
+}
+
+function isMouseOverUI() {
+  return isMouseOverElement(legend.elt) || 
+         isMouseOverElement(stepCounter.elt) ||
+         isMouseOverElement(controls.elt) ||
+         isMouseOverElement(stepList.elt);
 }
