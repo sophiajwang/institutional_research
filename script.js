@@ -50,7 +50,7 @@ const CASE_STUDIES = {
             auditorium: 'Auditorium',
             technical_school: 'Technical School'
         },
-        phaseOrder: ['preliminary_course', 'weaving_workshop', 'store_room', 'exhibition_room', 'studio_quarters','bridge','auditorium','technical_school'],
+        phaseOrder: ['preliminary_course', 'weaving_workshop', 'wall_painting_workshop','store_room', 'exhibition_room', 'studio_quarters','bridge','auditorium','technical_school'],
         description: 'The Bauhaus school, seen through the Dessau campus'
     }
 };
@@ -134,6 +134,14 @@ async function switchCaseStudy(caseStudyId) {
     hoveredNode = null;
     hoveredEdge = null;
     
+    // Clear step counter immediately
+    if (stepCounter) {
+        stepCounter.html('Step: None Selected');
+    }
+    
+    // Clear active step styling
+    selectAll('.step-item').forEach(item => item.removeClass('active'));
+    
     // Reset camera
     viewX = 0;
     viewY = 0;
@@ -166,7 +174,6 @@ async function switchCaseStudy(caseStudyId) {
         showErrorMessage(`Failed to load ${CASE_STUDIES[caseStudyId].name}`);
     }
 }
-
 /**
  * Create the case study dropdown menu
  */
@@ -769,16 +776,138 @@ function createLegend() {
     nodeTypes.parent(legend);
 }
 
+// =================================================================
+// SIDEBAR TAB MANAGEMENT
+// =================================================================
+
+// Current active tab
+let currentTab = 'edges'; // 'edges' or 'documents'
+
 /**
- * Create the step list with dynamic phase headers
+ * Create the tabbed sidebar interface
  */
-function createStepList() {
-    console.log('📋 Creating step list with dynamic phases...');
+function createTabbedSidebar() {
+    console.log('📋 Creating tabbed sidebar interface...');
     
-    const stepList = select('#step-list');
+    const sidebar = select('#sidebar');
     
     // Clear existing content
-    stepList.html('');
+    sidebar.html('');
+    
+    // Create tab navigation
+    const tabNav = createDiv('');
+    tabNav.id('tab-nav');
+    tabNav.style('display', 'flex');
+    tabNav.style('margin-bottom', '20px');
+    tabNav.style('border-bottom', '2px solid #444444');
+    tabNav.parent(sidebar);
+    
+    // Create Edges tab
+    const edgesTab = createDiv('Steps');
+    edgesTab.id('edges-tab');
+    edgesTab.class('tab-button');
+    edgesTab.addClass(currentTab === 'edges' ? 'active' : '');
+    edgesTab.style('flex', '1');
+    edgesTab.style('padding', '12px');
+    edgesTab.style('text-align', 'center');
+    edgesTab.style('cursor', 'pointer');
+    edgesTab.style('background', currentTab === 'edges' ? '#5DC0D9' : '#262626');
+    edgesTab.style('color', currentTab === 'edges' ? '#141414' : '#F2F2F2');
+    edgesTab.style('border-radius', '4px 4px 0 0');
+    edgesTab.style('font-weight', 'bold');
+    edgesTab.style('font-size', '14px');
+    edgesTab.style('transition', 'all 0.2s');
+    edgesTab.parent(tabNav);
+    
+    // Create Documents tab
+    const documentsTab = createDiv('Output');
+    documentsTab.id('documents-tab');
+    documentsTab.class('tab-button');
+    documentsTab.addClass(currentTab === 'documents' ? 'active' : '');
+    documentsTab.style('flex', '1');
+    documentsTab.style('padding', '12px');
+    documentsTab.style('text-align', 'center');
+    documentsTab.style('cursor', 'pointer');
+    documentsTab.style('background', currentTab === 'documents' ? '#5DC0D9' : '#262626');
+    documentsTab.style('color', currentTab === 'documents' ? '#141414' : '#F2F2F2');
+    documentsTab.style('border-radius', '4px 4px 0 0');
+    documentsTab.style('font-weight', 'bold');
+    documentsTab.style('font-size', '14px');
+    documentsTab.style('transition', 'all 0.2s');
+    documentsTab.parent(tabNav);
+    
+    // Add click handlers
+    edgesTab.mousePressed(() => switchTab('edges'));
+    documentsTab.mousePressed(() => switchTab('documents'));
+    
+    // Create content container
+    const contentContainer = createDiv('');
+    contentContainer.id('tab-content');
+    contentContainer.parent(sidebar);
+    
+    // Create the appropriate content
+    if (currentTab === 'edges') {
+        createStepEdgesList();
+    } else {
+        createStepDocumentsList();
+    }
+    
+    console.log('✅ Tabbed sidebar interface created');
+}
+
+/**
+ * Switch between tabs
+ */
+function switchTab(tabName) {
+    if (currentTab === tabName) return;
+    
+    console.log(`🔄 Switching to ${tabName} tab`);
+    
+    currentTab = tabName;
+    
+    // Update tab styling
+    const edgesTab = select('#edges-tab');
+    const documentsTab = select('#documents-tab');
+    
+    if (edgesTab && documentsTab) {
+        if (tabName === 'edges') {
+            edgesTab.style('background', '#5DC0D9');
+            edgesTab.style('color', '#141414');
+            documentsTab.style('background', '#262626');
+            documentsTab.style('color', '#F2F2F2');
+        } else {
+            documentsTab.style('background', '#5DC0D9');
+            documentsTab.style('color', '#141414');
+            edgesTab.style('background', '#262626');
+            edgesTab.style('color', '#F2F2F2');
+        }
+    }
+    
+    // Update content
+    const contentContainer = select('#tab-content');
+    if (contentContainer) {
+        contentContainer.html('');
+        
+        if (tabName === 'edges') {
+            createStepEdgesList();
+        } else {
+            createStepDocumentsList();
+        }
+    }
+}
+
+/**
+ * Create the step list with edges (original functionality)
+ */
+function createStepEdgesList() {
+    console.log('📋 Creating step edges list...');
+    
+    const contentContainer = select('#tab-content');
+    
+    // Create step list container
+    const stepList = createDiv('');
+    stepList.id('step-list');
+    stepList.parent(contentContainer);
     
     // Group steps by phase
     const phaseGroups = groupStepsByPhase();
@@ -961,8 +1090,487 @@ function createStepList() {
         });
     }
     
-    console.log('✅ Step list created with dynamic phases');
+    console.log('✅ Step edges list created');
 }
+
+/**
+ * Create the step list with documents (new functionality)
+ */
+function createStepDocumentsList() {
+    console.log('📋 Creating step documents list...');
+    
+    const contentContainer = select('#tab-content');
+    
+    // Create step list container
+    const stepList = createDiv('');
+    stepList.id('step-list');
+    stepList.parent(contentContainer);
+    
+    // Group steps by phase
+    const phaseGroups = groupStepsByPhase();
+    
+    console.log('📊 Phase groups:', Object.keys(phaseGroups));
+    
+    // Create phase sections in the correct order
+    const phaseOrder = getPhaseOrder();
+    
+    phaseOrder.forEach((phase, phaseIndex) => {
+        const phaseSteps = phaseGroups[phase];
+        if (!phaseSteps || phaseSteps.length === 0) return;
+        
+        // Create phase header with display name
+        const displayName = getPhaseDisplayName(phase);
+        const phaseHeader = createDiv(displayName);
+        phaseHeader.class('phase-header');
+        phaseHeader.style('color', '#5DC0D9');
+        phaseHeader.style('font-weight', 'bold');
+        phaseHeader.style('font-size', '14px');
+        phaseHeader.style('margin', '20px 0 10px 0');
+        phaseHeader.style('text-transform', 'uppercase');
+        phaseHeader.style('letter-spacing', '1px');
+        
+        // First phase gets no top margin
+        if (phaseIndex === 0) {
+            phaseHeader.style('margin-top', '0');
+        }
+        
+        phaseHeader.parent(stepList);
+        
+        // Create step items
+        phaseSteps.forEach(step => {
+            const stepDiv = createDiv();
+            stepDiv.class('step-item');
+            stepDiv.addClass(step.phase || 'null');
+            
+            const dateDiv = createDiv(step.date);
+            dateDiv.class('step-date');
+            dateDiv.parent(stepDiv);
+            
+            const descDiv = createDiv(step.step_description);
+            descDiv.class('step-description');
+            descDiv.parent(stepDiv);
+            
+            // Add documents list for this step
+            const relatedDocuments = getDocumentsForStep(step);
+            if (relatedDocuments.length > 0) {
+                const documentsList = createDiv();
+                documentsList.class('documents-list');
+                documentsList.style('display', 'none');
+                documentsList.style('margin-top', '8px');
+                documentsList.style('padding-left', '10px');
+                documentsList.style('border-left', '2px solid #444');
+                
+                relatedDocuments.forEach(doc => {
+                    const docItem = createDiv();
+                    docItem.class('document-item');
+                    docItem.style('font-size', '11px');
+                    docItem.style('color', '#BBBBBB');
+                    docItem.style('margin', '6px 0');
+                    docItem.style('cursor', 'pointer');
+                    docItem.style('padding', '6px');
+                    docItem.style('border-radius', '3px');
+                    docItem.style('border', '1px solid #444');
+                    docItem.style('background', '#1A1A1A');
+                    
+                    // Document title/TLDR
+                    const titleDiv = createDiv(doc.tldr || 'Untitled Document');
+                    titleDiv.style('font-weight', 'bold');
+                    titleDiv.style('color', '#5DC0D9');
+                    titleDiv.style('margin-bottom', '3px');
+                    titleDiv.style('font-size', '12px');
+                    titleDiv.parent(docItem);
+                    
+                    // Document author and date
+                    const metaDiv = createDiv(`${doc.author || 'Unknown Author'} • ${doc.date || 'No Date'}`);
+                    metaDiv.style('font-size', '10px');
+                    metaDiv.style('color', '#888');
+                    metaDiv.style('margin-bottom', '3px');
+                    metaDiv.parent(docItem);
+                    
+                    // Document description
+                    if (doc.document_description) {
+                        const descriptionDiv = createDiv(doc.document_description);
+                        descriptionDiv.style('font-size', '10px');
+                        descriptionDiv.style('color', '#BBBBBB');
+                        descriptionDiv.style('line-height', '1.3');
+                        descriptionDiv.parent(docItem);
+                    }
+                    
+                    docItem.mouseOver(() => {
+                        docItem.style('background', '#333');
+                        docItem.style('border-color', '#5DC0D9');
+                    });
+                    
+                    docItem.mouseOut(() => {
+                        docItem.style('background', '#1A1A1A');
+                        docItem.style('border-color', '#444');
+                    });
+                    
+                    docItem.parent(documentsList);
+                });
+                
+                documentsList.parent(stepDiv);
+                
+                const expandBtn = createDiv('▶ ' + relatedDocuments.length + ' documents');
+                expandBtn.class('expand-btn');
+                expandBtn.style('font-size', '10px');
+                expandBtn.style('color', '#5DC0D9');
+                expandBtn.style('cursor', 'pointer');
+                expandBtn.style('margin-top', '5px');
+                
+                let isExpanded = false;
+                expandBtn.mousePressed((e) => {
+                    e.stopPropagation();
+                    isExpanded = !isExpanded;
+                    if (isExpanded) {
+                        documentsList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
+                    } else {
+                        documentsList.style('display', 'none');
+                        expandBtn.html('▶ ' + relatedDocuments.length + ' documents');
+                    }
+                });
+                
+                expandBtn.parent(stepDiv);
+            }
+            
+            stepDiv.mousePressed(() => selectStep(step.step_id));
+            stepDiv.parent(stepList);
+        });
+    });
+    
+    // Handle 'other' phase if it exists
+    if (phaseGroups.other && phaseGroups.other.length > 0) {
+        const phaseHeader = createDiv('Other');
+        phaseHeader.class('phase-header');
+        phaseHeader.style('color', '#5DC0D9');
+        phaseHeader.style('font-weight', 'bold');
+        phaseHeader.style('font-size', '14px');
+        phaseHeader.style('margin', '20px 0 10px 0');
+        phaseHeader.style('text-transform', 'uppercase');
+        phaseHeader.style('letter-spacing', '1px');
+        phaseHeader.parent(stepList);
+        
+        phaseGroups.other.forEach(step => {
+            const stepDiv = createDiv();
+            stepDiv.class('step-item');
+            stepDiv.addClass('other');
+            
+            const dateDiv = createDiv(step.date);
+            dateDiv.class('step-date');
+            dateDiv.parent(stepDiv);
+            
+            const descDiv = createDiv(step.step_description);
+            descDiv.class('step-description');
+            descDiv.parent(stepDiv);
+            
+            // Add documents for steps in 'other' phase too
+            const relatedDocuments = getDocumentsForStep(step);
+            if (relatedDocuments.length > 0) {
+                const documentsList = createDiv();
+                documentsList.class('documents-list');
+                documentsList.style('display', 'none');
+                documentsList.style('margin-top', '8px');
+                documentsList.style('padding-left', '10px');
+                documentsList.style('border-left', '2px solid #444');
+                
+                relatedDocuments.forEach(doc => {
+                    const docItem = createDiv();
+                    docItem.class('document-item');
+                    docItem.style('font-size', '11px');
+                    docItem.style('color', '#BBBBBB');
+                    docItem.style('margin', '6px 0');
+                    docItem.style('cursor', 'pointer');
+                    docItem.style('padding', '6px');
+                    docItem.style('border-radius', '3px');
+                    docItem.style('border', '1px solid #444');
+                    docItem.style('background', '#1A1A1A');
+                    
+                    const titleDiv = createDiv(doc.tldr || 'Untitled Document');
+                    titleDiv.style('font-weight', 'bold');
+                    titleDiv.style('color', '#5DC0D9');
+                    titleDiv.style('margin-bottom', '3px');
+                    titleDiv.style('font-size', '12px');
+                    titleDiv.parent(docItem);
+                    
+                    const metaDiv = createDiv(`${doc.author || 'Unknown Author'} • ${doc.date || 'No Date'}`);
+                    metaDiv.style('font-size', '10px');
+                    metaDiv.style('color', '#888');
+                    metaDiv.style('margin-bottom', '3px');
+                    metaDiv.parent(docItem);
+                    
+                    if (doc.document_description) {
+                        const descriptionDiv = createDiv(doc.document_description);
+                        descriptionDiv.style('font-size', '10px');
+                        descriptionDiv.style('color', '#BBBBBB');
+                        descriptionDiv.style('line-height', '1.3');
+                        descriptionDiv.parent(docItem);
+                    }
+                    
+                    docItem.mouseOver(() => {
+                        docItem.style('background', '#333');
+                        docItem.style('border-color', '#5DC0D9');
+                    });
+                    
+                    docItem.mouseOut(() => {
+                        docItem.style('background', '#1A1A1A');
+                        docItem.style('border-color', '#444');
+                    });
+                    
+                    docItem.parent(documentsList);
+                });
+                
+                documentsList.parent(stepDiv);
+                
+                const expandBtn = createDiv('▶ ' + relatedDocuments.length + ' documents');
+                expandBtn.class('expand-btn');
+                expandBtn.style('font-size', '10px');
+                expandBtn.style('color', '#5DC0D9');
+                expandBtn.style('cursor', 'pointer');
+                expandBtn.style('margin-top', '5px');
+                
+                let isExpanded = false;
+                expandBtn.mousePressed((e) => {
+                    e.stopPropagation();
+                    isExpanded = !isExpanded;
+                    if (isExpanded) {
+                        documentsList.style('display', 'block');
+                        expandBtn.html('▼ ' + relatedDocuments.length + ' documents');
+                    } else {
+                        documentsList.style('display', 'none');
+                        expandBtn.html('▶ ' + relatedDocuments.length + ' documents');
+                    }
+                });
+                
+                expandBtn.parent(stepDiv);
+            }
+            
+            stepDiv.mousePressed(() => selectStep(step.step_id));
+            stepDiv.parent(stepList);
+        });
+    }
+    
+    console.log('✅ Step documents list created');
+}
+
+/**
+ * Get documents for a specific step
+ */
+function getDocumentsForStep(step) {
+    if (!step.document_ids || !Array.isArray(step.document_ids)) {
+        return [];
+    }
+    
+    return step.document_ids.map(docId => {
+        return documents.find(doc => doc.document_id === docId);
+    }).filter(doc => doc !== undefined);
+}
+
+// =================================================================
+// UPDATED INITIALIZATION FUNCTIONS
+// =================================================================
+
+/**
+ * Updated createStepList function to use the new tabbed interface
+ */
+function createStepList() {
+    createTabbedSidebar();
+}
+
+// /**
+//  * Create the step list with dynamic phase headers
+//  */
+// function createStepList() {
+//     console.log('📋 Creating step list with dynamic phases...');
+    
+//     const stepList = select('#step-list');
+    
+//     // Clear existing content
+//     stepList.html('');
+    
+//     // Group steps by phase
+//     const phaseGroups = groupStepsByPhase();
+    
+//     console.log('📊 Phase groups:', Object.keys(phaseGroups));
+    
+//     // Create phase sections in the correct order
+//     const phaseOrder = getPhaseOrder();
+    
+//     phaseOrder.forEach((phase, phaseIndex) => {
+//         const phaseSteps = phaseGroups[phase];
+//         if (!phaseSteps || phaseSteps.length === 0) return;
+        
+//         // Create phase header with display name
+//         const displayName = getPhaseDisplayName(phase);
+//         const phaseHeader = createDiv(displayName);
+//         phaseHeader.class('phase-header');
+//         phaseHeader.style('color', '#5DC0D9');
+//         phaseHeader.style('font-weight', 'bold');
+//         phaseHeader.style('font-size', '14px');
+//         phaseHeader.style('margin', '20px 0 10px 0');
+//         phaseHeader.style('text-transform', 'uppercase');
+//         phaseHeader.style('letter-spacing', '1px');
+        
+//         // First phase gets no top margin
+//         if (phaseIndex === 0) {
+//             phaseHeader.style('margin-top', '0');
+//         }
+        
+//         phaseHeader.parent(stepList);
+        
+//         // Create step items
+//         phaseSteps.forEach(step => {
+//             const stepDiv = createDiv();
+//             stepDiv.class('step-item');
+//             stepDiv.addClass(step.phase || 'null');
+            
+//             const dateDiv = createDiv(step.date);
+//             dateDiv.class('step-date');
+//             dateDiv.parent(stepDiv);
+            
+//             const descDiv = createDiv(step.step_description);
+//             descDiv.class('step-description');
+//             descDiv.parent(stepDiv);
+            
+//             // Add edges list for this step
+//             const relatedEdges = edges.filter(e => e.step_id === step.step_id);
+//             if (relatedEdges.length > 0) {
+//                 const edgesList = createDiv();
+//                 edgesList.class('edges-list');
+//                 edgesList.style('display', 'none');
+//                 edgesList.style('margin-top', '8px');
+//                 edgesList.style('padding-left', '10px');
+//                 edgesList.style('border-left', '2px solid #444');
+                
+//                 relatedEdges.forEach(edge => {
+//                     const edgeItem = createDiv();
+//                     edgeItem.class('edge-item');
+//                     edgeItem.style('font-size', '11px');
+//                     edgeItem.style('color', '#BBBBBB');
+//                     edgeItem.style('margin', '3px 0');
+//                     edgeItem.style('cursor', 'pointer');
+//                     edgeItem.style('padding', '3px');
+//                     edgeItem.style('border-radius', '2px');
+//                     edgeItem.style('position', 'relative');
+//                     edgeItem.style('display', 'flex');
+//                     edgeItem.style('align-items', 'center');
+                    
+//                     const checkbox = createCheckbox('', false);
+//                     checkbox.style('margin-right', '8px');
+//                     checkbox.style('transform', 'scale(0.8)');
+//                     checkbox.changed(() => {
+//                         if (checkbox.checked()) {
+//                             selectedEdges.add(edge.interaction_id);
+//                         } else {
+//                             selectedEdges.delete(edge.interaction_id);
+//                         }
+//                     });
+                    
+//                     checkbox.elt.addEventListener('click', (e) => {
+//                         e.stopPropagation();
+//                     });
+//                     checkbox.parent(edgeItem);
+                    
+//                     const fromNames = edge.from_nodes.map(id => {
+//                         const node = nodes.find(n => n.node_id === id);
+//                         return node ? node.node_name : id;
+//                     }).join(', ');
+                    
+//                     const toNames = edge.to_nodes.map(id => {
+//                         const node = nodes.find(n => n.node_id === id);
+//                         return node ? node.node_name : id;
+//                     }).join(', ');
+                    
+//                     const isSelfLoop = edge.from_nodes.some(fromId => 
+//                         edge.to_nodes.includes(fromId)
+//                     );
+                    
+//                     const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
+//                     const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
+                    
+//                     const textSpan = createSpan(display);
+//                     textSpan.style('vertical-align', 'middle');
+//                     textSpan.parent(edgeItem);
+                    
+//                     edgeItem.mouseOver(() => {
+//                         edgeItem.style('background', '#444');
+//                         hoveredEdge = edge.interaction_id;
+//                     });
+                    
+//                     edgeItem.mouseOut(() => {
+//                         edgeItem.style('background', 'transparent');
+//                         if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
+//                     });
+                    
+//                     edgeItem.elt.addEventListener('click', (e) => {
+//                         e.stopPropagation();
+//                     });
+                    
+//                     edgeItem.parent(edgesList);
+//                 });
+                
+//                 edgesList.parent(stepDiv);
+                
+//                 const expandBtn = createDiv('▶ ' + relatedEdges.length + ' edges');
+//                 expandBtn.class('expand-btn');
+//                 expandBtn.style('font-size', '10px');
+//                 expandBtn.style('color', '#5DC0D9');
+//                 expandBtn.style('cursor', 'pointer');
+//                 expandBtn.style('margin-top', '5px');
+                
+//                 let isExpanded = false;
+//                 expandBtn.mousePressed((e) => {
+//                     e.stopPropagation();
+//                     isExpanded = !isExpanded;
+//                     if (isExpanded) {
+//                         edgesList.style('display', 'block');
+//                         expandBtn.html('▼ ' + relatedEdges.length + ' edges');
+//                     } else {
+//                         edgesList.style('display', 'none');
+//                         expandBtn.html('▶ ' + relatedEdges.length + ' edges');
+//                     }
+//                 });
+                
+//                 expandBtn.parent(stepDiv);
+//             }
+            
+//             stepDiv.mousePressed(() => selectStep(step.step_id));
+//             stepDiv.parent(stepList);
+//         });
+//     });
+    
+//     // Handle 'other' phase if it exists
+//     if (phaseGroups.other && phaseGroups.other.length > 0) {
+//         const phaseHeader = createDiv('Other');
+//         phaseHeader.class('phase-header');
+//         phaseHeader.style('color', '#5DC0D9');
+//         phaseHeader.style('font-weight', 'bold');
+//         phaseHeader.style('font-size', '14px');
+//         phaseHeader.style('margin', '20px 0 10px 0');
+//         phaseHeader.style('text-transform', 'uppercase');
+//         phaseHeader.style('letter-spacing', '1px');
+//         phaseHeader.parent(stepList);
+        
+//         phaseGroups.other.forEach(step => {
+//             const stepDiv = createDiv();
+//             stepDiv.class('step-item');
+//             stepDiv.addClass('other');
+            
+//             const dateDiv = createDiv(step.date);
+//             dateDiv.class('step-date');
+//             dateDiv.parent(stepDiv);
+            
+//             const descDiv = createDiv(step.step_description);
+//             descDiv.class('step-description');
+//             descDiv.parent(stepDiv);
+            
+//             stepDiv.mousePressed(() => selectStep(step.step_id));
+//             stepDiv.parent(stepList);
+//         });
+//     }
+    
+//     console.log('✅ Step list created with dynamic phases');
+// }
 
 // =================================================================
 // MAIN DRAW LOOP
@@ -1814,6 +2422,8 @@ const TWO_PI = Math.PI * 2;
 // Make functions globally available
 window.switchCaseStudy = switchCaseStudy;
 window.selectStep = selectStep;
+window.switchTab = switchTab;
+
 
 // =================================================================
 // DEBUG FUNCTIONS

@@ -39,6 +39,42 @@ body {
     font-family: 'Helvetica', sans-serif;
 }
 
+/* Tab Navigation Styles */
+#tab-nav {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #444444;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    background: #262626;
+    color: #F2F2F2;
+    border-radius: 4px 4px 0 0;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1px solid #444444;
+    border-bottom: none;
+}
+
+.tab-button:hover {
+    background: #3A3A3A;
+}
+
+.tab-button.active {
+    background: #5DC0D9;
+    color: #141414;
+}
+
+.tab-button:first-child {
+    border-right: none;
+}
+
+/* Step Item Styles */
 .step-item {
     background: #262626;
     margin: 8px 0;
@@ -85,6 +121,7 @@ body {
     font-family: 'Helvetica', sans-serif;
 }
 
+/* Edge Item Styles */
 .edge-item {
     display: flex;
     align-items: center;
@@ -107,24 +144,81 @@ body {
     accent-color: #5DC0D9;
 }
 
+/* Document Item Styles */
+.document-item {
+    font-size: 11px;
+    color: #BBBBBB;
+    margin: 6px 0;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid #444;
+    background: #1A1A1A;
+    transition: all 0.2s;
+}
+
+.document-item:hover {
+    background: #333;
+    border-color: #5DC0D9;
+}
+
+.document-item .document-title {
+    font-weight: bold;
+    color: #5DC0D9;
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+.document-item .document-meta {
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 3px;
+}
+
+.document-item .document-description {
+    font-size: 10px;
+    color: #BBBBBB;
+    line-height: 1.3;
+}
+
+/* Expand Button Styles */
 .expand-btn {
     font-size: 10px;
     color: #5DC0D9;
     cursor: pointer;
     margin-top: 5px;
     user-select: none;
+    transition: color 0.2s;
 }
 
 .expand-btn:hover {
     color: #78B4D4;
 }
 
+/* List Styles */
 .edges-list {
     margin-top: 8px;
     padding-left: 10px;
     border-left: 2px solid #444;
 }
 
+.documents-list {
+    margin-top: 8px;
+    padding-left: 10px;
+    border-left: 2px solid #444;
+}
+
+/* Phase Header Styles */
+.phase-header {
+    color: #5DC0D9;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 20px 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Tooltip Styles */
 #tooltip {
     position: absolute;
     background: rgba(0, 0, 0, 0.9);
@@ -141,6 +235,7 @@ body {
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
+/* Control Styles */
 #controls {
     position: absolute;
     top: 10px;

@@ -8,56 +8,56 @@
   },
   {
     "step_id": 1,
-    "step_description": null,
+    "step_description": "One of many workshops offered at Bauhaus was weaving, a craft study on textile materials.",
     "date": null,
     "document_ids": [5,6,7],
     "phase": "weaving_workshop"
   },
   {
     "step_id": 2,
-    "step_description": null,
+    "step_description": "The wall painting workshop is another utilarian Bauhaus workshop which predominantly focused on light, space, and form.",
     "date": null,
     "document_ids": [8,9,10,11],
     "phase": "wall_painting_workshop"
   },
   {
     "step_id": 3,
-    "step_description": "Used during industrial production",
+    "step_description": "Storage rooms were used during busy periods of production with industrial partners.",
     "date": null,
     "document_ids": [12,13],
     "phase": "store_room"
   },
   {
     "step_id": 4,
-    "step_description": "Used for interfacing with the public and other external bodies.",
+    "step_description": "Exhibitions were a communication medium Bauhaus used for exchanging with the public and other external bodies.",
     "date": null,
     "document_ids": [14],
     "phase": "exhibition_room"
   },
   {
     "step_id": 5,
-    "step_description": "Studio Wing and students' quarters",
+    "step_description": "Students lived in the studio wing. All living quarters were designed and produced by students and faculty.",
     "date": null,
     "document_ids": [15,16,17],
     "phase": "studio_quarters"
   },
   {
     "step_id": 6,
-    "step_description": "Administration offices",
+    "step_description": "Administrative offices, also including the Directors' office, executed both operational functions and served as broader institutional vision setting.",
     "date": null,
     "document_ids": [18],
     "phase": "bridge"
   },
   {
     "step_id": 7,
-    "step_description": "Stage and theater for dynamic, performing arts",
+    "step_description": "The campus had a stage and theater for dynamic, performing arts.",
     "date": null,
     "document_ids": [19,20],
     "phase": "auditorium"
   },
   {
     "step_id": 8,
-    "step_description": "formal science-oriented, vocational training",
+    "step_description": "In Bauhaus' late stages, students took formal, science-oriented, vocational training courses.",
     "date": null,
     "document_ids": [21],
     "phase": "technical_school"
