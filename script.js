@@ -580,7 +580,7 @@ function drawNodes() {
         
         // Determine node color and visibility
         let nodeColor = color(textColor);
-        let alpha = 255;
+        let alpha = 225;
         let isRelevantNode = false;
         let isHighlightedChild = false;
         
@@ -616,10 +616,10 @@ function drawNodes() {
             
             if (isRelevantNode) {
                 nodeColor = h1Color;
-                alpha = 255;
+                alpha = 225;
             } else if (isHighlightedChild) {
                 nodeColor = color(255, 165, 0); // Orange for highlighted children
-                alpha = 200;
+                alpha = 180;
             } else {
                 // Show other nodes greyed out but visible
                 alpha = 80;
@@ -639,10 +639,12 @@ function drawNodes() {
         
         // Hover effect - show for all nodes when no step selected, only relevant when step selected
         if (hoveredNode === node.node_id) {
-            if (selectedStep === null || isRelevantNode) {
-                nodeColor = color(255, 200, 100);
+            // Ira: It seems it would be more intutitive to allow hovering regardless?
+            //
+            //if (selectedStep === null || isRelevantNode) {
+            //    nodeColor = color(255, 200, 100);
                 alpha = 255;
-            }
+            //}
         }
         
         fill(red(nodeColor), green(nodeColor), blue(nodeColor), alpha);
@@ -730,7 +732,7 @@ function drawSingleEdge(edge, fromId, toId) {
     // Special cases for active edges
     if (isActiveEdge && shouldShow) {
         if (edge.violated === 1) {
-            edgeColor = color(255, 100, 100);
+            edgeColor = color(200, 100, 100);
             strokeW = 2;
             alpha = Math.max(alpha, 180);
         } else if (edge.unused === 1) {
@@ -740,7 +742,9 @@ function drawSingleEdge(edge, fromId, toId) {
     
     // Hover effect
     if (hoveredEdge === edge.interaction_id && (selectedStep === null || shouldShow)) {
-        edgeColor = color(255, 255, 100);
+        // Ira: I think changing the alpha and stroke is enough
+        // WWETD? What Would Edward Tufte Do?
+        //edgeColor = color(255, 255, 100);
         strokeW = 3;
         alpha = 255;
     }
@@ -945,18 +949,23 @@ function handleMouseInteraction() {
         nodes.forEach(node => {
             const pos = nodePositions.get(node.node_id);
             if (pos && dist(worldMouseX, worldMouseY, pos.x, pos.y) < 20) {
-                if (selectedStep === null) {
-                    newHoveredNode = node.node_id;
-                } else {
-                    // Check if node is relevant to selected step
-                    const relevantEdges = edges.filter(e => 
-                        e.step_id === selectedStep && 
-                        (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
-                    );
-                    if (relevantEdges.length > 0) {
-                        newHoveredNode = node.node_id;
-                    }
-                }
+                newHoveredNode = node.node_id;
+
+                // Ira: It seems like you should just allow hovering for all nodes, regardless of whether a step is selected
+                // Especially that appears to be the intended effect for edges.
+                //
+                // if (selectedStep === null) {
+                //     newHoveredNode = node.node_id;
+                // } else {
+                //     // Check if node is relevant to selected step
+                //     const relevantEdges = edges.filter(e => 
+                //         e.step_id === selectedStep && 
+                //         (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
+                //     );
+                //     if (relevantEdges.length > 0) {
+                //         newHoveredNode = node.node_id;
+                //     }
+                // }
             }
         });
         
