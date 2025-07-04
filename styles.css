@@ -92,7 +92,7 @@ body {
 }
 
 .step-item.active {
-    background: #5DC0D9;
+    background: #2d5e6a;
     color: #F2F2F2;
 }
 
@@ -140,7 +140,7 @@ body {
 
 .edge-item input[type="checkbox"] {
     margin-right: 8px;
-    transform: scale(0.8);
+    transform: scale(1.2);
     accent-color: #5DC0D9;
 }
 
