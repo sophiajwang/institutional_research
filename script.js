@@ -1,4 +1,77 @@
-// Global variables
+// Ira Bugs Fixed
+// 1. [Done] Selecting Edges from Step List
+// 3. [Done] Improve hovering and selection of nodes and edges
+// 4. [Done] Zooming Effects
+// 5. [Done] Legend Location
+
+// Ira Won't Do
+// 2. Have Option to Render Documents in Steps (rand out of time / no data loaded, yet)
+
+// =================================================================
+// MULTI-CASE STUDY VISUALIZATION - COMPLETE INTEGRATION
+// =================================================================
+
+// =================================================================
+// CASE STUDY CONFIGURATIONS
+// =================================================================
+
+/**
+ * Configuration for each case study
+ */
+const CASE_STUDIES = {
+    'bell-labs': {
+        name: 'Bell Labs',
+        title: 'Bell Labs Transistor Development',
+        folder: 'bell_data',
+        phases: {
+            research: 'Research',
+            development: 'Development', 
+            impact: 'Impact'
+        },
+        phaseOrder: ['research', 'development', 'impact'],
+        description: 'The invention of the transistor at Bell Labs (1945-1956)'
+    },
+    'bridgewater': {
+        name: 'Bridgewater',
+        title: 'Bridgewater 2008 Financial Crisis',
+        folder: 'bridgewater_data',
+        phases: {
+            early_stage: 'Early Stage',
+            bubble: 'Bubble',
+            top: 'Top',
+            depression: 'Depression'
+        },
+        phaseOrder: ['early_stage', 'bubble', 'top', 'depression'],
+        description: 'Bridgewater\'s analysis of the 2008 financial crisis'
+    },
+    'bauhaus': {
+        name: 'Bauhaus',
+        title: 'Bauhaus Design Movement',
+        folder: 'bauhaus_data',
+        phases: {
+            preliminary_course: 'Preliminary Course',
+            weaving_workshop: 'Workshop: Weaving',
+            wall_painting_workshop: 'Workshop: Wall Painting',
+            store_room: 'Industrial Stores',
+            exhibition_room: 'Exhibitions',
+            studio_quarters: 'Living Quarters',
+            bridge: 'Administration',
+            auditorium: 'Auditorium',
+            technical_school: 'Technical School'
+        },
+        phaseOrder: ['preliminary_course', 'weaving_workshop', 'wall_painting_workshop','store_room', 'exhibition_room', 'studio_quarters','bridge','auditorium','technical_school'],
+        description: 'The Bauhaus school, seen through the Dessau campus'
+    }
+};
+
+// =================================================================
+// GLOBAL VARIABLES
+// =================================================================
+
+// Current case study
+let currentCaseStudy = 'bell-labs'; // Default case study
+
+// Data storage arrays
 let nodes = [];
 let edges = [];
 let steps = [];
@@ -11,6 +84,16 @@ let hoveredNode = null;
 let hoveredEdge = null;
 let tooltip;
 let stepCounter;
+let stepCounterClicked = false;
+let stepList;
+let legend;
+let canvas;
+let controls;
+let caseStudyDropdown;
+
+// Loading state
+let dataLoaded = false;
+let setupComplete = false;
 
 // 2D Camera controls
 let viewX = 0, viewY = 0;
@@ -384,7 +467,10 @@ function preload() {
 }
 
 function setup() {
-    let canvas = createCanvas(windowWidth - 350, windowHeight);
+    console.log('🎨 Setup function started');
+    
+    // Create canvas
+    canvas = createCanvas(windowWidth - PANEL_WIDTH, windowHeight);
     canvas.parent('canvas-container');
     
     // Get references to HTML elements
@@ -714,11 +800,138 @@ function createLegend() {
     legend.position(width - 250, height - legend.elt.offsetHeight - 20);
 }
 
-// Make selectStep globally accessible for navigation buttons
-window.selectStep = selectStep;
+// =================================================================
+// SIDEBAR TAB MANAGEMENT
+// =================================================================
 
-function createStepList() {
-    const stepList = select('#step-list');
+// Current active tab
+let currentTab = 'edges'; // 'edges' or 'documents'
+
+/**
+ * Create the tabbed sidebar interface
+ */
+function createTabbedSidebar() {
+    console.log('📋 Creating tabbed sidebar interface...');
+    
+    const sidebar = select('#sidebar');
+    
+    // Clear existing content
+    sidebar.html('');
+    
+    // Create tab navigation
+    const tabNav = createDiv('');
+    tabNav.id('tab-nav');
+    tabNav.style('display', 'flex');
+    tabNav.style('margin-bottom', '20px');
+    tabNav.style('border-bottom', '2px solid #444444');
+    tabNav.parent(sidebar);
+    
+    // Create Edges tab
+    const edgesTab = createDiv('Steps');
+    edgesTab.id('edges-tab');
+    edgesTab.class('tab-button');
+    edgesTab.addClass(currentTab === 'edges' ? 'active' : '');
+    edgesTab.style('flex', '1');
+    edgesTab.style('padding', '12px');
+    edgesTab.style('text-align', 'center');
+    edgesTab.style('cursor', 'pointer');
+    edgesTab.style('background', currentTab === 'edges' ? '#5DC0D9' : '#262626');
+    edgesTab.style('color', currentTab === 'edges' ? '#141414' : '#F2F2F2');
+    edgesTab.style('border-radius', '4px 4px 0 0');
+    edgesTab.style('font-weight', 'bold');
+    edgesTab.style('font-size', '14px');
+    edgesTab.style('transition', 'all 0.2s');
+    edgesTab.parent(tabNav);
+    
+    // Create Documents tab
+    const documentsTab = createDiv('Output');
+    documentsTab.id('documents-tab');
+    documentsTab.class('tab-button');
+    documentsTab.addClass(currentTab === 'documents' ? 'active' : '');
+    documentsTab.style('flex', '1');
+    documentsTab.style('padding', '12px');
+    documentsTab.style('text-align', 'center');
+    documentsTab.style('cursor', 'pointer');
+    documentsTab.style('background', currentTab === 'documents' ? '#5DC0D9' : '#262626');
+    documentsTab.style('color', currentTab === 'documents' ? '#141414' : '#F2F2F2');
+    documentsTab.style('border-radius', '4px 4px 0 0');
+    documentsTab.style('font-weight', 'bold');
+    documentsTab.style('font-size', '14px');
+    documentsTab.style('transition', 'all 0.2s');
+    documentsTab.parent(tabNav);
+    
+    // Add click handlers
+    edgesTab.mousePressed(() => switchTab('edges'));
+    documentsTab.mousePressed(() => switchTab('documents'));
+    
+    // Create content container
+    const contentContainer = createDiv('');
+    contentContainer.id('tab-content');
+    contentContainer.parent(sidebar);
+    
+    // Create the appropriate content
+    if (currentTab === 'edges') {
+        createStepEdgesList();
+    } else {
+        createStepDocumentsList();
+    }
+    
+    console.log('✅ Tabbed sidebar interface created');
+}
+
+/**
+ * Switch between tabs
+ */
+function switchTab(tabName) {
+    if (currentTab === tabName) return;
+    
+    console.log(`🔄 Switching to ${tabName} tab`);
+    
+    currentTab = tabName;
+    
+    // Update tab styling
+    const edgesTab = select('#edges-tab');
+    const documentsTab = select('#documents-tab');
+    
+    if (edgesTab && documentsTab) {
+        if (tabName === 'edges') {
+            edgesTab.style('background', '#5DC0D9');
+            edgesTab.style('color', '#141414');
+            documentsTab.style('background', '#262626');
+            documentsTab.style('color', '#F2F2F2');
+        } else {
+            documentsTab.style('background', '#5DC0D9');
+            documentsTab.style('color', '#141414');
+            edgesTab.style('background', '#262626');
+            edgesTab.style('color', '#F2F2F2');
+        }
+    }
+    
+    // Update content
+    const contentContainer = select('#tab-content');
+    if (contentContainer) {
+        contentContainer.html('');
+        
+        if (tabName === 'edges') {
+            createStepEdgesList();
+        } else {
+            createStepDocumentsList();
+        }
+    }
+}
+
+/**
+ * Create the step list with edges (original functionality)
+ */
+function createStepEdgesList() {
+    console.log('📋 Creating step edges list...');
+    
+    const contentContainer = select('#tab-content');
+    
+    // Create step list container
+    const stepList = createDiv('');
+    stepList.id('step-list');
+    stepList.parent(contentContainer);
     
     // Group steps by phase
     const phaseGroups = groupStepsByPhase();
@@ -786,8 +999,22 @@ function createStepList() {
                     edgeItem.style('position', 'relative');
                     edgeItem.style('display', 'flex');
                     edgeItem.style('align-items', 'center');
-                    
-                    // Create checkbox with event prevention
+
+                    // Prevent clicks from propagating to stepDiv
+                    edgeItem.elt.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    // Prevent hover from propagating to stepDiv
+                    edgeItem.elt.addEventListener('mouseover', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    edgeItem.elt.addEventListener('mouseout', (e) => {
+                        e.stopPropagation();
+                    });
+
+                    // Your existing checkbox code...
                     const checkbox = createCheckbox('', false);
                     checkbox.style('margin-right', '8px');
                     checkbox.style('transform', 'scale(0.8)');
@@ -800,13 +1027,11 @@ function createStepList() {
                         }
                     });
                     
-                    // Prevent checkbox events from bubbling to step selection
                     checkbox.elt.addEventListener('click', (e) => {
                         e.stopPropagation();
                     });
                     checkbox.parent(edgeItem);
                     
-                    // Get node names for display
                     const fromNames = edge.from_nodes.map(id => {
                         const node = nodes.find(n => n.node_id === id);
                         return node ? node.node_name : id;
@@ -816,12 +1041,8 @@ function createStepList() {
                         const node = nodes.find(n => n.node_id === id);
                         return node ? node.node_name : id;
                     }).join(', ');
-                    
-                    // Check for self-loop
-                    const isSelfLoop = edge.from_nodes.some(fromId => 
-                        edge.to_nodes.includes(fromId)
-                    );
-                    
+
+                    const isSelfLoop = edge.from_nodes.some(fromId => edge.to_nodes.includes(fromId));
                     const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
                     const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
 
@@ -836,12 +1057,7 @@ function createStepList() {
 
                     edgeItem.mouseOut(() => {
                         edgeItem.style('background', 'transparent');
-                        if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
-                    });
-                    
-                    // Prevent edge item clicks from bubbling to step selection
-                    edgeItem.elt.addEventListener('click', (e) => {
-                        e.stopPropagation();
+                        hoveredEdge = null;
                     });
 
                     edgeItem.parent(edgesList);
@@ -867,8 +1083,8 @@ function createStepList() {
                 expandBtn.elt.addEventListener('mouseout', (e) => e.stopPropagation());
 
                 let isExpanded = false;
-                expandBtn.mousePressed((e) => {
-                    e.stopPropagation(); // Prevent step selection
+                expandBtn.elt.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     isExpanded = !isExpanded;
                     if (isExpanded) {
                         edgesList.style('display', 'block');
@@ -1497,7 +1713,7 @@ function drawNodes() {
                 alpha = 225;
             } else if (isHighlightedChild) {
                 nodeColor = color(255, 165, 0); // Orange for highlighted children
-                alpha = 200;
+                alpha = 180;
             } else {
                 alpha = 80;
                 nodeColor = h3Color;
@@ -1595,11 +1811,21 @@ function drawSingleEdge(edge, fromId, toId) {
             shouldShow = true;
         }
     } else {
-        alpha = 60;
-        // When no step is selected, violated edges should be greyed out
-        if (edge.violated === 1) {
-            edgeColor = h3Color;
-            alpha = 40;
+        // Check if this specific edge is selected in the UI
+        if (selectedEdges.size > 0) {
+            shouldShow = selectedEdges.has(edge.interaction_id);
+            if (shouldShow) {
+                edgeColor = h2Color;
+                alpha = 200;
+                strokeW = 2;
+            }
+        } else {
+            alpha = 60;
+            // When no step is selected, violated edges should be greyed out
+            if (edge.violated === 1) {
+                edgeColor = h3Color;
+                alpha = 40;
+            }
         }
     }
     
@@ -1804,6 +2030,15 @@ function drawBrokenLine2D(from, to, segments) {
  * Handle mouse interaction
  */
 function handleMouseInteraction() {
+
+    // Don't bother if divs are in the way
+    if (isMouseOverUI()) {
+        hoveredNode = null;
+        if (!isMouseOverElement(stepList.elt)) hoveredEdge = null;
+        updateTooltip();
+        return;
+    }
+
     // Transform mouse coordinates to world space
     let worldMouseX = (mouseX - width/2) / zoomLevel - viewX;
     let worldMouseY = (mouseY - height/2) / zoomLevel - viewY;
@@ -1811,23 +2046,28 @@ function handleMouseInteraction() {
     let newHoveredNode = null;
     let newHoveredEdge = null;
     
-    if (mouseX < width - 350) {
+    if (mouseX < width) {
         // Check nodes - allow hover for all nodes when no step selected, relevant nodes when step selected
         nodes.forEach(node => {
             const pos = nodePositions.get(node.node_id);
             if (pos && dist(worldMouseX, worldMouseY, pos.x, pos.y) < 20) {
-                if (selectedStep === null) {
-                    newHoveredNode = node.node_id;
-                } else {
-                    // Check if node is relevant to selected step
-                    const relevantEdges = edges.filter(e => 
-                        e.step_id === selectedStep && 
-                        (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
-                    );
-                    if (relevantEdges.length > 0) {
-                        newHoveredNode = node.node_id;
-                    }
-                }
+                newHoveredNode = node.node_id;
+
+                // Ira: It seems like you should just allow hovering for all nodes, regardless of whether a step is selected
+                // Especially that appears to be the intended effect for edges.
+                //
+                // if (selectedStep === null) {
+                //     newHoveredNode = node.node_id;
+                // } else {
+                //     // Check if node is relevant to selected step
+                //     const relevantEdges = edges.filter(e => 
+                //         e.step_id === selectedStep && 
+                //         (e.from_nodes.includes(node.node_id) || e.to_nodes.includes(node.node_id))
+                //     );
+                //     if (relevantEdges.length > 0) {
+                //         newHoveredNode = node.node_id;
+                //     }
+                // }
             }
         });
         
@@ -1942,7 +2182,8 @@ function distanceToLineSegment(px, py, x1, y1, x2, y2) {
     return dist(px, py, projX, projY);
 }
 
-function selectStep(stepId) {
+function selectStep(stepId, fromStepCounter) {
+    stepCounterClicked = fromStepCounter;
     selectedStep = selectedStep === stepId ? null : stepId;
     selectedEdges.clear();
     
@@ -1972,23 +2213,69 @@ function updateStepCounter() {
     if (selectedStep !== null) {
         const step = steps.find(s => s.step_id === selectedStep);
         if (step) {
-            // Create navigation controls
-            const prevButton = selectedStep > 0 ? `<button onclick="selectStep(${selectedStep - 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-right: 5px; border-radius: 2px; cursor: pointer;">←</button>` : '';
-            const nextButton = selectedStep < steps.length - 1 ? `<button onclick="selectStep(${selectedStep + 1})" style="background: #5DC0D9; border: none; color: white; padding: 2px 6px; margin-left: 5px; border-radius: 2px; cursor: pointer;">→</button>` : '';
-            
-            stepCounter.html(`
-                <div style="text-align: center;">
-                    ${prevButton}
-                    <span style="color: #5DC0D9; font-weight: bold;">Step ${selectedStep}</span>
-                    ${nextButton}
-                </div>
-                <div style="font-size: 12px; margin-top: 5px; color: #F2F2F2; line-height: 1.3;">
-                    ${step.step_description}
-                </div>
-                <div style="font-size: 10px; margin-top: 3px; color: #BBBBBB;">
-                    ${step.date}
-                </div>
-            `);
+            // Clear previous contents
+            stepCounter.html('');
+
+            // Create a container div for centering
+            let container = createDiv();
+            container.parent(stepCounter);
+            container.style('text-align', 'center');
+
+            // Previous button
+            let prevBtn = null;
+            prevBtn = createButton('←');
+            prevBtn.parent(container);
+            prevBtn.style('background', '#666666');
+            prevBtn.style('border', 'none');
+            prevBtn.style('color', 'white');
+            prevBtn.style('padding', '2px 6px');
+            prevBtn.style('margin-right', '5px');
+            prevBtn.style('border-radius', '2px');
+            prevBtn.style('cursor', 'pointer');
+            if (selectedStep > 0) {
+                prevBtn.style('background', '#5DC0D9');
+                prevBtn.mousePressed(() => selectStep(selectedStep - 1, true));
+            }
+
+            // Step label
+            let stepLabel = createSpan('Step ' + selectedStep);
+            stepLabel.parent(container);
+            stepLabel.style('color', '#5DC0D9');
+            stepLabel.style('font-weight', 'bold');
+
+            // Next button
+            let nextBtn = null;
+            nextBtn = createButton('→');
+            nextBtn.parent(container);
+            nextBtn.style('background', '#666666');
+            nextBtn.style('border', 'none');
+            nextBtn.style('color', 'white');
+            nextBtn.style('padding', '2px 6px');
+            nextBtn.style('margin-left', '5px');
+            nextBtn.style('border-radius', '2px');
+            nextBtn.style('cursor', 'pointer');
+            if (selectedStep < steps.length - 1) {
+                nextBtn.style('background', '#5DC0D9');
+                nextBtn.mousePressed(() => selectStep(selectedStep + 1, true));
+            }
+
+            // Step description
+            let descDiv = createDiv(step.step_description);
+            descDiv.parent(stepCounter);
+            descDiv.style('font-size', '12px');
+            descDiv.style('margin-top', '5px');
+            descDiv.style('color', '#F2F2F2');
+            descDiv.style('line-height', '1.3');
+
+            // Step date
+            let dateDiv = createDiv(step.date);
+            dateDiv.parent(stepCounter);
+            dateDiv.style('font-size', '10px');
+            dateDiv.style('margin-top', '3px');
+            dateDiv.style('color', '#BBBBBB');
+
+            // Ensure the stepCounter is centered at the top of the canvas
+            stepCounter.style('width', '300px');
         }
     }
 }
@@ -2004,11 +2291,10 @@ function panToStepElements(stepId) {
         edge.to_nodes.forEach(id => involvedNodeIds.add(id));
     });
     if (involvedNodeIds.size === 0) return;
-    
-    // Calculate center point of all involved nodes
-    let centerX = 0, centerY = 0;
-    let count = 0;
-    
+
+    // Compute bounding box of all involved nodes
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let any = false;
     involvedNodeIds.forEach(nodeId => {
         const pos = nodePositions.get(nodeId);
         if (pos) {
@@ -2019,18 +2305,43 @@ function panToStepElements(stepId) {
             any = true;
         }
     });
-    
-    if (count > 0) {
-        centerX /= count;
-        centerY /= count;
-        
-        // Smoothly pan to the center of relevant nodes
-        targetViewX = -centerX;
-        targetViewY = -centerY;
-        
-        // Optionally adjust zoom to fit all relevant nodes
-        targetZoom = constrain(targetZoom * 1.1, 0.8, 2.0);
+    if (!any) return;
+
+    // Add padding to bounding box (in world coordinates)
+    const padding = 40;
+    minX -= padding;
+    maxX += padding;
+    minY -= padding;
+    maxY += padding;
+
+    // Center of bounding box
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    // Compute width and height of bounding box
+    const boxWidth = maxX - minX;
+    const boxHeight = maxY - minY;
+
+    // Compute the available screen size (canvas) in pixels
+    // Subtract some margin for UI overlays, legend, etc.
+    const margin = 60;
+    const availableWidth = width - margin;
+    const availableHeight = height - margin;
+
+    // Compute zoom to fit all nodes comfortably
+    // (boxWidth * zoom <= availableWidth) => zoom <= availableWidth / boxWidth
+    // (boxHeight * zoom <= availableHeight) => zoom <= availableHeight / boxHeight
+    let zoomFit = 1.0;
+    if (boxWidth > 0 && boxHeight > 0) {
+        zoomFit = Math.min(availableWidth / boxWidth, availableHeight / boxHeight);
+        // Clamp to reasonable zoom range
+        zoomFit = constrain(zoomFit, 0.2, 3.0);
     }
+
+    // Smoothly pan to the center of relevant nodes
+    targetViewX = -centerX;
+    targetViewY = -centerY;
+    targetZoom = zoomFit;
 }
 
 /**
@@ -2085,9 +2396,17 @@ function keyReleased() {
  * Mouse press events
  */
 function mousePressed() {
-    if (mouseX < width - 350) {
-        // Check if clicking on an edge when no step is selected
-        if (selectedStep === null && hoveredEdge !== null) {
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+}
+
+function mouseClicked() {
+    console.log("UI? " + isMouseOverUI());
+    if (isMouseOverUI()) return;
+    if (!isDragging) {
+        // Ira: It seems to me like you'd what to be able to select another step even if one is currently selected
+        //if (selectedStep === null && hoveredEdge !== null) {
+        if (hoveredEdge !== null) {
             const edge = edges.find(e => e.interaction_id === hoveredEdge);
             if (edge) {
                 selectStep(edge.step_id, false);
@@ -2104,33 +2423,48 @@ function mousePressed() {
  * Mouse drag events
  */
 function mouseDragged() {
-    if (isDragging && mouseX < width - 350) {
-        const deltaX = mouseX - lastMouseX;
-        const deltaY = mouseY - lastMouseY;
-        
-        if (isShiftPressed) {
-            // Rotate view (shift + drag) - just for visual effect in 2D
-            const sensitivity = 0.005;
-            targetViewX += deltaX * sensitivity * 100;
-            targetViewY += deltaY * sensitivity * 100;
-        } else {
-            // Move/pan view (regular drag)
-            const sensitivity = 1.0 / zoomLevel;
-            targetViewX += deltaX * sensitivity;
-            targetViewY += deltaY * sensitivity;
-        }
-        
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
+    isDragging = true;
+    const deltaX = mouseX - lastMouseX;
+    const deltaY = mouseY - lastMouseY;
+    
+    if (isShiftPressed) {
+        // Rotate view (shift + drag) - just for visual effect in 2D
+        const sensitivity = 2;
+        targetViewX += deltaX * sensitivity;
+        targetViewY += deltaY * sensitivity;
+    } else {
+        // Move/pan view (regular drag)
+        const sensitivity = 1.0 / zoomLevel;
+        targetViewX += deltaX * sensitivity;
+        targetViewY += deltaY * sensitivity;
     }
+    
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
 }
 
-function mouseReleased() {
-    isDragging = false;
-}
-
+/**
+ * Mouse release events
+ */
 function windowResized() {
-    resizeCanvas(windowWidth - 350, windowHeight);
+    resizeCanvas(windowWidth - PANEL_WIDTH, windowHeight);
+    legend.position(width - legend.elt.offsetHeight - MARGIN, height - legend.elt.offsetHeight - MARGIN);
+}
+
+/**
+ * Window resize events
+ */
+function isMouseOverElement(element) {
+  const rect = element.getBoundingClientRect();
+  return mouseX >= rect.left && mouseX <= rect.right &&
+         mouseY >= rect.top && mouseY <= rect.bottom;
+}
+
+function isMouseOverUI() {
+  return isMouseOverElement(legend.elt) || 
+         isMouseOverElement(stepCounter.elt) ||
+         isMouseOverElement(controls.elt) ||
+         isMouseOverElement(stepList.elt);
 }
 
 // =================================================================
