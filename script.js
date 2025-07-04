@@ -509,7 +509,7 @@ function createStepList() {
                     
                     edgeItem.mouseOut(() => {
                         edgeItem.style('background', 'transparent');
-                        if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
+                        hoveredEdge = null;
                     });
                     
                     // Prevent edge item clicks from bubbling to step selection
@@ -946,7 +946,7 @@ function handleMouseInteraction() {
     // Don't bother if divs are in the way
     if (isMouseOverUI()) {
         hoveredNode = null;
-        hoveredEdge = null;
+        if (!isMouseOverElement(stepList.elt)) hoveredEdge = null;
         updateTooltip();
         return;
     }
