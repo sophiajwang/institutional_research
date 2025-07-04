@@ -123,6 +123,11 @@ let darkMode = true;
 let nodePositions = new Map();
 let edgeOffsets = new Map();
 
+
+// Bauhaus specific
+const ESCAPE = 27;
+console.log('🎨 Bauhaus document view functionality loaded!');
+
 // =================================================================
 // CASE STUDY MANAGEMENT
 // =================================================================
@@ -1140,7 +1145,7 @@ function createStepEdgesList() {
 }
 
 /**
- * Create the step list with documents (new functionality)
+ * Updated createStepDocumentsList function with Bauhaus support
  */
 function createStepDocumentsList() {
     console.log('📋 Creating step documents list...');
@@ -1207,50 +1212,14 @@ function createStepDocumentsList() {
                 documentsList.style('border-left', '2px solid #444');
                 
                 relatedDocuments.forEach(doc => {
-                    const docItem = createDiv();
-                    docItem.class('document-item');
-                    docItem.style('font-size', '11px');
-                    docItem.style('color', '#BBBBBB');
-                    docItem.style('margin', '6px 0');
-                    docItem.style('cursor', 'pointer');
-                    docItem.style('padding', '6px');
-                    docItem.style('border-radius', '3px');
-                    docItem.style('border', '1px solid #444');
-                    docItem.style('background', '#1A1A1A');
+                    let docItem;
                     
-                    // Document title/TLDR
-                    const titleDiv = createDiv(doc.tldr || 'Untitled Document');
-                    titleDiv.style('font-weight', 'bold');
-                    titleDiv.style('color', '#5DC0D9');
-                    titleDiv.style('margin-bottom', '3px');
-                    titleDiv.style('font-size', '12px');
-                    titleDiv.parent(docItem);
-                    
-                    // Document author and date
-                    const metaDiv = createDiv(`${doc.author || 'Unknown Author'} • ${doc.date || 'No Date'}`);
-                    metaDiv.style('font-size', '10px');
-                    metaDiv.style('color', '#888');
-                    metaDiv.style('margin-bottom', '3px');
-                    metaDiv.parent(docItem);
-                    
-                    // Document description
-                    if (doc.document_description) {
-                        const descriptionDiv = createDiv(doc.document_description);
-                        descriptionDiv.style('font-size', '10px');
-                        descriptionDiv.style('color', '#BBBBBB');
-                        descriptionDiv.style('line-height', '1.3');
-                        descriptionDiv.parent(docItem);
+                    // Use Bauhaus-specific rendering if in Bauhaus case
+                    if (isBauhausCase()) {
+                        docItem = createBauhausDocumentItem(doc);
+                    } else {
+                        docItem = createRegularDocumentItem(doc);
                     }
-                    
-                    docItem.mouseOver(() => {
-                        docItem.style('background', '#333');
-                        docItem.style('border-color', '#5DC0D9');
-                    });
-                    
-                    docItem.mouseOut(() => {
-                        docItem.style('background', '#1A1A1A');
-                        docItem.style('border-color', '#444');
-                    });
                     
                     docItem.parent(documentsList);
                 });
@@ -1321,47 +1290,14 @@ function createStepDocumentsList() {
                 documentsList.style('border-left', '2px solid #444');
                 
                 relatedDocuments.forEach(doc => {
-                    const docItem = createDiv();
-                    docItem.class('document-item');
-                    docItem.style('font-size', '11px');
-                    docItem.style('color', '#BBBBBB');
-                    docItem.style('margin', '6px 0');
-                    docItem.style('cursor', 'pointer');
-                    docItem.style('padding', '6px');
-                    docItem.style('border-radius', '3px');
-                    docItem.style('border', '1px solid #444');
-                    docItem.style('background', '#1A1A1A');
+                    let docItem;
                     
-                    const titleDiv = createDiv(doc.tldr || 'Untitled Document');
-                    titleDiv.style('font-weight', 'bold');
-                    titleDiv.style('color', '#5DC0D9');
-                    titleDiv.style('margin-bottom', '3px');
-                    titleDiv.style('font-size', '12px');
-                    titleDiv.parent(docItem);
-                    
-                    const metaDiv = createDiv(`${doc.author || 'Unknown Author'} • ${doc.date || 'No Date'}`);
-                    metaDiv.style('font-size', '10px');
-                    metaDiv.style('color', '#888');
-                    metaDiv.style('margin-bottom', '3px');
-                    metaDiv.parent(docItem);
-                    
-                    if (doc.document_description) {
-                        const descriptionDiv = createDiv(doc.document_description);
-                        descriptionDiv.style('font-size', '10px');
-                        descriptionDiv.style('color', '#BBBBBB');
-                        descriptionDiv.style('line-height', '1.3');
-                        descriptionDiv.parent(docItem);
+                    // Use Bauhaus-specific rendering if in Bauhaus case
+                    if (isBauhausCase()) {
+                        docItem = createBauhausDocumentItem(doc);
+                    } else {
+                        docItem = createRegularDocumentItem(doc);
                     }
-                    
-                    docItem.mouseOver(() => {
-                        docItem.style('background', '#333');
-                        docItem.style('border-color', '#5DC0D9');
-                    });
-                    
-                    docItem.mouseOut(() => {
-                        docItem.style('background', '#1A1A1A');
-                        docItem.style('border-color', '#444');
-                    });
                     
                     docItem.parent(documentsList);
                 });
@@ -1413,6 +1349,285 @@ function getDocumentsForStep(step) {
 }
 
 // =================================================================
+// BAUHAUS-SPECIFIC DOCUMENT VIEW
+// =================================================================
+
+/**
+ * Check if current case study is Bauhaus
+ */
+function isBauhausCase() {
+    return currentCaseStudy === 'bauhaus';
+}
+
+/**
+ * Get image path for Bauhaus documents
+ */
+function getBauhausImagePath(filename) {
+    return `bauhaus_data/images/${filename}`;
+}
+
+/**
+ * Create image modal for Bauhaus documents
+ */
+function createImageModal(doc) {
+    // Remove existing modal if any
+    const existingModal = select('#image-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+    
+    // Create modal overlay
+    const modal = createDiv('');
+    modal.id('image-modal');
+    modal.style('position', 'fixed');
+    modal.style('top', '0');
+    modal.style('left', '0');
+    modal.style('width', '100%');
+    modal.style('height', '100%');
+    modal.style('background', 'rgba(0, 0, 0, 0.9)');
+    modal.style('z-index', '10000');
+    modal.style('display', 'flex');
+    modal.style('align-items', 'center');
+    modal.style('justify-content', 'center');
+    modal.style('cursor', 'pointer');
+    
+    // Close modal when clicking on overlay
+    modal.mousePressed(() => {
+        modal.remove();
+    });
+    
+    // Create modal content container
+    const modalContent = createDiv('');
+    modalContent.style('position', 'relative');
+    modalContent.style('max-width', '90%');
+    modalContent.style('max-height', '90%');
+    modalContent.style('background', '#1A1A1A');
+    modalContent.style('border-radius', '8px');
+    modalContent.style('padding', '20px');
+    modalContent.style('border', '2px solid #5DC0D9');
+    modalContent.style('cursor', 'default');
+    modalContent.parent(modal);
+    
+    // Prevent modal from closing when clicking on content
+    modalContent.elt.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+    
+    // Create close button
+    const closeBtn = createDiv('×');
+    closeBtn.style('position', 'absolute');
+    closeBtn.style('top', '10px');
+    closeBtn.style('right', '15px');
+    closeBtn.style('font-size', '24px');
+    closeBtn.style('color', '#5DC0D9');
+    closeBtn.style('cursor', 'pointer');
+    closeBtn.style('font-weight', 'bold');
+    closeBtn.style('z-index', '10001');
+    closeBtn.mousePressed(() => {
+        modal.remove();
+    });
+    closeBtn.parent(modalContent);
+    
+    // Create image element
+    const img = createImg(getBauhausImagePath(doc.tldr), 'Bauhaus Document');
+    img.style('max-width', '100%');
+    img.style('max-height', '70vh');
+    img.style('display', 'block');
+    img.style('margin', '0 auto 15px auto');
+    img.style('border-radius', '4px');
+    img.parent(modalContent);
+    
+    // Handle image loading error
+    img.elt.addEventListener('error', () => {
+        img.elt.style.display = 'none';
+        const errorMsg = createDiv('Image not found: ' + doc.tldr);
+        errorMsg.style('color', '#FF6464');
+        errorMsg.style('text-align', 'center');
+        errorMsg.style('padding', '20px');
+        errorMsg.parent(modalContent);
+    });
+    
+    // Create caption container
+    const captionContainer = createDiv('');
+    captionContainer.style('color', '#F2F2F2');
+    captionContainer.style('font-family', 'Helvetica, sans-serif');
+    captionContainer.style('text-align', 'center');
+    captionContainer.parent(modalContent);
+    
+    // Add document description if available
+    if (doc.document_description) {
+        const description = createDiv(doc.document_description);
+        description.style('font-size', '16px');
+        description.style('line-height', '1.5');
+        description.style('margin-bottom', '10px');
+        description.style('color', '#F2F2F2');
+        description.parent(captionContainer);
+    }
+    
+    // Add metadata if available
+    const metaParts = [];
+    if (doc.author) metaParts.push(doc.author);
+    if (doc.date) metaParts.push(doc.date);
+    
+    if (metaParts.length > 0) {
+        const metadata = createDiv(metaParts.join(' • '));
+        metadata.style('font-size', '14px');
+        metadata.style('color', '#BBBBBB');
+        metadata.style('margin-top', '10px');
+        metadata.parent(captionContainer);
+    }
+}
+
+/**
+ * Create Bauhaus-specific document item
+ */
+function createBauhausDocumentItem(doc) {
+    const docItem = createDiv('');
+    docItem.class('bauhaus-document-item');
+    docItem.style('margin', '10px 0');
+    docItem.style('cursor', 'pointer');
+    docItem.style('border-radius', '6px');
+    docItem.style('overflow', 'hidden');
+    docItem.style('border', '2px solid #444');
+    docItem.style('background', '#1A1A1A');
+    docItem.style('transition', 'all 0.3s ease');
+    
+    // Create image container
+    const imageContainer = createDiv('');
+    imageContainer.style('width', '100%');
+    imageContainer.style('height', '120px');
+    imageContainer.style('overflow', 'hidden');
+    imageContainer.style('position', 'relative');
+    imageContainer.style('background', '#2A2A2A');
+    imageContainer.parent(docItem);
+    
+    // Create image element
+    const img = createImg(getBauhausImagePath(doc.tldr), 'Bauhaus Document');
+    img.style('width', '100%');
+    img.style('height', '100%');
+    img.style('object-fit', 'cover');
+    img.style('display', 'block');
+    img.parent(imageContainer);
+    
+    // Handle image loading error
+    img.elt.addEventListener('error', () => {
+        imageContainer.style('display', 'flex');
+        imageContainer.style('align-items', 'center');
+        imageContainer.style('justify-content', 'center');
+        img.elt.style.display = 'none';
+        
+        const errorMsg = createDiv('📷');
+        errorMsg.style('color', '#666');
+        errorMsg.style('font-size', '24px');
+        errorMsg.parent(imageContainer);
+    });
+    
+    // Create text content container
+    const textContainer = createDiv('');
+    textContainer.style('padding', '10px');
+    textContainer.parent(docItem);
+    
+    // Add document description if available
+    if (doc.document_description) {
+        const description = createDiv(doc.document_description);
+        description.style('font-size', '12px');
+        description.style('color', '#F2F2F2');
+        description.style('line-height', '1.3');
+        description.style('margin-bottom', '6px');
+        description.parent(textContainer);
+    }
+    
+    // Add metadata if available
+    const metaParts = [];
+    if (doc.author) metaParts.push(doc.author);
+    if (doc.date) metaParts.push(doc.date);
+    
+    if (metaParts.length > 0) {
+        const metadata = createDiv(metaParts.join(' • '));
+        metadata.style('font-size', '10px');
+        metadata.style('color', '#888');
+        metadata.parent(textContainer);
+    }
+    
+    // Add hover effects
+    docItem.mouseOver(() => {
+        docItem.style('border-color', '#5DC0D9');
+        docItem.style('transform', 'scale(1.02)');
+    });
+    
+    docItem.mouseOut(() => {
+        docItem.style('border-color', '#444');
+        docItem.style('transform', 'scale(1)');
+    });
+    
+    // Add click handler to open modal
+    docItem.mousePressed(() => {
+        createImageModal(doc);
+    });
+    
+    return docItem;
+}
+
+/**
+ * Create regular (non-Bauhaus) document item
+ */
+function createRegularDocumentItem(doc) {
+    const docItem = createDiv();
+    docItem.class('document-item');
+    docItem.style('font-size', '11px');
+    docItem.style('color', '#BBBBBB');
+    docItem.style('margin', '6px 0');
+    docItem.style('cursor', 'pointer');
+    docItem.style('padding', '6px');
+    docItem.style('border-radius', '3px');
+    docItem.style('border', '1px solid #444');
+    docItem.style('background', '#1A1A1A');
+    
+    // Document title/TLDR
+    const titleDiv = createDiv(doc.tldr || 'Untitled Document');
+    titleDiv.style('font-weight', 'bold');
+    titleDiv.style('color', '#5DC0D9');
+    titleDiv.style('margin-bottom', '3px');
+    titleDiv.style('font-size', '12px');
+    titleDiv.parent(docItem);
+    
+    // Document author and date
+    const metaParts = [];
+    if (doc.author) metaParts.push(doc.author);
+    if (doc.date) metaParts.push(doc.date);
+    
+    if (metaParts.length > 0) {
+        const metaDiv = createDiv(metaParts.join(' • '));
+        metaDiv.style('font-size', '10px');
+        metaDiv.style('color', '#888');
+        metaDiv.style('margin-bottom', '3px');
+        metaDiv.parent(docItem);
+    }
+    
+    // Document description
+    if (doc.document_description) {
+        const descriptionDiv = createDiv(doc.document_description);
+        descriptionDiv.style('font-size', '10px');
+        descriptionDiv.style('color', '#BBBBBB');
+        descriptionDiv.style('line-height', '1.3');
+        descriptionDiv.parent(docItem);
+    }
+    
+    docItem.mouseOver(() => {
+        docItem.style('background', '#333');
+        docItem.style('border-color', '#5DC0D9');
+    });
+    
+    docItem.mouseOut(() => {
+        docItem.style('background', '#1A1A1A');
+        docItem.style('border-color', '#444');
+    });
+    
+    return docItem;
+}
+
+
+// =================================================================
 // UPDATED INITIALIZATION FUNCTIONS
 // =================================================================
 
@@ -1423,200 +1638,51 @@ function createStepList() {
     createTabbedSidebar();
 }
 
-// /**
-//  * Create the step list with dynamic phase headers
-//  */
-// function createStepList() {
-//     console.log('📋 Creating step list with dynamic phases...');
+
+// =================================================================
+// KEYBOARD SHORTCUTS FOR MODAL
+// =================================================================
+
+/**
+ * Handle keyboard events for modal
+ */
+function keyPressed() {
+    if (keyCode === SHIFT) {
+        isShiftPressed = true;
+    }
     
-//     const stepList = select('#step-list');
+    // Close modal with Escape key
+    if (keyCode === ESCAPE) {
+        const modal = select('#image-modal');
+        if (modal) {
+            modal.remove();
+        }
+    }
     
-//     // Clear existing content
-//     stepList.html('');
+    if (key === '=' || key === '+') {
+        targetZoom = constrain(targetZoom * 1.1, 0.2, 3.0);
+    } else if (key === '-') {
+        targetZoom = constrain(targetZoom * 0.9, 0.2, 3.0);
+    }
+}
+
+// =================================================================
+// UTILITY FUNCTIONS
+// =================================================================
+
+/**
+ * Preload images for better performance (optional)
+ */
+function preloadBauhausImages() {
+    if (!isBauhausCase()) return;
     
-//     // Group steps by phase
-//     const phaseGroups = groupStepsByPhase();
-    
-//     console.log('📊 Phase groups:', Object.keys(phaseGroups));
-    
-//     // Create phase sections in the correct order
-//     const phaseOrder = getPhaseOrder();
-    
-//     phaseOrder.forEach((phase, phaseIndex) => {
-//         const phaseSteps = phaseGroups[phase];
-//         if (!phaseSteps || phaseSteps.length === 0) return;
-        
-//         // Create phase header with display name
-//         const displayName = getPhaseDisplayName(phase);
-//         const phaseHeader = createDiv(displayName);
-//         phaseHeader.class('phase-header');
-//         phaseHeader.style('color', '#5DC0D9');
-//         phaseHeader.style('font-weight', 'bold');
-//         phaseHeader.style('font-size', '14px');
-//         phaseHeader.style('margin', '20px 0 10px 0');
-//         phaseHeader.style('text-transform', 'uppercase');
-//         phaseHeader.style('letter-spacing', '1px');
-        
-//         // First phase gets no top margin
-//         if (phaseIndex === 0) {
-//             phaseHeader.style('margin-top', '0');
-//         }
-        
-//         phaseHeader.parent(stepList);
-        
-//         // Create step items
-//         phaseSteps.forEach(step => {
-//             const stepDiv = createDiv();
-//             stepDiv.class('step-item');
-//             stepDiv.addClass(step.phase || 'null');
-            
-//             const dateDiv = createDiv(step.date);
-//             dateDiv.class('step-date');
-//             dateDiv.parent(stepDiv);
-            
-//             const descDiv = createDiv(step.step_description);
-//             descDiv.class('step-description');
-//             descDiv.parent(stepDiv);
-            
-//             // Add edges list for this step
-//             const relatedEdges = edges.filter(e => e.step_id === step.step_id);
-//             if (relatedEdges.length > 0) {
-//                 const edgesList = createDiv();
-//                 edgesList.class('edges-list');
-//                 edgesList.style('display', 'none');
-//                 edgesList.style('margin-top', '8px');
-//                 edgesList.style('padding-left', '10px');
-//                 edgesList.style('border-left', '2px solid #444');
-                
-//                 relatedEdges.forEach(edge => {
-//                     const edgeItem = createDiv();
-//                     edgeItem.class('edge-item');
-//                     edgeItem.style('font-size', '11px');
-//                     edgeItem.style('color', '#BBBBBB');
-//                     edgeItem.style('margin', '3px 0');
-//                     edgeItem.style('cursor', 'pointer');
-//                     edgeItem.style('padding', '3px');
-//                     edgeItem.style('border-radius', '2px');
-//                     edgeItem.style('position', 'relative');
-//                     edgeItem.style('display', 'flex');
-//                     edgeItem.style('align-items', 'center');
-                    
-//                     const checkbox = createCheckbox('', false);
-//                     checkbox.style('margin-right', '8px');
-//                     checkbox.style('transform', 'scale(0.8)');
-//                     checkbox.changed(() => {
-//                         if (checkbox.checked()) {
-//                             selectedEdges.add(edge.interaction_id);
-//                         } else {
-//                             selectedEdges.delete(edge.interaction_id);
-//                         }
-//                     });
-                    
-//                     checkbox.elt.addEventListener('click', (e) => {
-//                         e.stopPropagation();
-//                     });
-//                     checkbox.parent(edgeItem);
-                    
-//                     const fromNames = edge.from_nodes.map(id => {
-//                         const node = nodes.find(n => n.node_id === id);
-//                         return node ? node.node_name : id;
-//                     }).join(', ');
-                    
-//                     const toNames = edge.to_nodes.map(id => {
-//                         const node = nodes.find(n => n.node_id === id);
-//                         return node ? node.node_name : id;
-//                     }).join(', ');
-                    
-//                     const isSelfLoop = edge.from_nodes.some(fromId => 
-//                         edge.to_nodes.includes(fromId)
-//                     );
-                    
-//                     const arrow = isSelfLoop ? '↻' : (edge.bidirectional ? '↔' : '→');
-//                     const display = isSelfLoop ? fromNames + ' ' + arrow : `${fromNames} ${arrow} ${toNames}`;
-                    
-//                     const textSpan = createSpan(display);
-//                     textSpan.style('vertical-align', 'middle');
-//                     textSpan.parent(edgeItem);
-                    
-//                     edgeItem.mouseOver(() => {
-//                         edgeItem.style('background', '#444');
-//                         hoveredEdge = edge.interaction_id;
-//                     });
-                    
-//                     edgeItem.mouseOut(() => {
-//                         edgeItem.style('background', 'transparent');
-//                         if (hoveredEdge === edge.interaction_id) hoveredEdge = null;
-//                     });
-                    
-//                     edgeItem.elt.addEventListener('click', (e) => {
-//                         e.stopPropagation();
-//                     });
-                    
-//                     edgeItem.parent(edgesList);
-//                 });
-                
-//                 edgesList.parent(stepDiv);
-                
-//                 const expandBtn = createDiv('▶ ' + relatedEdges.length + ' edges');
-//                 expandBtn.class('expand-btn');
-//                 expandBtn.style('font-size', '10px');
-//                 expandBtn.style('color', '#5DC0D9');
-//                 expandBtn.style('cursor', 'pointer');
-//                 expandBtn.style('margin-top', '5px');
-                
-//                 let isExpanded = false;
-//                 expandBtn.mousePressed((e) => {
-//                     e.stopPropagation();
-//                     isExpanded = !isExpanded;
-//                     if (isExpanded) {
-//                         edgesList.style('display', 'block');
-//                         expandBtn.html('▼ ' + relatedEdges.length + ' edges');
-//                     } else {
-//                         edgesList.style('display', 'none');
-//                         expandBtn.html('▶ ' + relatedEdges.length + ' edges');
-//                     }
-//                 });
-                
-//                 expandBtn.parent(stepDiv);
-//             }
-            
-//             stepDiv.mousePressed(() => selectStep(step.step_id));
-//             stepDiv.parent(stepList);
-//         });
-//     });
-    
-//     // Handle 'other' phase if it exists
-//     if (phaseGroups.other && phaseGroups.other.length > 0) {
-//         const phaseHeader = createDiv('Other');
-//         phaseHeader.class('phase-header');
-//         phaseHeader.style('color', '#5DC0D9');
-//         phaseHeader.style('font-weight', 'bold');
-//         phaseHeader.style('font-size', '14px');
-//         phaseHeader.style('margin', '20px 0 10px 0');
-//         phaseHeader.style('text-transform', 'uppercase');
-//         phaseHeader.style('letter-spacing', '1px');
-//         phaseHeader.parent(stepList);
-        
-//         phaseGroups.other.forEach(step => {
-//             const stepDiv = createDiv();
-//             stepDiv.class('step-item');
-//             stepDiv.addClass('other');
-            
-//             const dateDiv = createDiv(step.date);
-//             dateDiv.class('step-date');
-//             dateDiv.parent(stepDiv);
-            
-//             const descDiv = createDiv(step.step_description);
-//             descDiv.class('step-description');
-//             descDiv.parent(stepDiv);
-            
-//             stepDiv.mousePressed(() => selectStep(step.step_id));
-//             stepDiv.parent(stepList);
-//         });
-//     }
-    
-//     console.log('✅ Step list created with dynamic phases');
-// }
+    documents.forEach(doc => {
+        if (doc.tldr && doc.tldr.endsWith('.png')) {
+            const img = new Image();
+            img.src = getBauhausImagePath(doc.tldr);
+        }
+    });
+}
 
 // =================================================================
 // MAIN DRAW LOOP
