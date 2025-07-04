@@ -1,7 +1,7 @@
 // Ira TO DO / Bugs to Fix
 // 1. Selecting Edges from Step List
 // 2. Have Option to Render Documents in Steps
-// 3. Improve hovering and selection of nodes and edges
+// 3. [Done] Improve hovering and selection of nodes and edges
 // 4. Zooming Effects
 // 5. [Done] Legend Location
 
