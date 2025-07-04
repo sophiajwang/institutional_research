@@ -29,7 +29,7 @@ const CASE_STUDIES = {
             impact: 'Impact'
         },
         phaseOrder: ['research', 'development', 'impact'],
-        description: 'The invention of the transistor at Bell Labs (1945-1956)'
+        description: 'The invention of the transistor'
     },
     'bridgewater': {
         name: 'Bridgewater',
@@ -42,7 +42,7 @@ const CASE_STUDIES = {
             depression: 'Depression'
         },
         phaseOrder: ['early_stage', 'bubble', 'top', 'depression'],
-        description: 'Bridgewater\'s analysis of the 2008 financial crisis'
+        description: 'The economy as a machine: Bridgewater\'s template of the 2008 financial crisis'
     },
     'bauhaus': {
         name: 'Bauhaus',
@@ -60,7 +60,7 @@ const CASE_STUDIES = {
             technical_school: 'Technical School'
         },
         phaseOrder: ['preliminary_course', 'weaving_workshop', 'wall_painting_workshop','store_room', 'exhibition_room', 'studio_quarters','bridge','auditorium','technical_school'],
-        description: 'The Bauhaus school, seen through the Dessau campus'
+        description: 'The unifying \'art\' of architecture seen through the Bauhaus Dessau campus'
     }
 };
 

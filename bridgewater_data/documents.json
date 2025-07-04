@@ -45,8 +45,8 @@
     "document_id": 6,
     "date": "2008",
     "author": "Bridgewater",
-    "tldr": "We believe that we are approaching the end of an era – i.e. the end of the post­-1981 period that was characterized by falling interest rates, falling inflation rates and strong growth… The “R”[ecession] word has been used a lot to describe the possible contraction in economic activity because all contractions are now called recessions. However, to use that term to describe what’s happening would be misleading… A “D”[epression] is an economic contraction that results from a financial deleveraging that leads assets (e.g. stocks and real estate) to be sold, causing asset prices to decline, causing equity levels to decline, causing more forced selling of assets, causing a contraction in credit and a contraction in economic activity, which worsens cash flows and increases asset sales in a self-reinforcing cycle… Equity levels fall relative to debt levels despite interest rates declining while credit spreads widen until risk free interest rates fall to 0%, and monetary policy ceases to work.",
-    "document_description": null
+    "tldr": "Recession to Depression",
+    "document_description": "We believe that we are approaching the end of an era – i.e. the end of the post­-1981 period that was characterized by falling interest rates, falling inflation rates and strong growth… The “R”[ecession] word has been used a lot to describe the possible contraction in economic activity because all contractions are now called recessions. However, to use that term to describe what’s happening would be misleading… A “D”[epression] is an economic contraction that results from a financial deleveraging that leads assets (e.g. stocks and real estate) to be sold, causing asset prices to decline, causing equity levels to decline, causing more forced selling of assets, causing a contraction in credit and a contraction in economic activity, which worsens cash flows and increases asset sales in a self-reinforcing cycle… Equity levels fall relative to debt levels despite interest rates declining while credit spreads widen until risk free interest rates fall to 0%, and monetary policy ceases to work."
   },
   {
     "document_id": 7,
@@ -72,7 +72,7 @@
   {
     "document_id": 10,
     "date": "September 15, 2008",
-    "author": " News",
+    "author": "News",
     "tldr": "Lehman Brothers declare bankruptcy",
     "document_description": null
   },
@@ -80,8 +80,8 @@
     "document_id": 11,
     "date": "September -- October 2008",
     "author": "News",
-    "tldr": "US policy makers launch a huge variety of programs in the wake of Lehman’s collapse, including the AMLF, CPFF, MMIFF, and many others, to address the variety of issues in the crisis without achieving full resolution.",
-    "document_description": null
+    "tldr": "Relief policies and programs",
+    "document_description": "US policy makers launch a huge variety of programs in the wake of Lehman’s collapse, including the AMLF, CPFF, MMIFF, and many others, to address the variety of issues in the crisis without achieving full resolution."
   },
   {
     "document_id": 12,
