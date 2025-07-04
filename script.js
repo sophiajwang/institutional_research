@@ -1225,6 +1225,8 @@ function mousePressed() {
                 selectStep(edge.step_id);
                 return;
             }
+        } else {
+            selectStep(null);
         }
         
         isDragging = true;
