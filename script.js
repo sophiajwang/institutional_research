@@ -1098,7 +1098,6 @@ function distanceToLineSegment(px, py, x1, y1, x2, y2) {
 
 function selectStep(stepId, fromStepCounter) {
     stepCounterClicked = fromStepCounter;
-    console.log("Step ID: " + stepId);
     selectedStep = selectedStep === stepId ? null : stepId;
     selectedEdges.clear(); // Clear selected edges when changing steps
     
