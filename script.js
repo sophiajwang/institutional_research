@@ -1216,7 +1216,10 @@ function keyReleased() {
 function mousePressed() {
     if (mouseX < width) {
         // Check if clicking on an edge when no step is selected
-        if (selectedStep === null && hoveredEdge !== null) {
+
+        // Ira: It seems to me like you'd what to be able to select another step even if one is currently selected
+        //if (selectedStep === null && hoveredEdge !== null) {
+        if (hoveredEdge !== null) {
             const edge = edges.find(e => e.interaction_id === hoveredEdge);
             if (edge) {
                 selectStep(edge.step_id);
