@@ -1,3 +1,4 @@
+
 // =================================================================
 // MULTI-CASE STUDY VISUALIZATION - COMPLETE INTEGRATION
 // =================================================================
@@ -201,7 +202,7 @@ function createCaseStudyDropdown() {
     dropdownContainer.id('case-study-dropdown-container');
     dropdownContainer.style('position', 'absolute');
     dropdownContainer.style('top', '10px');
-    dropdownContainer.style('left', '10px');
+    dropdownContainer.style('left', '10px'); // Move it to the right of controls
     dropdownContainer.style('z-index', '1000');
     dropdownContainer.style('background', 'rgba(20, 20, 20, 0.95)');
     dropdownContainer.style('padding', '10px');
@@ -775,21 +776,33 @@ function createLegend() {
     title.style('font-weight', 'bold');
     title.style('margin-bottom', '8px');
     
+    // let edgeTypes = createDiv(`
+    //     <div style="margin: 4px 0;"><span style="color: #78B478;">━━━</span> Active Edge</div>
+    //     <div style="margin: 4px 0;"><span style="color: #999999;">━━━</span> Inactive Edge</div>
+    //     <div style="margin: 4px 0;"><span style="color: #FF6464;">┅┅┅</span> Violated Edge</div>
+    //     <div style="margin: 4px 0;"><span style="color: #666666;">━━━</span> Unused Edge</div>
+    //     <div style="margin: 4px 0;"><span style="color: #78B478;">⭕</span> Self-Loop</div>
+    // `);
     let edgeTypes = createDiv(`
-        <div style="margin: 4px 0;"><span style="color: #78B478;">━━━</span> Active Edge</div>
-        <div style="margin: 4px 0;"><span style="color: #999999;">━━━</span> Inactive Edge</div>
-        <div style="margin: 4px 0;"><span style="color: #FF6464;">┅┅┅</span> Violated Edge</div>
-        <div style="margin: 4px 0;"><span style="color: #666666;">━━━</span> Unused Edge</div>
-        <div style="margin: 4px 0;"><span style="color: #78B478;">⭕</span> Self-Loop</div>
+        <div style="margin: 4px 0;"><span style="color: #78B478;">━━━</span> Active</div>
+        <div style="margin: 4px 0;"><span style="color: #999999;">━━━</span> Inactive</div>
+        <div style="margin: 4px 0;"><span style="color: #FF6464;">┅┅┅</span> Violated</div>
     `);
     edgeTypes.parent(legend);
     
+    // let nodeTypes = createDiv(`
+    //     <div style="margin: 6px 0 4px 0; font-weight: bold;">Nodes:</div>
+    //     <div style="margin: 2px 0;"><span style="color: #5DC0D9;">■</span> Individual/Child</div>
+    //     <div style="margin: 2px 0;"><span style="color: #78B478;">■</span> Group/Parent</div>
+    //     <div style="margin: 2px 0;"><span style="color: #999999;">■</span> Organization/Root</div>
+    //     <div style="margin: 2px 0;"><span style="color: #FFA500;">■</span> Related Children</div>
+    // `);
     let nodeTypes = createDiv(`
         <div style="margin: 6px 0 4px 0; font-weight: bold;">Nodes:</div>
-        <div style="margin: 2px 0;"><span style="color: #5DC0D9;">■</span> Individual/Child</div>
-        <div style="margin: 2px 0;"><span style="color: #78B478;">■</span> Group/Parent</div>
-        <div style="margin: 2px 0;"><span style="color: #999999;">■</span> Organization/Root</div>
-        <div style="margin: 2px 0;"><span style="color: #FFA500;">■</span> Related Children</div>
+        <div style="margin: 2px 0;"><span style="color: #5DC0D9;">■</span> Agent</div>
+        <div style="margin: 2px 0;"><span style="color: #FFA500;">■</span> Related Agent</div>
+        <div style="margin: 2px 0;"><span style="color: #78B478;">■</span> Parent</div>
+        <div style="margin: 2px 0;"><span style="color: #999999;">■</span> Grandparent</div>
     `);
     nodeTypes.parent(legend);
 
