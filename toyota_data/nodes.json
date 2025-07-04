@@ -1,0 +1,354 @@
+[
+  "lever", "variable",
+  {
+    "node_id": 0,
+    "node_name": "cross functional teams",
+    "node_description": null,
+    "node_type": "tool",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 1,
+    "node_name": "Enhanced Capabilities",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 2,
+    "node_name": "performance measures",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 3,
+    "node_name": "Participation in Continuous Improvements",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 4,
+    "node_name": "synergy",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 5,
+    "node_name": "collaborative planning",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 6,
+    "node_name": "economics of manufacturing",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 7,
+    "node_name": "sustainable growth",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 8,
+    "node_name": "Information Sharing",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 9,
+    "node_name": "uncertainty",
+    "node_description": null,
+    "node_type": "variable",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 10,
+    "node_name": "departmental integration",
+    "node_description": null,
+    "node_type": "lever",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+
+  {
+    "node_id": 1,
+    "node_name": "Bell Labs Administration",
+    "node_description": "Executive",
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 2,
+    "node_name": "Bell Labs",
+    "node_description": "AT&T research arm",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 1
+  },
+  {
+    "node_id": 3,
+    "node_name": "AT&T",
+    "node_description": "Management and Holding Company of the Bell System",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 4,
+    "node_name": "William Shockley",
+    "node_description": "Lead theorist of solid-state research group",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 5,
+    "node_name": "Solid-State Research Group",
+    "node_description": "Research team focusing on solid-state physics",
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 6,
+    "node_name": "Walter Houser Brattain",
+    "node_description": "Experimental Physicist",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 7,
+    "node_name": "John Bardeen",
+    "node_description": "Theoretical Physicist",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 8,
+    "node_name": "Robert Gibney",
+    "node_description": "Electrochemist",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 9,
+    "node_name": "Gerald Pearson",
+    "node_description": "Experimental Physicist",
+    "node_type": "agent",
+    "node_parent_id": 5,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 10,
+    "node_name": "Frank Jewett",
+    "node_description": "Bell Labs Chairman",
+    "node_type": "agent",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 11,
+    "node_name": "Oliver Ellsworth Buckley",
+    "node_description": "Bell Labs President",
+    "node_type": "agent",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 12,
+    "node_name": "Ralph Bown",
+    "node_description": "Vice President of Research at Bell Labs, (later) Research Director at Bell Labs",
+    "node_type": "agent",
+    "node_parent_id": 1,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 13,
+    "node_name": "Bell Labs Lawyers",
+    "node_description": "Legal team handling patents and intellectual property",
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 14,
+    "node_name": "Government",
+    "node_description": "Government regulatory bodies",
+    "node_type": "agent",
+    "node_parent_id": 15,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 15,
+    "node_name": "External",
+    "node_description": "Agents and institutions external to Bell System",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 16,
+    "node_name": "Military",
+    "node_description": "Military organizations and defense contractors",
+    "node_type": "agent",
+    "node_parent_id": 15,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 17,
+    "node_name": "Competitors",
+    "node_description": "Competing telephony communications technologies companies and later, electronics companies",
+    "node_type": "agent",
+    "node_parent_id": 15,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 18,
+    "node_name": "Academia",
+    "node_description": "Foremost science and engineering academic-research organizations in the country",
+    "node_type": "agent",
+    "node_parent_id": 15,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 19,
+    "node_name": "Public Domain",
+    "node_description": "Public knowledge and open research",
+    "node_type": "agent",
+    "node_parent_id": 15,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 20,
+    "node_name": "Jack Morton",
+    "node_description": "Lead of transistor development team, (later) Vice President of Device Development",
+    "node_type": "agent",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 21,
+    "node_name": "Transistor Development Team",
+    "node_description": "Engineering team focused on transistor development and manufacturing",
+    "node_type": "agent",
+    "node_parent_id": 2,
+    "node_grandparent_id": null,
+    "is_parent": 1,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 22,
+    "node_name": "Gordon Teal",
+    "node_description": "Metallurgist",
+    "node_type": "agent",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 23,
+    "node_name": "Morgan Sparks",
+    "node_description": "Chemist, (later) Director of Solid State Research at Bell Labs, Vice President of Electronics Technology, Director of Sandia National Laboratories",
+    "node_type": "agent",
+    "node_parent_id": 21,
+    "node_grandparent_id": 2,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 24,
+    "node_name": "Western Electric",
+    "node_description": "AT&T manufacturing arm",
+    "node_type": "agent",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  }
+]

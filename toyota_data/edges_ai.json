@@ -1,0 +1,310 @@
+[
+  {
+    "interaction_id": 0,
+    "from_nodes": [
+      33
+    ],
+    "to_nodes": [
+      48
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 1,
+    "from_nodes": [
+      48
+    ],
+    "to_nodes": [
+      35
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 2,
+    "from_nodes": [
+      35
+    ],
+    "to_nodes": [
+      56
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 3,
+    "from_nodes": [
+      56
+    ],
+    "to_nodes": [
+      15
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 4,
+    "from_nodes": [
+      15
+    ],
+    "to_nodes": [
+      12
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 5,
+    "from_nodes": [
+      12
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 6,
+    "from_nodes": [
+      13
+    ],
+    "to_nodes": [
+      40
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 7,
+    "from_nodes": [
+      40
+    ],
+    "to_nodes": [
+      41
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 8,
+    "from_nodes": [
+      41
+    ],
+    "to_nodes": [
+      60
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 9,
+    "from_nodes": [
+      60
+    ],
+    "to_nodes": [
+      57
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 10,
+    "from_nodes": [
+      57
+    ],
+    "to_nodes": [
+      51
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 11,
+    "from_nodes": [
+      51
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 12,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 13,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      46
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 14,
+    "from_nodes": [
+      46
+    ],
+    "to_nodes": [
+      48
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "decrease"
+  },
+  {
+    "interaction_id": 15,
+    "from_nodes": [
+      46
+    ],
+    "to_nodes": [
+      28
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 16,
+    "from_nodes": [
+      28
+    ],
+    "to_nodes": [
+      27
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 17,
+    "from_nodes": [
+      27
+    ],
+    "to_nodes": [
+      72
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 18,
+    "from_nodes": [
+      72
+    ],
+    "to_nodes": [
+      42
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 19,
+    "from_nodes": [
+      42
+    ],
+    "to_nodes": [
+      54
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 20,
+    "from_nodes": [
+      54
+    ],
+    "to_nodes": [
+      55
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 21,
+    "from_nodes": [
+      55
+    ],
+    "to_nodes": [
+      49
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  }
+]

@@ -1,0 +1,802 @@
+[
+  {
+    "node_id": 0,
+    "node_name": "accounting system",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 1,
+    "node_name": "additional capabilities",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 2,
+    "node_name": "capacity expansion",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 3,
+    "node_name": "capacity utilization",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 4,
+    "node_name": "capital spending",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 5,
+    "node_name": "collaboration planning",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 6,
+    "node_name": "competitive advantage",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 7,
+    "node_name": "competitive organization",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 8,
+    "node_name": "continuous improvement",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 9,
+    "node_name": "cost of quality",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 10,
+    "node_name": "cross functional teams",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 11,
+    "node_name": "customer focused system",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 12,
+    "node_name": "customer loyalty",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 13,
+    "node_name": "customer orders",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 14,
+    "node_name": "customer orders ratio",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 15,
+    "node_name": "customer satisfaction",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 16,
+    "node_name": "cycle time",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 17,
+    "node_name": "demand fluctuation",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 18,
+    "node_name": "demand variability",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 19,
+    "node_name": "departmental integration",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 20,
+    "node_name": "desired order rate",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 21,
+    "node_name": "desired start rate",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 22,
+    "node_name": "economics of manufacturing",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 23,
+    "node_name": "employee initiatives",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 24,
+    "node_name": "employee satisfaction",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 25,
+    "node_name": "employee value proposition & supplier partnership",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 26,
+    "node_name": "enhanced capabilities",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 27,
+    "node_name": "fgi control",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 28,
+    "node_name": "finished goods inventory",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 29,
+    "node_name": "fixed costs",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 30,
+    "node_name": "information sharing",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 31,
+    "node_name": "integration",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 32,
+    "node_name": "jidoka",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 33,
+    "node_name": "just in time",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 34,
+    "node_name": "kaizen",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 35,
+    "node_name": "lead time",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 36,
+    "node_name": "lean initiatives",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 37,
+    "node_name": "maintenance costs",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 38,
+    "node_name": "maintenance system",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 39,
+    "node_name": "operating costs",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 40,
+    "node_name": "order backlog",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 41,
+    "node_name": "order fulfillment",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 42,
+    "node_name": "order to supplier",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 43,
+    "node_name": "participation in continuous improvement",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 44,
+    "node_name": "performance measures",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 45,
+    "node_name": "price control",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 46,
+    "node_name": "production capacity",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 47,
+    "node_name": "production planning and inventory system",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 48,
+    "node_name": "production pressure",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 49,
+    "node_name": "production start rate",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 50,
+    "node_name": "productivity",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 51,
+    "node_name": "profit margins",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 52,
+    "node_name": "pull system",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 53,
+    "node_name": "quality at source",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 54,
+    "node_name": "raw material control",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 55,
+    "node_name": "raw material inventory",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 56,
+    "node_name": "responsiveness",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 57,
+    "node_name": "revenue",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 58,
+    "node_name": "rework",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 59,
+    "node_name": "smed",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 60,
+    "node_name": "sales",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 61,
+    "node_name": "sales orders",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 62,
+    "node_name": "supplier capabilities",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 63,
+    "node_name": "supplier partnerships",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 64,
+    "node_name": "supply cost",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 65,
+    "node_name": "supply cost effectiveness",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 66,
+    "node_name": "supply volatility",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 67,
+    "node_name": "sustainability",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 68,
+    "node_name": "sustainable competitive advantage",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 69,
+    "node_name": "sustainable growth",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 70,
+    "node_name": "system level integration",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 71,
+    "node_name": "tpm",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 72,
+    "node_name": "target completion rate",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 73,
+    "node_name": "total costs",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 74,
+    "node_name": "uncertainty",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 75,
+    "node_name": "vsm",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 76,
+    "node_name": "variable costs",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 77,
+    "node_name": "wip",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 78,
+    "node_name": "wip control",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  },
+  {
+    "node_id": 79,
+    "node_name": "workforce turnover",
+    "node_description": null,
+    "node_type": "attribute",
+    "node_parent_id": null,
+    "node_grandparent_id": null,
+    "is_parent": 0,
+    "is_grandparent": 0
+  }
+]

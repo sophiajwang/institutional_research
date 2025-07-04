@@ -1,0 +1,918 @@
+[
+  "increase", "decrease"
+  {
+    "interaction_id": 0,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 1,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 2,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      1
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 3,
+    "from_nodes": [
+      1
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 4,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 5,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      3
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 6,
+    "from_nodes": [
+      3
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 7,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      6
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 8,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 9,
+    "from_nodes": [
+      7
+    ],
+    "to_nodes": [
+      5
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 10,
+    "from_nodes": [
+      8
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 11,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 12,
+    "from_nodes": [
+      9
+    ],
+    "to_nodes": [
+      5
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 13,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      10
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "increase"
+  },
+  {
+    "interaction_id": 14,
+    "from_nodes": [
+      10
+    ],
+    "to_nodes": [
+      9
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": null,
+    "step_id": 0,
+    "edge_type": "decrease"
+  },
+  
+
+
+
+  {
+    "interaction_id": 1,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The existing 'knowledge reservoir' included silicon and germanium of p- and n-type controller impurity developed in the late 1930s during the war by Bell Labs metallurgists Scaff and Ohl.",
+    "step_id": 0,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 2,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Combines chemists, physicists, metallurgists, and engineers -- theoreticians with experimentalists -- to work on new electronic technologies.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 3,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Assigns Shockley as research group leader, mandating work that constitutes 'invention,' settling for nothing less than 'starting a new field.'",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 4,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Formed solid-state research group.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 5,
+    "from_nodes": [
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "to_nodes": [
+      0
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Freedom to say 'no.'",
+    "step_id": 1,
+    "edge_type": "unused"
+  },
+  {
+    "interaction_id": 6,
+    "from_nodes": [
+      4,
+      7
+    ],
+    "to_nodes": [
+      6
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Theorists worked on blackboards, attempting to 'see,' at a subatomic level, the surfaces and interiors of semiconductor crystals. The experimentalists tested the theorists\u2019 blackboard predictions at their lab benches with carefully calibrated instruments.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 7,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      4,
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Theorists would try to interpret the data that emerged from the experimentalists\u2019 attempts to investigate the theorists\u2019 original ideas.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 8,
+    "from_nodes": [
+      0,
+      10,
+      11
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Designed Murray Hill (1942). Building 1 shaped like an H with long corridors meant to intersect, forcing researchers to intersect. The building was designed after a university instead of a factory to avoid fixed geographical delineations between departments and increase interchange and close contact (between physics and mathematics, research and development). Further, technical staff would often have both laboratories and small offices but located in different corridors.",
+    "step_id": 1,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 9,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      5
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Shockley formulated a theory called the \u201cfield effect.\u201d The team attempted to apply an electrical current to the surface of a semiconductor slice to increase the conductivity, resulting in an amplifier. But it didn\u2019t. The observable effects were at least 1,500 times smaller than predicted.",
+    "step_id": 2,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 10,
+    "from_nodes": [
+      7
+    ],
+    "to_nodes": [
+      5
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bardeen suggested 'surface states' on semiconducting materials, postulating that when a charge was applied to a semiconductor, the electrons on its surface were not free to move the same way the electrons in the interior might, creating a frozen barrier between any outside voltage and the material's interior.",
+    "step_id": 3,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 11,
+    "from_nodes": [
+      5
+    ],
+    "to_nodes": [
+      5
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Laboratory spaces were flexible and could be rearranged (in 'weekend changes') as the character of work changed. The 6-ft laboratory module was outfitted with pipes and all needs of experimentalist (e.g. compressed air, distilled water, steam, gas, vacuum, hydrogen, oxygen, nitrogen, both DC and AC power).",
+    "step_id": 3,
+    "edge_type": "unused"
+  },
+  {
+    "interaction_id": 12,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      8
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Explore whether applying an electrolyte, a solution that conducts electricity, would help cut through the surface states barrier. It did.",
+    "step_id": 4,
+    "edge_type": "bidirectional"
+  },
+  {
+    "interaction_id": 13,
+    "from_nodes": [
+      6,
+      7
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Informed Shockley of their progress.",
+    "step_id": 4,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 14,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bardeen suggested a geometry for building a solid-state amplifier, involving a drop of electrolyte fluid, and a 'point-contact' wire piercing the drop and touching the surface of the semiconductor slice. Brattain and a lab assistant began building a rough prototype, a slab of silicon with a metal point pushed down into it, resulting in a slight power gain.",
+    "step_id": 4,
+    "edge_type": "bidirectional"
+  },
+  {
+    "interaction_id": 15,
+    "from_nodes": [
+      6
+    ],
+    "to_nodes": [
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bardeen suggested switching from silicon to n-type germanium. Together, they used a gold foil wrapped arrowhead to split the V-shaped wire into two separate wires ('points') to push down on the top face of the germanium. The narrow space could create an amplifier. Brattain connected the top ends of each of the points to separate batteries, forming a simple circuits. After two weeks of experimentation, on December 16, this configuration had yielded significant net amplification and power gain.",
+    "step_id": 4,
+    "edge_type": "bidirectional"
+  },
+  {
+    "interaction_id": 16,
+    "from_nodes": [
+      6,
+      7
+    ],
+    "to_nodes": [
+      12
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Demonstrated to Bell Labs management, notably Ralph Bown. As with all important entries in the scientists\u2019 notebooks, Brattain\u2019s entry ended with a signature and verification by third parties: 'Read & understood by G. L. Pearson Dec. 24, 1947 and H. R. Moore Dec. 24, 1947.'",
+    "step_id": 5,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 17,
+    "from_nodes": [
+      6,
+      7
+    ],
+    "to_nodes": [
+      0
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Mervin Kelly was not invited to the initial demonstration, but briefed one month later. He believed in granting autonomy to researchers and had not asked about or apprised of Bardeen and Brattain's work. At Bell Labs, there was a tendency to confine important developments to middle management for a purgatorial period, lest word of a breakthrough reach upper management too soon. It was common practice for supervisor to move any big news up a step, a week or two at a time.",
+    "step_id": 5,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 18,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      6,
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Shockley\u2019s Christmas was a holiday of torment. For the next three weeks, Shockley kept up a furious pace. By late January he had come up with a theory, and a design, for a transistor that both looked and functioned differently than Bardeen and Brattain\u2019s. Theirs had been described as the point-contact transistor; Shockley\u2019s was to be known as the junction transistor. Rather than two metal points jammed into a sliver of semiconducting material, it was a solid block made from two pieces of n-type germanium and a nearly microscopic slice of p-type germanium in between.",
+    "step_id": 6,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 19,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      6,
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Supervisor authorized to guide, not interfere with, the people he managed, and to absolutely never compete with underlings.",
+    "step_id": 6,
+    "edge_type": "violated"
+  },
+  {
+    "interaction_id": 20,
+    "from_nodes": [
+      6,
+      7
+    ],
+    "to_nodes": [
+      13
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bardeen and Brattain began working with Bell Labs lawyers on assembly application.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 21,
+    "from_nodes": [
+      12
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Ralph Bown establishes Bell Labs' confidential technology group with the code name 'Surface States Phenomena' to better understand use cases for the amplifier. He brings together the best electronic engineers across the lab.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 22,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      15
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Doubts on how long the Labs could maintain secrecy or should. Executives doubted that they could keep the transistor rights to themselves once the device became public knowledge.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 23,
+    "from_nodes": [
+      3
+    ],
+    "to_nodes": [
+      14
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "AT&T's monopoly was maintained at the government's pleasure with the understanding that its scientific work was in the public's interest. Any capitalization on the transistor could invite antitrust government regulators.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 24,
+    "from_nodes": [
+      3
+    ],
+    "to_nodes": [
+      2
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Funding came in large part from what was essentially a built-in 'R&D tax' on telephone service. In 1974, more than 4 cents of every dollar received by AT&T went to R&D at Bell Labs and Western Electric.",
+    "step_id": 0,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 25,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      16
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "From the start, Labs executives agreed to show the device to the military before any public debut, but wanted to resist any orders to contain the device as a military secret.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 26,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      16
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Philosophically, Bell Labs saw itself and the military as servicing needs and producing public goods.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 27,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Sharing technology with competitors could be positive, by profiting from patent licensing fees, having a head start, and later reaping the rewards from outside engineers improving functionality.",
+    "step_id": 7,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 28,
+    "from_nodes": [
+      6,
+      7
+    ],
+    "to_nodes": [
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bardeen and Brattain\u2019s letter to the Physical Review announced their breakthrough.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 29,
+    "from_nodes": [
+      4,
+      12
+    ],
+    "to_nodes": [
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "First public press conference where the device debuted as a replacement for the vacuum tube.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 30,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Harvard, Purdue, Stanford, Cornell, and a half dozen other schools to request a sample of the device for their own laboratories. MIT's Electrical Engineering department's Jay Forrester, wrote to Bown in July suggesting that transistors could be used for high-speed digital computing apparatus.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 31,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Letters from electronics companies (RCA, Motorola, Westinghouse, host of other radio and television manufacturers) came pouring in requesting a sample.",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 32,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      3
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Finding a market for the device was not a problem. Even if nobody else bought them, 'certainly the vast Bell empire itself would form an adequate market.'",
+    "step_id": 8,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 33,
+    "from_nodes": [
+      0
+    ],
+    "to_nodes": [
+      20
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Assigned development lead",
+    "step_id": 9,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 34,
+    "from_nodes": [
+      21
+    ],
+    "to_nodes": [
+      21
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Morton\u2019s team, in conjunction with the Labs\u2019 metallurgists, fabricated five thousand working germanium transistors.",
+    "step_id": 9,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 35,
+    "from_nodes": [
+      21
+    ],
+    "to_nodes": [
+      5,
+      16,
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Transistors given as complimentary samples. Nearly a thousand were used at Bell Labs to study the properties of germanium.",
+    "step_id": 9,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 36,
+    "from_nodes": [
+      22
+    ],
+    "to_nodes": [
+      6,
+      7
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "During the summer of 1951, Jack Morton\u2019s team had readied Bardeen and Brattain\u2019s point-contact transistor for large-scale production.",
+    "step_id": 10,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 37,
+    "from_nodes": [
+      22,
+      23
+    ],
+    "to_nodes": [
+      4
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Advances in crystal pulling allowed Teal and his colleague Morgan Sparks to grow junction transistors for Shockley, the essential missing ingredient that made his idea possible (before, trapped in theory with no way of fabricating).",
+    "step_id": 10,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 38,
+    "from_nodes": [
+      22,
+      23,
+      4
+    ],
+    "to_nodes": [
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Shockley, Sparks and Teal published results of 'grown-junction transistor' in the Physical Review, '\ud835\udc5d \u2212\ud835\udc5b Junction Transistors.'",
+    "step_id": 10,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 39,
+    "from_nodes": [
+      4
+    ],
+    "to_nodes": [
+      19
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The manufacture of the device roughly coincided with Shockley\u2019s demonstration of the first junction transistors at a public unveiling. The newest invention was hailed as clearly superior to the point-contact transistor in terms of its efficiency and performance (it used only one-millionth of the power of a typical vacuum tube).",
+    "step_id": 10,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 40,
+    "from_nodes": [
+      20
+    ],
+    "to_nodes": [
+      24
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Readied point-contact transistor for large-scale production.",
+    "step_id": 11,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 41,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Licensed transistor technology for $25,000. Free exception for companies that wanted to use the devices for hearing aids (as deference to AT&T founder Alexander Graham Bell).",
+    "step_id": 11,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 42,
+    "from_nodes": [
+      20,
+      9
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "In 1951 and 1952, Bell Labs sponsored multi-day conventions at Murray Hill, attended by hundreds of scientists and engineers from around the world. These conventions included the likes of Jack Kilby (who realized the first integrated circuit at Texas Instruments) and the founding engineers at Sony. At the conventions, Jack Morton gave the guests a brief overview of the transistor and Gerald Pearson followed with brief tutorial on transistor theory. Over the next two days, the guests were then given in-depth presentations on different types of transistors and their applications.",
+    "step_id": 11,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 43,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      18
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Exchange through conferences, professional societies, seminars.",
+    "step_id": 11,
+    "edge_type": "unused"
+  },
+  {
+    "interaction_id": 44,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      14
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "Bell Labs maintained an open door policy following immense political pressure to appease governmental regulators.",
+    "step_id": 11,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 45,
+    "from_nodes": [
+      2
+    ],
+    "to_nodes": [
+      19
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The transistor burnished Bell Labs' reputation as a national resource (AT&T's monopoly resulted in large-scale scientific and public benefits).",
+    "step_id": 11,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 46,
+    "from_nodes": [
+      14
+    ],
+    "to_nodes": [
+      3
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "After the 1956 Anti-Trust decree, AT&T was obligated to license all existing patents royalty-free.",
+    "step_id": 12,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 47,
+    "from_nodes": [
+      3
+    ],
+    "to_nodes": [
+      17,
+      19
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "AT&T\u2019s licensing policy shaped by antitrust policy remains as one of the most unheralded contributions to economic development, possibly far exceeding the Marshall Plan in terms of the wealth generation capability it established abroad and in the United States.",
+    "step_id": 12,
+    "edge_type": null
+  },
+  {
+    "interaction_id": 48,
+    "from_nodes": [
+      4,
+      22
+    ],
+    "to_nodes": [
+      17
+    ],
+    "from_color": null,
+    "to_color": null,
+    "interaction_description": "The combination of liberal licensing policies and people such as Gordon Teal leaving to start Texas Instruments ICs and William Shockley leaving to start Shockley Semiconductor in Palo Alto started the growth of Silicon Valley.",
+    "step_id": 12,
+    "edge_type": null
+  }
+]

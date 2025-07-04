@@ -33,55 +33,7 @@ let edgeOffsets = new Map();
 
 function preload() {
     // Load data directly - embedded in this function since external files aren't available
-    loadAllJsonFiles();
-    // loadDataDirectly();
-}
-
-async function loadJsonFile(filename) {
-    try {
-        const response = await fetch(filename);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        return Array.isArray(data) ? data : [];
-    } catch (error) {
-        console.error(`Error loading ${filename}:`, error);
-        return [];
-    }
-}
-
-// Option 3: Load all files at once and return an object with all data
-function loadAllJsonFiles() {
-    const files = ['nodes.json', 'edges.json'];
-    const dataKeys = ['nodes', 'edges'];
-    
-    try {
-        const promises = files.map(file => loadJsonFile(file));
-        const results = Promise.all(promises);
-        
-        const data = {};
-        dataKeys.forEach((key, index) => {
-            data[key] = results[index];
-        });
-
-        console.log(data.nodes);
-        console.log(data.edges);
-        // console.log(data.steps);
-        
-        nodes = data.nodes;
-        edges = data.edges;
-        steps = data.steps;
-        return data;
-    } catch (error) {
-        console.error('Error loading JSON files:', error);
-        return {
-            nodes: [],
-            edges: [],
-            documents: [],
-            steps: []
-        };
-    }
+    loadDataDirectly();
 }
 
 function loadDataDirectly() {

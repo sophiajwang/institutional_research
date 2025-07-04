@@ -1,0 +1,58 @@
+[
+  {
+    "document_id": 0,
+    "date": "2005",
+    "author": "Michael Riordan, IEEE Spectrum",
+    "tldr": "The End of AT&T",
+    "document_description": "History of technology: Ma Bell may be gone, but its innovations are everywhere."
+  },
+  {
+    "document_id": 1,
+    "date": "2012",
+    "author": "Jon Gertner",
+    "tldr": "The Idea Factory: Bell Labs and the Great Age of American Innovation",
+    "document_description": "The definitive history of America's greatest incubator of innovation and the birthplace of some of the 20th century's most influential technologies."
+  },
+  {
+    "document_id": 2,
+    "date": "1966",
+    "author": "John Walsh",
+    "tldr": "Bell Labs: A Systems Approach to Innovation Is the Main Thing",
+    "document_description": "Funding and personnel structure of Bell Labs."
+  },
+  {
+    "document_id": 3,
+    "date": "November 1, 2020",
+    "author": "Martin Watzinger, Thomas A. Fackler, Markus Nagler, and Monika Schnitzer",
+    "tldr": "How Antitrust Enforcement Can Spur Innovation: Bell Labs and the 1956 Consent Decree",
+    "document_description": "Is compulsory licensing an effective antitrust remedy to increase innovation? To answer this question, we analyze the 1956 consent decree that settled an antitrust lawsuit against Bell, a vertically integrated monopolist charged with foreclosing the telecommunications equipment market. Bell was forced to license all its existing patents royalty-free, including those not related to telecommunications. We identify the effect of the consent decree on follow-on innovations building on Bell patents by using exactly matched non-Bell patents as control group. We show that the consent decree led to a lasting increase in innovation but only in markets outside the telecommunications sector."
+  },
+  {
+    "document_id": 4,
+    "date": "1952",
+    "author": "Ralph Bown",
+    "tldr": "Vitality of a Research Institution and How to Maintain It",
+    "document_description": "Working principles and freedoms for fundamental research department."
+  },
+  {
+    "document_id": 5,
+    "date": "January 1954",
+    "author": "Ralph Bown",
+    "tldr": "Inventing and Patenting at Bell Laboratories",
+    "document_description": "The primary responsibility of the Laboratories is to furnish the Bell System with new developments and improvements throughout the broad field of communications. As a result, the making of inventions - and protecting the System's rights by appropriate patents - is an important part of our daily work."
+  },
+  {
+    "document_id": 6,
+    "date": "March 23, 1950",
+    "author": "Mervin Kelly",
+    "tldr": "The Bell Telephone Laboratories -- an Example of an Institute of Creative Technology",
+    "document_description": "Since the earliest days of the telephone, the Bell System has been responsible for its own technology and for the manufacture of the major portion of its technical facilities. The Western Electric Company, a subsidiary, has always been the manufacturer. The Bell System is unique among organizations providing service in its responsibility for its own technology and for the manufacture of its technical facilities."
+  },
+  {
+    "document_id": 7,
+    "date": "February 2022",
+    "author": "Iulia Georgescu",
+    "tldr": "Bringing back the golden days of Bell Labs",
+    "document_description": "Established almost 100 years ago, Bell Labs made a great contribution to advancing both fundamental science and technology. Was that the result of a unique set of circumstances or is there a reproducible recipe for success?"
+  }
+]
