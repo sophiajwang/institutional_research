@@ -1,3 +1,10 @@
+// Ira TO DO / Bugs to Fix
+// 1. Selecting Edges from Step List
+// 2. Have Option to Render Documents in Steps
+// 3. Improve hovering and selection of nodes and edges
+// 4. Zooming Effects
+// 5. [Done] Legend Location
+
 // Global variables
 let nodes = [];
 let edges = [];
@@ -9,6 +16,7 @@ let hoveredNode = null;
 let hoveredEdge = null;
 let tooltip;
 let stepCounter;
+let legend;
 
 // 2D Camera controls
 let viewX = 0, viewY = 0;
@@ -22,6 +30,9 @@ let lastMouseX = 0, lastMouseY = 0;
 // Layout parameters for better spacing
 let nodeSpacing = 150;
 let groupRadius = 300;
+
+// Layout Dimensions
+const PANEL_WIDTH = 350;
 
 // Color scheme (SDS style)
 let bgColor, bgColorDark, textColor, textColorDark;
@@ -148,7 +159,7 @@ function loadDataDirectly() {
 }
 
 function setup() {
-    let canvas = createCanvas(windowWidth - 350, windowHeight);
+    let canvas = createCanvas(windowWidth - PANEL_WIDTH, windowHeight);
     canvas.parent('canvas-container');
     
     tooltip = select('#tooltip');
@@ -334,9 +345,8 @@ function calculateEdgeOffsets() {
 }
 
 function createLegend() {
-    let legend = createDiv('');
+    legend = createDiv('');
     legend.id('legend');
-    legend.position(width - 250, height - 180);
     legend.style('background', 'rgba(20, 20, 20, 0.9)');
     legend.style('padding', '15px');
     legend.style('border-radius', '4px');
@@ -345,6 +355,7 @@ function createLegend() {
     legend.style('color', '#F2F2F2');
     legend.style('font-size', '11px');
     legend.style('width', '200px');
+
     
     let title = createDiv('Legend');
     title.parent(legend);
@@ -371,6 +382,8 @@ function createLegend() {
         <div style="margin: 2px 0;"><span style="color: #FFA500;">■</span> Related Children</div>
     `);
     nodeTypes.parent(legend);
+
+    legend.position(width - 250, height - legend.elt.offsetHeight - 20);
 }
 
 // Make selectStep globally accessible for navigation buttons
@@ -1233,4 +1246,5 @@ function mouseReleased() {
 
 function windowResized() {
     resizeCanvas(windowWidth - 350, windowHeight);
+    legend.position(width - 250, height - legend.elt.offsetHeight - 20);
 }
