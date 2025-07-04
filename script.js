@@ -1,9 +1,11 @@
-// Ira TO DO / Bugs to Fix
+// Ira Bugs Fixed
 // 1. [Done] Selecting Edges from Step List
-// 2. Have Option to Render Documents in Steps
 // 3. [Done] Improve hovering and selection of nodes and edges
-// 4. Zooming Effects
+// 4. [Done] Zooming Effects
 // 5. [Done] Legend Location
+
+// Ira Won't Do
+// 2. Have Option to Render Documents in Steps (rand out of time / no data loaded, yet)
 
 // Global variables
 let nodes = [];
@@ -1227,38 +1229,62 @@ function panToStepElements(stepId) {
     // Find all nodes involved in this step
     const stepEdges = edges.filter(e => e.step_id === stepId);
     const involvedNodeIds = new Set();
-    
     stepEdges.forEach(edge => {
         edge.from_nodes.forEach(id => involvedNodeIds.add(id));
         edge.to_nodes.forEach(id => involvedNodeIds.add(id));
     });
-    
     if (involvedNodeIds.size === 0) return;
-    
-    // Calculate center point of all involved nodes
-    let centerX = 0, centerY = 0;
-    let count = 0;
-    
+
+    // Compute bounding box of all involved nodes
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let any = false;
     involvedNodeIds.forEach(nodeId => {
         const pos = nodePositions.get(nodeId);
         if (pos) {
-            centerX += pos.x;
-            centerY += pos.y;
-            count++;
+            minX = Math.min(minX, pos.x);
+            minY = Math.min(minY, pos.y);
+            maxX = Math.max(maxX, pos.x);
+            maxY = Math.max(maxY, pos.y);
+            any = true;
         }
     });
-    
-    if (count > 0) {
-        centerX /= count;
-        centerY /= count;
-        
-        // Smoothly pan to the center of relevant nodes
-        targetViewX = -centerX;
-        targetViewY = -centerY;
-        
-        // Optionally adjust zoom to fit all relevant nodes
-        targetZoom = constrain(targetZoom * 1.1, 0.8, 2.0);
+    if (!any) return;
+
+    // Add padding to bounding box (in world coordinates)
+    const padding = 40;
+    minX -= padding;
+    maxX += padding;
+    minY -= padding;
+    maxY += padding;
+
+    // Center of bounding box
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    // Compute width and height of bounding box
+    const boxWidth = maxX - minX;
+    const boxHeight = maxY - minY;
+
+    // Compute the available screen size (canvas) in pixels
+    // Subtract some margin for UI overlays, legend, etc.
+    const margin = 60;
+    const availableWidth = width - margin;
+    const availableHeight = height - margin;
+
+    // Compute zoom to fit all nodes comfortably
+    // (boxWidth * zoom <= availableWidth) => zoom <= availableWidth / boxWidth
+    // (boxHeight * zoom <= availableHeight) => zoom <= availableHeight / boxHeight
+    let zoomFit = 1.0;
+    if (boxWidth > 0 && boxHeight > 0) {
+        zoomFit = Math.min(availableWidth / boxWidth, availableHeight / boxHeight);
+        // Clamp to reasonable zoom range
+        zoomFit = constrain(zoomFit, 0.2, 3.0);
     }
+
+    // Smoothly pan to the center of relevant nodes
+    targetViewX = -centerX;
+    targetViewY = -centerY;
+    targetZoom = zoomFit;
 }
 
 function updateTooltip() {
